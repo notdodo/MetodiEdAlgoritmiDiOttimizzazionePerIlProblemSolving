@@ -1,0 +1,116 @@
+%%%%%
+%%%%%   PRELIM
+%%%%%
+
+\@ifundefined{chapter}{\@latexerr{The `appunti' option should be used with the `report' document style}}{}
+
+
+%%%%%
+%%%%%   DOCUMENTATION
+%%%%%
+
+%%%%%
+%%%%%   SETUP DOUBLESPACING
+%%%%%
+
+% include doublespace.sty for some of the stuff below
+
+\RequirePackage{setspace}
+\RequirePackage{graphicx}
+\RequirePackage{fancyhdr}
+\RequirePackage{ifthen}
+
+% Use 1.0 times the normal baseline-to-baseline skip
+\setstretch{1.0}
+
+
+%%%%%
+%%%%%   SETUP MARGINS AND PENALTIES 
+%%%%%
+
+% Theses may be either single or double sided
+\setlength\oddsidemargin   {5mm}
+\setlength\evensidemargin  {0mm}
+\setlength\marginparwidth  {5mm}
+
+\marginparsep 0mm
+\hoffset 0mm
+
+\textwidth 160mm
+
+% so an alternative is to use \brokenpenalty=100 and manually search for and fix such page breaks)
+\brokenpenalty=10000
+
+%%%%%
+%%%%%   SETUP COMMANDS PECULIAR TO THESES
+%%%%%
+
+
+\def\titolo#1{\gdef\@titolo{#1}}
+\def\candidato#1{\gdef\@candidato{#1}}
+\def\relatore#1{\gdef\@relatore{#1}}
+\def\annoaccademico#1{\gdef\@annoaccademico{#1}}
+
+\def\titlep{
+    \begin{center}
+	    \includegraphics[height=10cm]{integer_programming.jpg}\\[5mm]%
+    	\setlength{\baselineskip}{3.60\baselineskip}
+	    \textbf{\Huge\uppercase\expandafter{\@titolo}}
+    \end{center}%
+        \vfill%
+    \begin{minipage}[t]{\textwidth}%
+    \begin{tabular}{ll}%
+    Docente: \hspace{110mm} & Adattamento: \\%
+    \@relatore & \@candidato\\[5mm]%
+    \end{tabular} 
+    \vspace{1mm}\centerline{\rule{15.5cm}{0.5pt}}\\%
+    \centerline{Anno Accademico \@annoaccademico} %
+    \end{minipage}%
+        \null
+    \newpage}
+
+\def\copertinatesi{
+        \pagenumbering{roman}
+        \pagestyle{empty}
+        \titlep
+        }
+
+\def\indice{
+        \pagestyle{plain}
+        \tableofcontents
+        \newpage
+        }
+        
+\def\indicefigure{
+        \pagestyle{plain}
+        \listoffigures
+        \newpage
+        }
+        
+\def\indicetabelle{
+        \pagestyle{plain}
+        \listoftables
+        \newpage
+        }
+        
+
+\def\iniziatesto{
+    \cleardoublepage
+        \pagenumbering{arabic}
+    \pagestyle{fancy}
+    \renewcommand{\chaptermark}[1]{\markboth{##1}{##1}} % remember er title
+    \renewcommand{\sectionmark}[1]{\markright{\thesection\ ##1 }}
+
+    %\lhead[\fancyplain{}{\bf\thepage}]{\fancyplain{}{\bf\miomark}}
+    \lhead[\fancyplain{}{\bf\thepage}]{\fancyplain{}{\bf\miomark}}
+    \rhead[\fancyplain{}{\bf\miomark}]{\fancyplain{}{\bf\thepage}}
+    \def\miomark{\rightmark}
+    \def\miominit{\thesection~}
+    \cfoot{}
+    \fancypagestyle{plain}{% 
+    \fancyhead{} %get rid of the headers on plain pages 
+    \renewcommand{\headrulewidth}{0pt}} % and the line  
+}
+
+% Start out normal
+\pagestyle{headings}

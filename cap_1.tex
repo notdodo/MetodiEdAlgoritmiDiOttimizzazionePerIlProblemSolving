@@ -1,0 +1,85 @@
+\chapter{Modelli e formulazioni matematiche}
+
+\section{The Traveling Salesman Problem}
+Il Traveling Salesman Problem (TSP) è il problema più noto dell'ottimizzazione combinatoria.
+Siano date \emph{n} città e i costi $c_{ij}$ per andare dalla città \emph{i} alla città \emph{j}.
+Si vuole determinare un cammino che parte da una città (diciamo $i_{1}$), visitare una ed una sola volta tutte le rimanenti città e terminare nella città di partenza $i_{1}$.
+Inoltre si vuole che il costo di tale cammino sia minimo.\newline
+Ha molteplici applicazioni pratiche e teoriche perche è la struttura di molti problemi pratici.\newline
+Si è soliti modella il TSP come segue:
+\begin{itemize}
+	\item è dato un grafo orientato (o non orientato) \emph{G = (N,A)}
+	dove \emph{N} è un insieme di \emph{n} vertici e \emph{A} è un insieme di \emph{m} archi.
+	
+	Ad ogni arco $\emph{(i,j)} \in \emph{A}$ è associato un costo $c_{ij}$.
+	
+	Un circuito hamiltoniano di \emph{G} è un circuito che passa per ogni vertice una ed una sola volta.\newline
+	Il costo di un circuito hamiltoniano di \emph{G} è pari alla somma dei costi degli archi che compongono il circuito;
+	\item il problema del TSP è di trovare un grafo \emph{G}, con una data matrice dei costi \emph{[$c_{ij}$]}, un circuito hamiltoniano di costo minimo.
+\end{itemize}
+
+\section{Formulazioni Matematiche del TSP}
+In letteratura esistono molteplici (e a volte fantasiose) formulazioni del TSP.\newline
+Presentiamo le due formulazioni più note e su cui si basano i metodi esatti più efficienti.
+
+\subsection{TSP asimmetrico}
+I costi $c_{ij}$ non verificano $c_{ij} = c_{ji}\;\forall\;i,j$ con $i < j$.\newline
+Sia $x_{ij}$ una variabile $(0-1)$ associata ad ogni arco $(i,j) \in A$ dove $x_{ij}=1$ se l'arco $(i,j)$ è nella soluzione ottima e $x_{ij}=0$ altrimenti.\newline
+
+\begin{equation}
+	Min\;\;\displaystyle\sum_{i\in N}^{} \sum_{j\in N}^{} c_{ij} x_{ij}
+\end{equation}
+\begin{equation}
+	s.t.\;\;\displaystyle\sum_{i\in N}^{} x_{ij} = 1,\;\;\forall j \in N
+\end{equation}
+\begin{equation}
+	\;\;\;\;\;\;\;\displaystyle\sum_{j\in N}^{} x_{ij} = 1,\;\;\forall i \in N
+\end{equation}
+\begin{equation}
+	\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\displaystyle\sum_{i\in S}^{} \sum_{j\in N\setminus S}^{} x_{ij} \ge 1,\;\;\forall S \subset N
+\end{equation}
+\begin{equation}
+	\;\;\;\;\;\;\;\;\;\;x_{ij} \in \{0,1\}\;,\;\forall (i,j) \in A
+\end{equation}
+
+Il vincolo \emph{1.4} impone che ogni soluzione ammissibile debba contenere almeno un arco \emph{(i,j)} con $i\in S$ e $j\in N\setminus S$ per ogni sottoinsieme \emph{S} di \emph{N}.
+Un'alternativa al vincolo \emph{1.4} è:
+\begin{equation}\tag{1.4'}
+\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\displaystyle\sum_{i\in S}^{} \sum_{j\in S}^{} x_{ij} \le |S| - 1,\;\;\forall S \subset N
+\end{equation}
+
+\subsection{TSP simmetrico}
+Sia dato un grafo non-orientato \emph{G=(N,A)} con $c_{ij} = c_{ji}\:,\forall i,j\in N$.\newline
+Gli archi di \emph{A} sono numerati da $1$ a $m$. L'arco di indice $l$ corrisponde a $(\alpha_{l},\beta_{l})$ con $\alpha_{l} < \beta_{l}$.\newline
+$A_{i}$ è il sottoinsieme degli indici degli archi che incidono sul vertice $i$:
+\begin{center}
+	$A_{i} = \{l:\;l=1,m\;\;s.t.\;\alpha_{l}=i\;or\;\beta_{l}=i\}$
+\end{center}
+
+Per una dato $S\in N$ e $\bar{S} = N\setminus S$ indichiamo con $(S, \bar{S})$ il sottoinsieme degli indici degli archi per cui $\alpha_{l}\in S$ e $\beta_{l}\in \bar{S}$ oppure $\alpha_{l}\in \bar{S}$ e $\beta_{l}\in S$.
+
+Ad ogni arco di incide $l$ è associato un costo $d_{l}=c_{\alpha_{l}\beta_{l}}$ e $x_{l}\in \{0,1\}$ è una variabile che vale 1 se e solo se l'arco di indice $l$ è nella soluzione ottima.
+\begin{equation}
+	Min\;\;\displaystyle\sum_{l=1}^{} d_{l}\:x_{l}
+\end{equation}
+\begin{equation}
+	s.t.\;\;\displaystyle\sum_{l\in A_{i}}^{} x_{l}=2,\; \forall i\in N
+\end{equation}
+\begin{equation}
+	\;\;\;\;\;\;\;\;\;\displaystyle\sum_{l\in (S, \bar{S})}^{} x_{l} \ge 1,\;\forall S \subset N
+\end{equation}
+\begin{equation}
+	x_{l}\in \{0,1\},\;\;l=1,...,m
+\end{equation}
+
+\subsection{Eliminiazione subtours di Miller, Tucker, Zemlin (1960)}
+Sia $u_{i}$ una variabile intera il cui valore sappresenta la posizione che il vertice $i$ occupa nel tour.
+
+\begin{center}
+	Es. tour (1,4,5,3,2,1) per TSP con n=5 vertici, si ha $u_{1}=1,\;u_{2}=5,\;u_{3}=4,\;u_{4}=2,\;u_{5}=3$	
+\end{center}
+
+Miller, Tucker e Zemlin propongono in alternativa a:
+\begin{equation}\tag{*}
+	\displaystyle\sum_{i\in S}^{}\sum_{j\in N\setminus S}^{} x_{ij} \ge 1,\;\;\forall\;S\subset N
+\end{equation}
