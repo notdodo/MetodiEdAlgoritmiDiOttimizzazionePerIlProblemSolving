@@ -1,6 +1,6 @@
 # Metodi ed algoritmi di ottimizzazione per il problem solving
 
-Rewriting in TeX of "Metodo ed algoritmi di ottimizzazione per il problem solving"'s slides course
+Rewriting in TeX of "Metodi ed algoritmi di ottimizzazione per il problem solving"'s slides course
 
 ## 1. Modelli e formulazioni matematiche
 
