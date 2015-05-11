@@ -72,7 +72,7 @@ Ad ogni arco di incide $l$ è associato un costo $d_{l}=c_{\alpha_{l}\beta_{l}}$ 
 	x_{l}\in \{0,1\},\;\;l=1,...,m
 \end{equation}
 
-\subsection{Eliminiazione subtours di Miller, Tucker, Zemlin (1960)}
+\subsection{Eliminazione subtours di Miller, Tucker, Zemlin (1960)}
 Sia $u_{i}$ una variabile intera il cui valore sappresenta la posizione che il vertice $i$ occupa nel tour.
 
 \begin{center}
@@ -83,3 +83,20 @@ Miller, Tucker e Zemlin propongono in alternativa a:
 \begin{equation}\tag{*}
 	\displaystyle\sum_{i\in S}^{}\sum_{j\in N\setminus S}^{} x_{ij} \ge 1,\;\;\forall S\subset N
 \end{equation}
+hanno imposto i seguenti vincoli:
+\begin{equation}
+	u_{i}-u_{j}+nx_{ij}\le n-1,\;\; i=1,...,n\:,\;j=2,...,n
+\end{equation}
+Ogni tour hamiltoniano soddisfa questi vincoli e ogni subtour li viola.
+\begin{wrapfigure}{l}{0.5\textwidth}
+	\vspace{-1em}
+	\hspace{1em}
+	\includegraphics[height=5cm]{images/graph1.png}
+	\caption{Grafo orientato}
+\end{wrapfigure}
+\begin{description}
+	\vspace{1.5em}
+	\item $u_{2}-u_{6}+n\;x_{2,6}\le n-1$
+	\item $u_{6}-u_{3}+n\;x_{6,3}\le n-1$
+	\item $u_{3}-u_{2}+n\;x_{3,2}\le n-1$
+\end{description}
