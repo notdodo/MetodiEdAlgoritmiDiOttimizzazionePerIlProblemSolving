@@ -9,4 +9,4 @@ Rewriting in TeX of "Metodi ed algoritmi di ottimizzazione per il problem solvin
   * Metodi branch-and-cut
   * Metodi branch-and-bound basati sul rilassamento lineare
 
-()[Metodi.pdf]
+(ok)[./Metodi.pdf]
