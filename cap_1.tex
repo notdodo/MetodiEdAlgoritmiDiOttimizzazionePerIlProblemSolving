@@ -2,20 +2,20 @@
 
 \section{The Traveling Salesman Problem}
 Il Traveling Salesman Problem (TSP) è il problema più noto dell'ottimizzazione combinatoria.
-Siano date \emph{n} città e i costi $c_{ij}$ per andare dalla città \emph{i} alla città \emph{j}.
+Siano date $n$ città e i costi $c_{ij}$ per andare dalla città $i$ alla città $j$.
 Si vuole determinare un cammino che parte da una città (diciamo $i_{1}$), visitare una ed una sola volta tutte le rimanenti città e terminare nella città di partenza $i_{1}$.
 Inoltre si vuole che il costo di tale cammino sia minimo.\newline
 Ha molteplici applicazioni pratiche e teoriche perche è la struttura di molti problemi pratici.\newline
 Si è soliti modella il TSP come segue:
 \begin{itemize}
-	\item è dato un grafo orientato (o non orientato) \emph{G = (N,A)}
-	dove \emph{N} è un insieme di \emph{n} vertici e \emph{A} è un insieme di \emph{m} archi.
+	\item è dato un grafo orientato (o non orientato) $G = (N,A)$
+	dove $N$ è un insieme di $n$ vertici e $A$ è un insieme di $m$ archi.
 	
 	Ad ogni arco $\emph{(i,j)} \in \emph{A}$ è associato un costo $c_{ij}$.
 	
-	Un circuito hamiltoniano di \emph{G} è un circuito che passa per ogni vertice una ed una sola volta.\newline
-	Il costo di un circuito hamiltoniano di \emph{G} è pari alla somma dei costi degli archi che compongono il circuito;
-	\item il problema del TSP è di trovare un grafo \emph{G}, con una data matrice dei costi \emph{[$c_{ij}$]}, un circuito hamiltoniano di costo minimo.
+	Un circuito hamiltoniano di $G$ è un circuito che passa per ogni vertice una ed una sola volta.\newline
+	Il costo di un circuito hamiltoniano di $G$ è pari alla somma dei costi degli archi che compongono il circuito;
+	\item il problema del TSP è di trovare un grafo $G$, con una data matrice dei costi [$c_{ij}$], un circuito hamiltoniano di costo minimo.
 \end{itemize}
 
 \section{Formulazioni Matematiche del TSP}
@@ -42,15 +42,15 @@ Sia $x_{ij}$ una variabile $(0-1)$ associata ad ogni arco $(i,j) \in A$ dove $x_
 	\;\;\;\;\;\;\;\;\;\;x_{ij} \in \{0,1\}\;,\;\forall (i,j) \in A
 \end{equation}
 
-Il vincolo \emph{1.4} impone che ogni soluzione ammissibile debba contenere almeno un arco \emph{(i,j)} con $i\in S$ e $j\in N\setminus S$ per ogni sottoinsieme \emph{S} di \emph{N}.
-Un'alternativa al vincolo \emph{1.4} è:
+Il vincolo $1.4$ impone che ogni soluzione ammissibile debba contenere almeno un arco $(i,j)$ con $i\in S$ e $j\in N\setminus S$ per ogni sottoinsieme $S$ di $N$.
+Un'alternativa al vincolo $1.4$ è:
 \begin{equation}\tag{1.4'}
 \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\displaystyle\sum_{i\in S}^{} \sum_{j\in S}^{} x_{ij} \le |S| - 1,\;\;\forall S \subset N
 \end{equation}
 
 \subsection{TSP simmetrico}
-Sia dato un grafo non-orientato \emph{G=(N,A)} con $c_{ij} = c_{ji}\:,\forall i,j\in N$.\newline
-Gli archi di \emph{A} sono numerati da $1$ a $m$. L'arco di indice $l$ corrisponde a $(\alpha_{l},\beta_{l})$ con $\alpha_{l} < \beta_{l}$.\newline
+Sia dato un grafo non-orientato $G=(N,A)$ con $c_{ij} = c_{ji}\:,\forall i,j\in N$.\newline
+Gli archi di $A$ sono numerati da $1$ a $m$. L'arco di indice $l$ corrisponde a $(\alpha_{l},\beta_{l})$ con $\alpha_{l} < \beta_{l}$.\newline
 $A_{i}$ è il sottoinsieme degli indici degli archi che incidono sul vertice $i$:
 \begin{center}
 	$A_{i} = \{l:\;l=1,m\;\;s.t.\;\alpha_{l}=i\;or\;\beta_{l}=i\}$
@@ -87,16 +87,80 @@ hanno imposto i seguenti vincoli:
 \begin{equation}
 	u_{i}-u_{j}+nx_{ij}\le n-1,\;\; i=1,...,n\:,\;j=2,...,n
 \end{equation}
-Ogni tour hamiltoniano soddisfa questi vincoli e ogni subtour li viola.
-\begin{wrapfigure}{l}{0.5\textwidth}
-	\vspace{-1em}
-	\hspace{1em}
+Ogni tour hamiltoniano soddisfa questi vincoli e ogni subtour li viola.\newline
+\begin{wrapfigure}[5]{l}{0.5\textwidth}
+	\vspace{-2em}
 	\includegraphics[height=5cm]{images/graph1.png}
 	\caption{Grafo orientato}
 \end{wrapfigure}
 \begin{description}
 	\vspace{1.5em}
-	\item $u_{2}-u_{6}+n\;x_{2,6}\le n-1$
-	\item $u_{6}-u_{3}+n\;x_{6,3}\le n-1$
-	\item $u_{3}-u_{2}+n\;x_{3,2}\le n-1$
-\end{description}
+	\item $u_{2}-u_{6}+n\;\cdot x_{2,6}\le n-1$
+	\item $u_{6}-u_{3}+n\;\cdot x_{6,3}\le n-1$
+	\item $u_{3}-u_{2}+n\;\cdot x_{3,2}\le n-1$
+	\item {\hskip 5.6em}$\downarrow$
+	\item {\hskip 3em}$3n \le 3(n-1)$
+\end{description}\newpage
+
+\subsection{Il Traveling salesman problem con time windows (TSPTW)}
+
+È una variante del TSP che ha molte applicazioni.
+
+Sia dato un grafo orientato $G=(V,A)$ di $n+1$ vertici $(V=\{0,1,...,n\})$.
+
+Ad ogni arco $(i,j)\in A$ sono associati
+\begin{itemize}
+	\item un costo $c_{ij} \ge 0$
+	\item un tempo di percorrenza $\theta_{ij}\ge 0$
+\end{itemize}
+Ad ogni vertice è associato un intervallo $[r_{i},d_{i}]$ chiamato "time window" che rappresenta l'orario in cui il vertice $i$ può essere vistato dal "salesman".
+
+Ovvero il salesman può visitare $i$ ad ogni tempo $t\in \mathbb{Z}^{+}$ con $r_{i}\le t\le d_{i}$.\newline
+Il problema consiste nel trovare una sequenza dei vertici di $G$ che parte dal vertice $0$ al tempo $0$ e finisce al nodo $0$ tale che sia il minimo il costo del circuito e il tempo di arrivo al nodo $i$ sia nell'intervallo $[r_{i},d_{j}],\;\forall i\in V$.\newline
+Si consideri la sequenza $(0,i,..,i_{k-1},i_{k},...,i_{n},0)$ e sia $t_{i_{k}}$ il tempo di arrivo al vertice $i_{k},\; k=0,1,...,n+1$.
+
+I tempi di arrivo sono calcolati come:
+\begin{equation}
+	t_{0}=0
+\end{equation}
+\begin{equation}
+	t_{i_{k}}=\max \{t_{i_{k-1}}+\theta_{i_{k-1}}\cdot i_{k},\; r_{i_{k}}\}
+\end{equation}
+
+
+\subsubsection{Formulazione del TSPTW}
+Sia $x_{ij}$ una variabile binaria intera che assume il valore $1$ se il vertice $i$ è visitato immediatamente prima di $i$ e $x_{ij}=0$ altrimenti.
+\begin{flalign}
+	& Min\;\;\displaystyle\sum_{(i,j)\in A}^{}c_{ik}x_{ij} \\
+	& s.t.\;\;\;\;\displaystyle\sum_{i\in A_{j}^{-}}^{}x_{ij}=1,\;\;\forall j\in V \\		
+	& \;\;\;\;\;\;\;\;\displaystyle\sum_{j\in A_{i}^{+}}^{}x_{ij}=1,\;\;\forall i\in V \\
+	& \;\;\;\;\;\;\;\;t_{i}+\theta_{ij}-t_{j}\le M(1-x_{ij},\;\;\forall (i,j)\in A,\; j\ne 0) \\
+	& \;\;\;\;\;\;\;\;t_{i}\le d_{i},\;\;\forall i\in V \\
+	& \;\;\;\;\;\;\;\;t_{i}\ge r_{i},\;\;\forall i\in V \\
+	& \;\;\;\;\;\;\;\;x_{ij}\in \{0,1\},\;\;\forall \in A \\
+	& \;\;\;\;\;\;\;\;t_{i}\in \mathbb{N}^{+},\;\;\forall i\in V
+\end{flalign}
+
+dove 
+\begin{flalign*}
+	& A_{i}^{+}=\{j\in V:(i,j)\in A\} \\
+	& A_{i}^{-}=\{j\in V:(i,j)\in A\} \\
+	& M\;è\;un\;intero\;grande\;a\;piacere \\
+	& r_{0}=d_{0}=0
+\end{flalign*}
+
+\section{Project scheduling with resource constrants (PSR)}
+\`E dato un insieme $\mathbb{X}=\{1,...,n\}$ di $n$ jobs.
+
+Sono disponibili $m$ risorse dove ogni risorsa $k$ ha una disponibilità $b_{k}$ ad ogni istante del periodo di scheduling.
+
+Ogni job $i$ ha un tempo di processo $d_{i}$ e la sua esecuzione, una volta iniziata, non può essere interrotta.
+
+Il job $i$ per essere eseguito richiede $b_{ik}$ unità della risorsa $k$ per ciascun intervallo di tempo in cui rimane in esecuzione.\newline
+\`E dato un grafo $G=(X,H)$ di precedenze, dove ogni arco $(i,j)\in H$ impone che il job $j$ può iniziare solo dopo che il job $i$ è stato completato.
+
+\begin{itemize}
+	\item Si vuole determinare il tempo di inizio di processo di ogni job in modo che siano soddisfatti i vincoli di precedenza, i vincoli sulle risorse e sia minima la durata complessia del progetto
+\end{itemize}
+
+\subsection{Esempio di PSR}
