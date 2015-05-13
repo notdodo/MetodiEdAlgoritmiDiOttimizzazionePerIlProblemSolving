@@ -160,7 +160,17 @@ Il job $i$ per essere eseguito richiede $b_{ik}$ unità della risorsa $k$ per cia
 \`E dato un grafo $G=(X,H)$ di precedenze, dove ogni arco $(i,j)\in H$ impone che il job $j$ può iniziare solo dopo che il job $i$ è stato completato.
 
 \begin{itemize}
-	\item Si vuole determinare il tempo di inizio di processo di ogni job in modo che siano soddisfatti i vincoli di precedenza, i vincoli sulle risorse e sia minima la durata complessia del progetto
+	\item Si vuole determinare il tempo di inizio di processo di ogni job in modo che siano soddisfatti i vincoli di precedenza, i vincoli sulle risorse e sia minima la durata complessiva del progetto
 \end{itemize}
 
 \subsection{Esempio di PSR}
+Siano dati $n=11$ jobs e $m=3$ risorse con $b_{1}=b_{2}=b_{3}=4$ e un grafo $H$ delle precedenze corrispondenti agli archi della figura ~\ref{fig:grafoHDellePrecedenze}.
+
+Si osservi che i jobs $2$ e $3$ non possono essere eseguiti in parallelo poiché $r_{2,1}+r_{3,1}=5 > b_{1}$!
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[height=6.5cm]{images/graph2.png}
+	\caption{Grafo H delle precedenze}
+	\label{fig:grafoHDellePrecedenze}
+\end{figure}
