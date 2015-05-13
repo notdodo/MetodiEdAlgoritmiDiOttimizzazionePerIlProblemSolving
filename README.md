@@ -8,3 +8,5 @@ Rewriting in TeX of "Metodi ed algoritmi di ottimizzazione per il problem solvin
   * Metodo dei piani di taglio di Gomory
   * Metodi branch-and-cut
   * Metodi branch-and-bound basati sul rilassamento lineare
+
+[Metodi.pdf]
