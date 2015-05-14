@@ -5,8 +5,8 @@ Rewriting in TeX of "Metodi ed algoritmi di ottimizzazione per il problem solvin
 ######[PDF](Metodi.pdf)
 
 ## 1. Modelli e formulazioni matematiche
-    * The Traveling Salesman Problem
-    * Project scheduling with resource constraints (PSR)
+   * The Traveling Salesman Problem
+   * Project scheduling with resource constraints (PSR)
 
 ## 2. Introduzione alla programmazione lineare a numeri interi
   * Metodo dei piani di taglio di Gomory
