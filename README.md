@@ -19,8 +19,8 @@ Rewriting in TeX of "Metodi ed algoritmi di ottimizzazione per il problem solvin
   * Confronto fra rilassamento lagrangiano e rilassamento lineare
   * Il metodo del sub gradiente
   * Applicazione pratiche del rilassamento Lagrangiano a:
-  * * il Traveling Salesman Problem (TSP)
-  * * l'Assegnamento Generalizzato (GAP)
+  * - il Traveling Salesman Problem (TSP)
+  * - l'Assegnamento Generalizzato (GAP)
 
 ## 4. Introduzione alla programmazione dinamica
   * Principio di ottimalità
