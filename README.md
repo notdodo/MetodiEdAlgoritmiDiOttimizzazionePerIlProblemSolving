@@ -29,3 +29,13 @@ Rewriting in TeX of "Metodi ed algoritmi di ottimizzazione per il problem solvin
   * Ricorsioni per il TSP
   * Rilassamento dello spazio degli stati
   * Un nuovo metodo di rilassamento: <i>ng-path relaxation<i/>
+
+## 5. Metodi di decomposizione
+  * Il metodo Dantiz-Wolfe
+  * Decomposizione Lagrangiana
+  * Esempi applicativi
+
+## 6. Metodi Column Generation
+  * Aspetti teorici
+  * Il Crew Scheduling Problem (CSP)
+  * Il Vehicle Routing Problem (VRP)
