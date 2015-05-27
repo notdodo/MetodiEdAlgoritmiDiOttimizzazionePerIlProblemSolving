@@ -18,11 +18,11 @@ Si è soliti modella il TSP come segue:
 	\item il problema del TSP è di trovare un grafo $G$, con una data matrice dei costi [$c_{ij}$], un circuito hamiltoniano di costo minimo.
 \end{itemize}
 
-\section{Formulazioni Matematiche del TSP}
+\subsection{Formulazioni Matematiche del TSP}
 In letteratura esistono molteplici (e a volte fantasiose) formulazioni del TSP.\newline
 Presentiamo le due formulazioni più note e su cui si basano i metodi esatti più efficienti.
 
-\subsection{TSP asimmetrico}
+\subsubsection{TSP asimmetrico}
 I costi $c_{ij}$ non verificano $c_{ij} = c_{ji}\;\forall\;i,j$ con $i < j$.\newline
 Sia $x_{ij}$ una variabile $(0-1)$ associata ad ogni arco $(i,j) \in A$ dove $x_{ij}=1$ se l'arco $(i,j)$ è nella soluzione ottima e $x_{ij}=0$ altrimenti.\newline
 
@@ -48,7 +48,7 @@ Un'alternativa al vincolo $1.4$ è:
 \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\displaystyle\sum_{i\in S}^{} \sum_{j\in S}^{} x_{ij} \le |S| - 1,\;\;\forall S \subset N
 \end{equation}
 
-\subsection{TSP simmetrico}
+\subsubsection{TSP simmetrico}
 Sia dato un grafo non-orientato $G=(N,A)$ con $c_{ij} = c_{ji}\:,\forall i,j\in N$.\newline
 Gli archi di $A$ sono numerati da $1$ a $m$. L'arco di indice $l$ corrisponde a $(\alpha_{l},\beta_{l})$ con $\alpha_{l} < \beta_{l}$.\newline
 $A_{i}$ è il sottoinsieme degli indici degli archi che incidono sul vertice $i$:
@@ -103,7 +103,6 @@ Ogni tour hamiltoniano soddisfa questi vincoli e ogni subtour li viola.\newline
 \end{description}\newpage
 
 \subsection{Il Traveling salesman problem con time windows (TSPTW)}
-
 È una variante del TSP che ha molte applicazioni.
 
 Sia dato un grafo orientato $G=(V,A)$ di $n+1$ vertici $(V=\{0,1,...,n\})$.
@@ -127,7 +126,6 @@ I tempi di arrivo sono calcolati come:
 	t_{i_{k}}=\max \{t_{i_{k-1}}+\theta_{i_{k-1}}\cdot i_{k},\; r_{i_{k}}\}
 \end{equation}
 
-
 \subsubsection{Formulazione del TSPTW}
 Sia $x_{ij}$ una variabile binaria intera che assume il valore $1$ se il vertice $i$ è visitato immediatamente prima di $i$ e $x_{ij}=0$ altrimenti.
 \begin{flalign}
@@ -148,6 +146,7 @@ dove
 	& M\;è\;un\;intero\;grande\;a\;piacere \\
 	& r_{0}=d_{0}=0
 \end{flalign*}
+\newpage
 
 \section{Project scheduling with resource constraints (PSR)}
 \`E dato un insieme $\mathbb{X}=\{1,...,n\}$ di $n$ jobs.
@@ -169,8 +168,110 @@ Siano dati $n=11$ jobs e $m=3$ risorse con $b_{1}=b_{2}=b_{3}=4$ e un grafo $H$ 
 Si osservi che i jobs $2$ e $3$ non possono essere eseguiti in parallelo poiché $r_{2,1}+r_{3,1}=5 > b_{1}$!
 
 \begin{figure}[h]
+	\caption{Grafo H delle precedenze}
 	\centering
 	\includegraphics[height=6.5cm]{images/graph2.png}
-	\caption{Grafo H delle precedenze}
 	\label{fig:grafoHDellePrecedenze}
 \end{figure}
+
+\subsection{Formulazione del PSR}
+Sia $\xi_{it}$ una variabile binaria 0-1 che vale 1 se e solo se il job $i$ viene messo in esecuzione al tempo $t$.
+
+Sia $T_{max}$ un upper bound sulla durata del progetto.
+
+\begin{flalign}
+	& Min \displaystyle\sum_{t=1}^{T_{max}}t\;\xi_{n t} \\
+	& \;\;s.t. \displaystyle\sum_{t=1}^{T_{max}}t\;\xi_{i t} = 1,\;\;\;i=1,...,n \\
+	& \;\;\;\;\;\;\;\displaystyle\sum_{t=1}^{T_{max}}t\;\xi_{j t} - \displaystyle\sum_{t=1}^{T_{max}}t\;\xi_{i t} \ge d_{i},\;\;\;\forall (i,j)\in H \\
+	& \;\;\;\;\;\;\;\displaystyle\sum_{i=1}^{n}r_{ik}\displaystyle\sum_{\tau=t-d_{i}+1}^{t}\xi_{i\tau}\le b_{k},\;\;\;t=1,...,T_{max}\;e\;k=1,...,m \\
+	& \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
+	\;\;\;\;\;\;\xi_{it}\in\{0,1\},\;\;\; i=1,...,n\;e\;t=1,...,T_{max}
+\end{flalign}
+Si osservi che:
+\begin{flalign*}
+	& \displaystyle\sum_{\tau=t-d_{i}+1}^{t}\xi_{i \tau}=1\;\;\;se\;il\;job\;i\;è\;in\;esecuzione\;al\;tempo\;t
+\end{flalign*}
+\subsubsection{Esempio}
+Sia $d_{i}=4$.
+
+Se $\xi_{i3}=1$, allora i è in esecuzione nei tempi 3,4,5 e 6.
+Infatti avremo: \newline $\displaystyle\sum_{\tau=t-d_{i}+1}^{t}\xi_{i \tau} = 1$ per $t=3,4,5,6\;$ e $\displaystyle\sum_{\tau=t-d_{i}+1}^{t}\xi_{i \tau} = 0$ per $t<3$ e $t>6$
+\newpage
+\section{Fixed Charge Transportation Problem (FCTP)}
+Il Problema del Trasporto di Carico Fisso è una generalizzazione del classico Problema del Trasporto.
+
+Si differenzia nel definire che il costo per la spedizione di una quantità non-zero di beni, da ogni origine alla sua destinazione, è composto da un costo proporzionale all'ammontare dei beni inviati più un costo fisso. 
+
+\subsection{Descrizione del FCTP}
+Il FCTP è definito su un grafo completo e bipartito $G=(S,T,A)$ dove $S={1,2,...,m}$ è un insieme di $m$ sorgenti e $T={1,2,...,n}$ è un insieme di $n$ destinazioni.
+
+Per ogni sorgente $i\in S$ è disponibile è una quantità intera $a_{i}>0$ di merce e per ogni destinazione $j\in T$ è necessaria una quantità intera $b_{j}>0$ di merce dalle sorgenti.\newline
+L'insieme $A$ degli archi è definito come: $A=\{(i,j):\;i\in S,\;j\in T\}$; ogni arco $(i,j)\in A$ è
+associato ad un costo unitario $c_{ij}$ per il trasporto di una unità della merce dalla sorgente $i$ alla destinazione $j$ più un costo fisso $f_{ij}$ for usare l'arco $(i,j)$.
+
+Senza perdere di generalità si assume che:
+\begin{flalign*}
+	& \displaystyle\sum_{i\in S}^{}a_{i}=\displaystyle\sum_{j\in T}^{}b_{j} \\
+\end{flalign*}
+
+\subsection{Formulazione del FCTP}
+Sia $x_{ij}$ una variabile rappresentante la quantità di merce trasportata dalla sorgente $i$ alla destinazione $j$ e $y_{ij}$ una variabile (0-1) che vale $1$ se e solo se $x_{ij}>0$.
+
+Sia $m_{ij}=min{a_{i},b_{j},\;(i,j)\in A}$.\newline
+Una semplice formulazione matematiche del FCTP è:
+\begin{flalign}
+	& z(F0) = min \displaystyle\sum_{i\in S}^{}\displaystyle\sum_{j\in T}^{}(c_{ij}x_{ij}+f_{ij}y_{ij}) \\
+	\label{con:1.27}
+	& \;\;\;\;\;\;\;s.t.\;\;\displaystyle\sum_{j\in T}^{}x_{ij}=a_{i},\;\;i\in S \\
+	\label{con:1.28}
+	& \;\;\;\;\;\;\;\;\;\;\;\;\;\;\displaystyle\sum_{i\in S}^{}x_{ij} = b_{j},\;\;j\in T \\
+	& \;\;\;\;\;\;\;\;\;\;\;\;\;\;x_{ij}\le m_{ij}y_{ij},\;\;\;(i,j)\in A \\
+	& \;\;\;\;\;\;\;\;\;\;\;\;\;\;x_{ij}\ge 0,\;\;\;\;\;\;\;\;\;\;\;(i,j)\in A \\
+	& \;\;\;\;\;\;\;\;\;\;\;\;\;\;y_{ij}\in \{0,1\}
+\end{flalign}
+Si denota con $LF0$ il rilassamento lineare del problema $F0$ e con $z(LF0)$ il costo della soluzione ottima. Notare che, per ogni soluzione ottima di $LF0$, le variabili $x_{ij}>0$ corrispondono ad una soluzione base fattibile dei vincoli \ref{con:1.27} e \ref{con:1.28}, e $y_{ij}=x_{ij}/m_{ij}\;con\;(i,j)\in A$.
+\newpage
+\section{Assegnamento dei veicoli alle baie di carico}
+Sia dato un insieme $N$ di veicoli che devono scaricare presso un deposito che ha un insieme $L$ di linee di scarico.
+
+Per ogni linea di scarico $j\in L$ è definito l'insieme degli istanti di tempo $T_{j}$ in cui è operativa.\newline
+Per ogni veicolo $i\in N$ sono noti:
+\begin{itemize}
+	\item il sottoinsieme di linee $L_{i}\subseteq L$ compatibili con le operazioni di scarico richieste dal veicolo;
+	\item iltempo di arrivo $a_{i}$ del veicolo al deposito;
+	\item la durata dello scarico $d_{ij}$ sulla linea $j\in L_{i}$.
+\end{itemize}
+Si assume che lo scarico di un veicolo non possa essere interrotto, ovvero, se lo scarico del veicolo $i$ sulla linea $j\in L_{i}$ inizia al tempo $t$, allora la linea $j$ deve essere disponibile per tutti gli istanti di tempo $\tau=t,...,t+d_{ij}-1$ (ovvero $\tau \in T_{j}$ per ogni $\tau=t,...,t+d_{ij}-1$).
+Indichiamo con $I_{ij}$ l'insieme degli istanti di tempo in cui può iniziare lo scarico del veicolo $i$ sulla linea $j\in L_{i}$, ovvero per ogni $t\in I_{ij}$ si assume che la linea $j$ disponibile per ogni istante $\tau=i,...,d_{ij}-1$.
+
+Sia $c_{ijt}$ è il costo per iniziare lo scarico del veicolo $i\in N$ sulla linea $j\in L{i}$ al tempo $t\in I_{ij}$.\newline
+Il problema richiede che ogni veicolo sia assegnato ad una linea di scarico compatibile in modo che ogni scarico sia fatto senza interruzioni e sia minimo il costo dell'assegnamento.
+
+\subsection{Formulazione matematica F}
+Per ogni $i\in N$, $j\in L_{i}$ e $t\in I_{ij}$ poniamo $\delta_{ijt\tau}=1$ per $\tau=t,...,t+d_{ij}-1$ e $\delta_{ijt\tau}=0$ per ogni $\tau\in T_{j}$ tale che $\tau < t$ oppure $\tau >t+d_{ij}-1$.
+
+Indichiamo con $N_{j}\subseteq N$ il sottoinsieme di veicoli che possono essere scaricati sulla linea $j$, ovvero $N_{j}=\{i\in N:\;j\in L_{i}\}$.
+
+\subsubsection{Variabili}
+$x_{ijt}$ è una variabile (0-1) che vale 1 se e solo se il veicolo $i\in N$ inizia lo scarico sulla linea $j\in L_{i}$ al tempo $t\in I_{ij}$.
+
+$s_{j\tau}$ è una variabile (0-1) che vale 1 se e solo se la linea $j$ non viene utilizzata nell'istante di tempo $\tau$.\newline
+La formulazione matematica $F$ del problema è la seguente.
+\begin{flalign}
+	& z(F)=min\sum_{j\in L}^{}\sum_{i\in N_{j}}^{}\sum_{t\in I_{ij}}^{}c_{ijt}+x_{ijt}+\sum_{j\in L}^{}\sum_{\tau\in T_{j}}^{}g_{j\tau}s_{j\tau} \\
+	\label{con:1.33}
+	& \;\;\;\;\;\;\;\;s.t.\;\;\sum_{j\in L_{i}}^{}\sum_{t\in I_{ij}}^{}x_{ijt}=1,\;\;\;i\in N \\
+	\label{con:1.34}
+	& \;\;\;\;\;\;\;\;\;\;\;\;\;\;
+	\sum_{i\in N_{j}}^{}\sum_{t\in I_{ij}}^{}\delta_{ijt\tau}x_{ijt}+s_{j\tau}=1,\;\;\;j\in L,\;\tau\in T_{j} \\
+	& \;\;\;\;\;\;\;\;\;\;\;\;\;\; 
+	x_{ijt}\in {0,1},\;\;\;\;\;\;\;\;\;\;\;\;\;\;
+	i\in N,\;j\in L_{i},\;t\in I_{ij} \\
+	& \;\;\;\;\;\;\;\;\;\;\;\;\;\; 
+	s_{j\tau}\in {0,1},\;\;\;\;\;\;\;\;\;\;\;\;\;\;
+	j\in L,\;\tau\in T_{j}
+\end{flalign}
+Il vincolo \ref{con:1.33} impone che ad ogni veicolo venga assegnato una linea compatibile ed un tempo di scarico a sua volta compatibile sia con il veicolo stesso che con la linea a lui assegnata.
+
+Il vincolo \ref{con:1.34} impone che per ogni linea ed ogni istante di tempo compatibile con la linea vi sia in scarico al più un solo veicolo.\newline
+La formulazione $F$ richiede $\hat{n}=|N|\times|L|\times\hat{I}$ variabili, dove $\hat{I}=max{|I_{ij}|:i\in N,\;j\in L_{i}}$ e al più $\hat{m}=|N|+|L|\times \hat{T}$ vincoli, dove 
