@@ -274,4 +274,112 @@ La formulazione matematica $F$ del problema è la seguente.
 Il vincolo \ref{con:1.33} impone che ad ogni veicolo venga assegnato una linea compatibile ed un tempo di scarico a sua volta compatibile sia con il veicolo stesso che con la linea a lui assegnata.
 
 Il vincolo \ref{con:1.34} impone che per ogni linea ed ogni istante di tempo compatibile con la linea vi sia in scarico al più un solo veicolo.\newline
-La formulazione $F$ richiede $\hat{n}=|N|\times|L|\times\hat{I}$ variabili, dove $\hat{I}=max{|I_{ij}|:i\in N,\;j\in L_{i}}$ e al più $\hat{m}=|N|+|L|\times \hat{T}$ vincoli, dove 
+La formulazione $F$ richiede $\hat{n}=|N|\times|L|\times\hat{I}$ variabili, dove $\hat{I}=max{|I_{ij}|:i\in N,\;j\in L_{i}}$ e al più $\hat{m}=|N|+|L|\times \hat{T}$ vincoli, dove $\hat{T}=max{|T_{j}|:\;j\in L}$.
+
+Supponiamo di discretizzare il tempo a 5 minuti, che ogni linea sia disponibile al più 10 ore (i.e. $\hat{T}=120$) e che un veicolo quando arriva non possa aspettare più di 5 ore (i.e. $\hat{I}=60$). Avremo $\hat{n}=200\cdot20\cdot60=240.000$ e $\hat{m}=200+20\cdot120=2600$.
+\newpage
+
+\section{Lot Sizing Problem}
+Il termine \textit{\textbf{Lot Sizing}} indica il processo decisionale mediante il quale un'azienda definisce la politica ottima di investimenti, produzione e stoccaggio dei prodotti per soddisfare le richieste dei clienti nel rispetto dei vincoli di produzione e di magazzino.
+
+Non esiste un unico modello di lot sizing che rappresenti in modo generale le varie realtà operative. Sistemi di produzione anche marginalmente diversi possono richiedere modelli aventi complessità computazionale molto diverse.
+
+Non esiste in letteratura un modello generale che contenga come sottocasi tutti i problemi reali noti di lot sizing.
+
+Per questi motivi non esistono software commerciali general pourpose.\newline
+Diverse aziende di consulenze nel settore della supply chain vendono software basati su modelli semplificati che non necessariamente producono soluzioni operative ma lasciano all'utente il compito di modificare manualmente la soluzione prodotta per tener conto delle specifiche complessità del problema reale.\newline
+I problemi reali sono varianti complesse delle seguenti tre classi di lot sizing problem di un singolo prodotto che sono risolvibili in tempo polinomiale:
+\begin{itemize}
+	\item lot sizing senza vincoli di capacità produttiva;
+	\item lot sizing con back logging senza vincoli di capacità;
+	\item lot sizing con vincoli di capacità.
+\end{itemize}
+Molti problemi reali possono essere risolti rilassando in modo lagrangiano i vincoli reali per cui il problema lagrangiano risultante corrisponde ad uno dei tre problemi suddetti.
+
+\subsection{Lot sizing senza vincoli di capacità}
+Si consideri un'azienda che deve pianificare la propria produzione per un orizzonte temporale di $T$ periodi (ad esempio, $T$ mesi).
+
+Per ciascun periodo $t=1,...,T$ sono noti:
+\begin{itemize}
+	\item[\textit{$d_{t}$}] domanda complessiva dei clienti;
+	\item[\textit{$A_{t}$}] costo fisso di set up per attivare la produzione;
+	\item[\textit{$p_{t}$}] costo per produrre un'unità di prodotto;
+	\item[\textit{$h_{t}$}] costo per unità di prodotto presente nel magazzino alla fine del periodo $t$. 
+\end{itemize}
+Per ciascun periodo $t$, deve essere deciso il numero di unità che devono essere prodotto al fine di soddisfare la domanda in ciascun periodo.\newline
+Si suppone che la quantità prodotto nel periodo $t$ sia subito disponibile e che la quantità non venduta alla fine di ogni mese viene depositata in magazzino.
+L'obiettivo è di minimizzare i costi complessivi di set up, produzione e stoccaggio.
+
+\subsubsection{Formulazione Matematica (modello di Wagner-Whitin)}
+Variabili decisonali associate a ciascun periodo t=1,...,T
+\begin{description}
+	\item[$x_{t}$] quantità prodotta all'inizio del periodo $t$;
+	\item[$I_{t}$] livello del magazzino alla fine del periodo $t$;
+	\item[$y_{i}\in (0,1): y_{t}=1$] se nel periodo $t$ vi è produzione, $y_{t}=0$ altrimenti. 
+\end{description}
+
+\begin{flalign}
+	& Min\;z=\sum_{t=1}^{T} (p_{t}x_{t}+h_{t}I_{t}+A_{t}y_{t}) \\
+	&\;\;\;\;\;\;\;\;x_{t}+I_{t-1}=I_{t}+d_{t},\;t=1,...,T \\
+	& \;\;\;\;\;\;\;\;x_{t}\le My_{t},\;t=1,..., \\
+	& \;\;\;\;\;\;\;\;x_{t},\;I_{t}\ge 0,\;t=1,...,T \\
+	& \;\;\;\;\;\;\;\;y_{t}\in \{0,1\},\;t=1,...,T \\
+	& dove\;M=\sum_{t=1}^{T}d_{t}\;e,\;per\;semplicità,\;si;suppone\;che\;I_{0}=0.
+\end{flalign}
+
+\subsubsection{Metodo di soluzione}
+Al modello si associa il grafo $R=(N,A)$ senza vincoli di capacità sugli archi tale che ogni soluzione del problema corrisponde ad un flusso in $R$.\newline
+Il grafo $R$ si compone di $2T+1$ nodi:
+\begin{itemize}
+	\item nodo sorgente S da cui parte un flusso pari a $\sum_{t=1}^{T}d_{t}$;
+	\item per ciascun periodo $t$ una coppia di nodi $U_{t}$, $V_{t}$ dove:
+	\begin{itemize}
+		\item[$U_{t}$] rappresenta il magazzino,
+		\item[$V_{t}$] corrisponde alla domanda.
+	\end{itemize}
+\end{itemize}
+Per ciascun periodo $t=1,..,T$ vi sono gli archi:
+\begin{description}
+	\item[$(S,U_{t})$] ~~~~il cui flusso corrisponde alla produzione $x_{t}$;
+	\item[$(U_{t},U_{t+1})$] il cui flusso è pari al livello $I_{t}$ del magazzino alla fine del periodo $t$;
+	\item[$(U_{t},V_{t})$] ~~~~il cui flusso deve essere pari alla domanda $d_{t}$.
+\end{description}
+\newpage
+\begin{figure}
+	\caption{Esempio della rete di flusso (modello di Wagner-Whitin)}
+	\centering
+	\includegraphics[height=8.5cm]{images/graph3.png}
+	\label{fig:WagnerWhitin}
+\end{figure}
+
+\subsubsection{Proprietà della soluzione ottima}
+\textbf{Teorema.} In una soluzione ottima non può mai avvenire che la domanda del periodo $t$ venga soddisfatta sia dalla produzione che dal magazzino, ovvero:
+\begin{center}
+	$I_{t-1}\cdot x_{t}=0;\;t=1,...,T$
+\end{center}
+
+\begin{figure}[h]
+	\caption{}
+	\centering
+	\includegraphics[height=5.6cm]{images/graph4.png}
+	\label{fig:PossibileSoluzione}
+\end{figure}
+
+\subsubsection{Algoritmo di soluzione (di complessità $O(T^{2})$)}
+Si costruisca un grafo aciclico di $T+1$ vertici.\newline
+Si definiscano gli archi $j,k)$ per $j=0,...,T-1$ e $k=j+1,...,T$.
+
+L'arco $(j,k)$ rappresenta la decisione di produrre all'inizio del periodo $j+1$ quanto serve per soddisfare le domanda complessiva dei periodo $j+1,\;j+2,...,k$.
+
+Il costo $M_{jk}$ dell'arco (j,k) è pari al costo per produrre nel periodo j+1 la quantità $\sum_{r=j+1}^{k}d_{r}$ più i costi di stoccaggio:
+\begin{center}
+	$M_{jk}=A_{j+1}+p_{j+1}\displaystyle\sum_{r=j+1}^{k}d_{r}+\sum_{t=j+1}^{k-1}h_{t}(\sum_{r=t+1}^{k}d_{r})$
+\end{center}
+\begin{figure}[h]
+	\caption{}
+	\centering
+	\includegraphics[height=4.2cm]{images/graph5.png}
+	\label{fig:PossibileSoluzione2}
+\end{figure}
+Ogni soluzione del modello di Wagner-Whitin corrisponde ad un cammino da $0$ a $t$ in questo grafo aciclico.\newline
+Il cammino di costo minimo fornisce la soluzione ottima.
