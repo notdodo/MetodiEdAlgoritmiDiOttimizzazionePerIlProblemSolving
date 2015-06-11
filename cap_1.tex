@@ -357,8 +357,7 @@ Per ciascun periodo $t=1,..,T$ vi sono gli archi:
 \begin{center}
 	$I_{t-1}\cdot x_{t}=0;\;t=1,...,T$
 \end{center}
-
-\begin{figure}[h]
+\begin{figure}[H]
 	\caption{}
 	\centering
 	\includegraphics[height=5.6cm]{images/graph4.png}
@@ -375,11 +374,12 @@ Il costo $M_{jk}$ dell'arco (j,k) è pari al costo per produrre nel periodo j+1 l
 \begin{center}
 	$M_{jk}=A_{j+1}+p_{j+1}\displaystyle\sum_{r=j+1}^{k}d_{r}+\sum_{t=j+1}^{k-1}h_{t}(\sum_{r=t+1}^{k}d_{r})$
 \end{center}
-\begin{figure}[h]
+\begin{figure}[H]
 	\caption{}
 	\centering
 	\includegraphics[height=4.2cm]{images/graph5.png}
 	\label{fig:PossibileSoluzione2}
 \end{figure}
+
 Ogni soluzione del modello di Wagner-Whitin corrisponde ad un cammino da $0$ a $t$ in questo grafo aciclico.\newline
 Il cammino di costo minimo fornisce la soluzione ottima.
