@@ -28,7 +28,7 @@ Rewriting in TeX of "Metodi ed algoritmi di ottimizzazione per il problem solvin
   * Il taglio 2-D a ghigliottina
   * Ricorsioni per il TSP
   * Rilassamento dello spazio degli stati
-  * Un nuovo metodo di rilassamento: <i>ng-path relaxation<i/>
+  * Un nuovo metodo di rilassamento: <i>ng-path relaxation</i>
 
 ## 5. Metodi di decomposizione
   * Il metodo Dantiz-Wolfe
