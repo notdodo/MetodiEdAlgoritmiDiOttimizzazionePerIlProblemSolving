@@ -339,4 +339,98 @@ Si osservi che per definizione di $x_{3}$ e $x_{4}$ si ha
 \begin{equation}
 x_{3} = 6 - 3x_{1} - 2x_{2}\text{ ed }x_{4} = 3x_{1} - 2x_{2}
 \end{equation}
-Sostituendo in \ref{eq:2.29} si ottiene $x_{2}\le 1$
+\newpage
+Sostituendo in \ref{eq:2.29} si ottiene $x_{2}\le 1$:
+
+\centerline{\includegraphics[height=8cm]{images/graph13.png}}
+
+Aggiungendo il cut al tableau ottimo precedente:
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{llllllll}
+				&                         & $x_{1}$ & $x_{2}$  & $x_{3}$ & $x_{4}$ & $s_{1}$ &  RHS  \\ \cline{2-8}
+		z		& \multicolumn{1}{|l|}{1} & 0       & 0        & -1/4    & -1/4    & 0 & \multicolumn{1}{|l|}{-3/2} \\ \cline{2-8}
+		$x_{1}$ & \multicolumn{1}{|l|}{0} & 1       & 0        & 1/6     & -1/6    & 0 & \multicolumn{1}{|l|}{1} \\
+		$x_{2}$ & \multicolumn{1}{|l|}{0} & 0       & 1        & 1/4     & 1/4     & 0 & \multicolumn{1}{|l|}{3/2} \\
+		$s_{1}$ & \multicolumn{1}{|l|}{0} & 0       & 0        & \textbf{-1/4}     & -1/4   & 1  & \multicolumn{1}{|l|}{1} \\ \cline{2-8}
+	\end{tabular}
+\end{table}
+
+Continuando con il simplesso duale:
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{llllllll}
+				&       				  & $x_{1}$ & $x_{2}$  & $x_{3}$ & $x_{4}$ & $s_{1}$ &  RHS  \\ \cline{2-8}
+		z		& \multicolumn{1}{|l|}{1} & 0       & 0        & 0       & 0       & -1      & \multicolumn{1}{|l|}{-1} \\ \cline{2-8}
+		$x_{1}$ & \multicolumn{1}{|l|}{0} & 1       & 0        & 0       & -1/3    & 2/3     & \multicolumn{1}{|l|}{2/3} \\
+		$x_{2}$ & \multicolumn{1}{|l|}{0} & 0       & 1        & 0       & 0       & 1       & \multicolumn{1}{|l|}{1} \\
+		$s_{1}$ & \multicolumn{1}{|l|}{0} & 0       & 0        & 1       & 1       & -4      & \multicolumn{1}{|l|}{2} \\ \cline{2-8}
+	\end{tabular}
+\end{table}
+
+Dalla riga di $x_{1}$ si ha i cut:
+\begin{equation}
+-\frac{2}{3}x_{4} - \frac{2}{3}s_{1} + s_{2} = - \frac{2}{3}
+\end{equation}
+
+Il nuovo tableau, quindi, diviene:
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{lllllllll}
+				&       				  & $x_{1}$ & $x_{2}$  & $x_{3}$ & $x_{4}$ & $s_{1}$ & $s_{2}$ &  RHS  \\ \cline{2-9}
+		z		& \multicolumn{1}{|l|}{1} & 0       & 0        & 0       & 0       & -1      & 0	   & \multicolumn{1}{|l|}{-1} \\ \cline{2-9}
+		$x_{1}$ & \multicolumn{1}{|l|}{0} & 1       & 0        & 0       & -1/3    & 2/3     & 0       & \multicolumn{1}{|l|}{2/3} \\
+		$x_{2}$ & \multicolumn{1}{|l|}{0} & 0       & 1        & 0       & 0       & 1       & 0       & \multicolumn{1}{|l|}{1} \\
+		$s_{1}$ & \multicolumn{1}{|l|}{0} & 0       & 0        & 1       & 1       & -4      & 0       & \multicolumn{1}{|l|}{2} \\
+		$s_{2}$ & \multicolumn{1}{|l|}{0} & 0       & 0        & 0       & -2/3    & -2/3    & 1       & \multicolumn{1}{|l|}{2/3} \\ \cline{2-9}
+	\end{tabular}
+\end{table}
+
+e ottimizzando con li simplesso duale:
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{lllllllll}
+				&       				  & $x_{1}$ & $x_{2}$  & $x_{3}$ & $x_{4}$ & $s_{1}$ & $s_{2}$ &  RHS  \\ \cline{2-9}
+		z		& \multicolumn{1}{|l|}{1} & 0       & 0        & 0       & 0       & -1      & -1/2	   & \multicolumn{1}{|l|}{-1} \\ \cline{2-9}
+		$x_{1}$ & \multicolumn{1}{|l|}{0} & 1       & 0        & 0       & 0       & -1      & 0       & \multicolumn{1}{|l|}{1} \\
+		$x_{2}$ & \multicolumn{1}{|l|}{0} & 0       & 1        & 0       & 0       & 1       & 0       & \multicolumn{1}{|l|}{1} \\
+		$s_{1}$ & \multicolumn{1}{|l|}{0} & 0       & 0        & 1       & 0       & -5      & 3/2     & \multicolumn{1}{|l|}{2} \\
+		$s_{2}$ & \multicolumn{1}{|l|}{0} & 0       & 0        & 0       & 1       & 1       & -3/2    & \multicolumn{1}{|l|}{1} \\ \cline{2-9}
+	\end{tabular}
+	\caption{Tableau ottimo.}
+\end{table}
+\noindent
+L'algoritmo converge in un numero finito di passi purché venga impiegata una appropiata regola lessicografica per la scelta del pivot.
+
+\subsubsection{Come evitare un numero indefinito di righe e colonne}
+Qualora una variabile di slack $s_{i}$, associata all'i-esimo cut, entra in base, si elimina sia il cut sia la variabile $s_{i}$.
+
+In questo modo il numero delle righe aggiunte (relative ai cuts) non supera n-m.
+
+\section{Metodi Branch and Bound}
+Sia $P_{0}$ un problema a cui corrisponde l'insieme $S_{0}$ di soluzioni ammissibili.
+
+Ad esempio
+\begin{displaymath}
+P_{0}
+\begin{cases}
+\;Min\;\;cx\\
+\;\;\;\;\;\;\;\;\;\;\;A x = b\\
+\;\;\;\;\;\;\;\;\;\;\;x \ge 0\;e\:intero
+\end{cases}
+\end{displaymath}
+\begin{equation}
+	S_{0}=\{x:Ax=b,\;x\ge 0\;intero\}
+\end{equation}
+
+Suddividre il problema $P_{0}$ nei sottoproblemi $P_{1},P_{2},...,P_{k}$ a cui corrispondono gli insiemi di soluzioni ammissibili $S_{1},S_{2},...,S_{k}$. La suddivisione è tale per cui 
+\begin{equation}
+S_{1} \cup S_{2} \cup ... \cup S_{k} = S_{0}
+\end{equation}
+
+È evidente che:
+\begin{equation}
+\min_{x \in S_{0}} cx = MIN\{\min_{x\in S_{1}} cx, \min_{x\in S_{1}}cx,...,\min_{x\in S_{k}}cx\}
+\end{equation}
+\noindent
+La risoluzione di ogni sottoproblema $P_{1},P_{2},...,P_{k}$ può risultare molto più semplice della risoluzione di $P_{0}$.
