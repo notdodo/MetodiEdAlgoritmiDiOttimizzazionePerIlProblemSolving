@@ -27,16 +27,16 @@ I costi $c_{ij}$ non verificano $c_{ij} = c_{ji}\;\forall\;i,j$ con $i < j$.\new
 Sia $x_{ij}$ una variabile $(0-1)$ associata ad ogni arco $(i,j) \in A$ dove $x_{ij}=1$ se l'arco $(i,j)$ è nella soluzione ottima e $x_{ij}=0$ altrimenti.\newline
 
 \begin{equation}
-	Min\;\;\displaystyle\sum_{i\in N}^{} \sum_{j\in N}^{} c_{ij} x_{ij}
+	Min\;\;\sum_{i\in N}^{} \sum_{j\in N}^{} c_{ij} x_{ij}
 \end{equation}
 \begin{equation}
-	s.t.\;\;\displaystyle\sum_{i\in N}^{} x_{ij} = 1,\;\;\forall j \in N
+	s.t.\;\;\sum_{i\in N}^{} x_{ij} = 1,\;\;\forall j \in N
 \end{equation}
 \begin{equation}
-	\;\;\;\;\;\;\;\displaystyle\sum_{j\in N}^{} x_{ij} = 1,\;\;\forall i \in N
+	\;\;\;\;\;\;\;\sum_{j\in N}^{} x_{ij} = 1,\;\;\forall i \in N
 \end{equation}
 \begin{equation}
-	\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\displaystyle\sum_{i\in S}^{} \sum_{j\in N\setminus S}^{} x_{ij} \ge 1,\;\;\forall S \subset N
+	\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\sum_{i\in S}^{} \sum_{j\in N\setminus S}^{} x_{ij} \ge 1,\;\;\forall S \subset N
 \end{equation}
 \begin{equation}
 	\;\;\;\;\;\;\;\;\;\;x_{ij} \in \{0,1\}\;,\;\forall (i,j) \in A
@@ -45,7 +45,7 @@ Sia $x_{ij}$ una variabile $(0-1)$ associata ad ogni arco $(i,j) \in A$ dove $x_
 Il vincolo $1.4$ impone che ogni soluzione ammissibile debba contenere almeno un arco $(i,j)$ con $i\in S$ e $j\in N\setminus S$ per ogni sottoinsieme $S$ di $N$.
 Un'alternativa al vincolo $1.4$ è:
 \begin{equation}\tag{1.4'}
-\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\displaystyle\sum_{i\in S}^{} \sum_{j\in S}^{} x_{ij} \le |S| - 1,\;\;\forall S \subset N
+\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\sum_{i\in S}^{} \sum_{j\in S}^{} x_{ij} \le |S| - 1,\;\;\forall S \subset N
 \end{equation}
 
 \subsubsection{TSP simmetrico}
@@ -60,16 +60,16 @@ Per una dato $S\in N$ e $\bar{S} = N\setminus S$ indichiamo con $(S, \bar{S})$ i
 
 Ad ogni arco di incide $l$ è associato un costo $d_{l}=c_{\alpha_{l}\beta_{l}}$ e $x_{l}\in \{0,1\}$ è una variabile che vale 1 se e solo se l'arco di indice $l$ è nella soluzione ottima.
 \begin{equation}
-	Min\;\;\displaystyle\sum_{l=1}^{} d_{l}\:x_{l}
+	Min\;\;\sum_{l=1}^{} d_{l}\:x_{l}
 \end{equation}
 \begin{equation}
-	s.t.\;\;\displaystyle\sum_{l\in A_{i}}^{} x_{l}=2,\; \forall i\in N
+	s.t.\;\;\sum_{l\in A_{i}}^{} x_{l}=2,\; \forall i\in N
 \end{equation}
 \begin{equation}
-	\;\;\;\;\;\;\;\;\;\displaystyle\sum_{l\in (S, \bar{S})}^{} x_{l} \ge 1,\;\forall S \subset N
+	\;\;\;\;\;\;\;\;\;\sum_{l\in (S, \bar{S})}^{} x_{l} \ge 1,\;\forall S \subset N
 \end{equation}
 \begin{equation}
-	x_{l}\in \{0,1\},\;\;l=1,...,m
+	x_{l}\in \{0,1\},\;\;l=1,\dots,m
 \end{equation}
 
 \subsection{Eliminazione subtours di Miller, Tucker, Zemlin (1960)}
@@ -81,11 +81,11 @@ Sia $u_{i}$ una variabile intera il cui valore sappresenta la posizione che il v
 
 Miller, Tucker e Zemlin propongono in alternativa a:
 \begin{equation}\tag{*}
-	\displaystyle\sum_{i\in S}^{}\sum_{j\in N\setminus S}^{} x_{ij} \ge 1,\;\;\forall S\subset N
+	\sum_{i\in S}^{}\sum_{j\in N\setminus S}^{} x_{ij} \ge 1,\;\;\forall S\subset N
 \end{equation}
 hanno imposto i seguenti vincoli:
 \begin{equation}
-	u_{i}-u_{j}+nx_{ij}\le n-1,\;\; i=1,...,n\:,\;j=2,...,n
+	u_{i}-u_{j}+nx_{ij}\le n-1,\;\; i=1,\dots,n\:,\;j=2,\dots,n
 \end{equation}
 Ogni tour hamiltoniano soddisfa questi vincoli e ogni subtour li viola.\newline
 \begin{wrapfigure}[5]{l}{0.5\textwidth}
@@ -105,7 +105,7 @@ Ogni tour hamiltoniano soddisfa questi vincoli e ogni subtour li viola.\newline
 \subsection{Il Traveling salesman problem con time windows (TSPTW)}
 È una variante del TSP che ha molte applicazioni.
 
-Sia dato un grafo orientato $G=(V,A)$ di $n+1$ vertici $(V=\{0,1,...,n\})$.
+Sia dato un grafo orientato $G=(V,A)$ di $n+1$ vertici $(V=\{0,1,\dots,n\})$.
 
 Ad ogni arco $(i,j)\in A$ sono associati
 \begin{itemize}
@@ -116,7 +116,7 @@ Ad ogni vertice è associato un intervallo $[r_{i},d_{i}]$ chiamato "time window
 
 Ovvero il salesman può visitare $i$ ad ogni tempo $t\in \mathbb{Z}^{+}$ con $r_{i}\le t\le d_{i}$.\newline
 Il problema consiste nel trovare una sequenza dei vertici di $G$ che parte dal vertice $0$ al tempo $0$ e finisce al nodo $0$ tale che sia il minimo il costo del circuito e il tempo di arrivo al nodo $i$ sia nell'intervallo $[r_{i},d_{j}],\;\forall i\in V$.\newline
-Si consideri la sequenza $(0,i,..,i_{k-1},i_{k},...,i_{n},0)$ e sia $t_{i_{k}}$ il tempo di arrivo al vertice $i_{k},\; k=0,1,...,n+1$.
+Si consideri la sequenza $(0,i,..,i_{k-1},i_{k},\dots,i_{n},0)$ e sia $t_{i_{k}}$ il tempo di arrivo al vertice $i_{k},\; k=0,1,\dots,n+1$.
 
 I tempi di arrivo sono calcolati come:
 \begin{equation}
@@ -129,9 +129,9 @@ I tempi di arrivo sono calcolati come:
 \subsubsection{Formulazione del TSPTW}
 Sia $x_{ij}$ una variabile binaria intera che assume il valore $1$ se il vertice $i$ è visitato immediatamente prima di $i$ e $x_{ij}=0$ altrimenti.
 \begin{flalign}
-	& Min\;\;\displaystyle\sum_{(i,j)\in A}^{}c_{ik}x_{ij} \\
-	& s.t.\;\;\;\;\displaystyle\sum_{i\in A_{j}^{-}}^{}x_{ij}=1,\;\;\forall j\in V \\		
-	& \;\;\;\;\;\;\;\;\displaystyle\sum_{j\in A_{i}^{+}}^{}x_{ij}=1,\;\;\forall i\in V \\
+	& Min\;\;\sum_{(i,j)\in A}^{}c_{ik}x_{ij} \\
+	& s.t.\;\;\;\;\sum_{i\in A_{j}^{-}}^{}x_{ij}=1,\;\;\forall j\in V \\		
+	& \;\;\;\;\;\;\;\;\sum_{j\in A_{i}^{+}}^{}x_{ij}=1,\;\;\forall i\in V \\
 	& \;\;\;\;\;\;\;\;t_{i}+\theta_{ij}-t_{j}\le M(1-x_{ij},\;\;\forall (i,j)\in A,\; j\ne 0) \\
 	& \;\;\;\;\;\;\;\;t_{i}\le d_{i},\;\;\forall i\in V \\
 	& \;\;\;\;\;\;\;\;t_{i}\ge r_{i},\;\;\forall i\in V \\
@@ -149,7 +149,7 @@ dove
 \newpage
 
 \section{Project scheduling with resource constraints (PSR)}
-\`E dato un insieme $\mathbb{X}=\{1,...,n\}$ di $n$ jobs.
+\`E dato un insieme $\mathbb{X}=\{1,\dots,n\}$ di $n$ jobs.
 
 Sono disponibili $m$ risorse dove ogni risorsa $k$ ha una disponibilità $b_{k}$ ad ogni istante del periodo di scheduling.
 
@@ -180,22 +180,22 @@ Sia $\xi_{it}$ una variabile binaria 0-1 che vale 1 se e solo se il job $i$ vien
 Sia $T_{max}$ un upper bound sulla durata del progetto.
 
 \begin{flalign}
-	& Min \displaystyle\sum_{t=1}^{T_{max}}t\;\xi_{n t} \\
-	& \;\;s.t. \displaystyle\sum_{t=1}^{T_{max}}t\;\xi_{i t} = 1,\;\;\;i=1,...,n \\
-	& \;\;\;\;\;\;\;\displaystyle\sum_{t=1}^{T_{max}}t\;\xi_{j t} - \displaystyle\sum_{t=1}^{T_{max}}t\;\xi_{i t} \ge d_{i},\;\;\;\forall (i,j)\in H \\
-	& \;\;\;\;\;\;\;\displaystyle\sum_{i=1}^{n}r_{ik}\displaystyle\sum_{\tau=t-d_{i}+1}^{t}\xi_{i\tau}\le b_{k},\;\;\;t=1,...,T_{max}\;e\;k=1,...,m \\
+	& Min \sum_{t=1}^{T_{max}}t\;\xi_{n t} \\
+	& \;\;s.t. \sum_{t=1}^{T_{max}}t\;\xi_{i t} = 1,\;\;\;i=1,\dots,n \\
+	& \;\;\;\;\;\;\;\sum_{t=1}^{T_{max}}t\;\xi_{j t} - \sum_{t=1}^{T_{max}}t\;\xi_{i t} \ge d_{i},\;\;\;\forall (i,j)\in H \\
+	& \;\;\;\;\;\;\;\sum_{i=1}^{n}r_{ik}\sum_{\tau=t-d_{i}+1}^{t}\xi_{i\tau}\le b_{k},\;\;\;t=1,\dots,T_{max}\;e\;k=1,\dots,m \\
 	& \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
-	\;\;\;\;\;\;\xi_{it}\in\{0,1\},\;\;\; i=1,...,n\;e\;t=1,...,T_{max}
+	\;\;\;\;\;\;\xi_{it}\in\{0,1\},\;\;\; i=1,\dots,n\;e\;t=1,\dots,T_{max}
 \end{flalign}
 Si osservi che:
 \begin{flalign*}
-	& \displaystyle\sum_{\tau=t-d_{i}+1}^{t}\xi_{i \tau}=1\;\;\;se\;il\;job\;i\;è\;in\;esecuzione\;al\;tempo\;t
+	& \sum_{\tau=t-d_{i}+1}^{t}\xi_{i \tau}=1\;\;\;se\;il\;job\;i\;è\;in\;esecuzione\;al\;tempo\;t
 \end{flalign*}
 \subsubsection{Esempio}
 Sia $d_{i}=4$.
 
 Se $\xi_{i3}=1$, allora i è in esecuzione nei tempi 3,4,5 e 6.
-Infatti avremo: \newline $\displaystyle\sum_{\tau=t-d_{i}+1}^{t}\xi_{i \tau} = 1$ per $t=3,4,5,6\;$ e $\displaystyle\sum_{\tau=t-d_{i}+1}^{t}\xi_{i \tau} = 0$ per $t<3$ e $t>6$
+Infatti avremo: \newline $\sum_{\tau=t-d_{i}+1}^{t}\xi_{i \tau} = 1$ per $t=3,4,5,6\;$ e $\sum_{\tau=t-d_{i}+1}^{t}\xi_{i \tau} = 0$ per $t<3$ e $t>6$
 \newpage
 \section{Fixed Charge Transportation Problem (FCTP)}
 Il Problema del Trasporto di Carico Fisso è una generalizzazione del classico Problema del Trasporto.
@@ -203,7 +203,7 @@ Il Problema del Trasporto di Carico Fisso è una generalizzazione del classico P
 Si differenzia nel definire che il costo per la spedizione di una quantità non-zero di beni, da ogni origine alla sua destinazione, è composto da un costo proporzionale all'ammontare dei beni inviati più un costo fisso. 
 
 \subsection{Descrizione del FCTP}
-Il FCTP è definito su un grafo completo e bipartito $G=(S,T,A)$ dove $S={1,2,...,m}$ è un insieme di $m$ sorgenti e $T={1,2,...,n}$ è un insieme di $n$ destinazioni.
+Il FCTP è definito su un grafo completo e bipartito $G=(S,T,A)$ dove $S={1,2,\dots,m}$ è un insieme di $m$ sorgenti e $T={1,2,\dots,n}$ è un insieme di $n$ destinazioni.
 
 Per ogni sorgente $i\in S$ è disponibile è una quantità intera $a_{i}>0$ di merce e per ogni destinazione $j\in T$ è necessaria una quantità intera $b_{j}>0$ di merce dalle sorgenti.\newline
 L'insieme $A$ degli archi è definito come: $A=\{(i,j):\;i\in S,\;j\in T\}$; ogni arco $(i,j)\in A$ è
@@ -211,7 +211,7 @@ associato ad un costo unitario $c_{ij}$ per il trasporto di una unità della mer
 
 Senza perdere di generalità si assume che:
 \begin{flalign*}
-	& \displaystyle\sum_{i\in S}^{}a_{i}=\displaystyle\sum_{j\in T}^{}b_{j} \\
+	& \sum_{i\in S}^{}a_{i}=\sum_{j\in T}^{}b_{j} \\
 \end{flalign*}
 
 \subsection{Formulazione del FCTP}
@@ -220,11 +220,11 @@ Sia $x_{ij}$ una variabile rappresentante la quantità di merce trasportata dall
 Sia $m_{ij}=min{a_{i},b_{j},\;(i,j)\in A}$.\newline
 Una semplice formulazione matematiche del FCTP è:
 \begin{flalign}
-	& z(F0) = min \displaystyle\sum_{i\in S}^{}\displaystyle\sum_{j\in T}^{}(c_{ij}x_{ij}+f_{ij}y_{ij}) \\
+	& z(F0) = min \sum_{i\in S}^{}\sum_{j\in T}^{}(c_{ij}x_{ij}+f_{ij}y_{ij}) \\
 	\label{con:1.27}
-	& \;\;\;\;\;\;\;s.t.\;\;\displaystyle\sum_{j\in T}^{}x_{ij}=a_{i},\;\;i\in S \\
+	& \;\;\;\;\;\;\;s.t.\;\;\sum_{j\in T}^{}x_{ij}=a_{i},\;\;i\in S \\
 	\label{con:1.28}
-	& \;\;\;\;\;\;\;\;\;\;\;\;\;\;\displaystyle\sum_{i\in S}^{}x_{ij} = b_{j},\;\;j\in T \\
+	& \;\;\;\;\;\;\;\;\;\;\;\;\;\;\sum_{i\in S}^{}x_{ij} = b_{j},\;\;j\in T \\
 	& \;\;\;\;\;\;\;\;\;\;\;\;\;\;x_{ij}\le m_{ij}y_{ij},\;\;\;(i,j)\in A \\
 	& \;\;\;\;\;\;\;\;\;\;\;\;\;\;x_{ij}\ge 0,\;\;\;\;\;\;\;\;\;\;\;(i,j)\in A \\
 	& \;\;\;\;\;\;\;\;\;\;\;\;\;\;y_{ij}\in \{0,1\}
@@ -241,14 +241,14 @@ Per ogni veicolo $i\in N$ sono noti:
 	\item iltempo di arrivo $a_{i}$ del veicolo al deposito;
 	\item la durata dello scarico $d_{ij}$ sulla linea $j\in L_{i}$.
 \end{itemize}
-Si assume che lo scarico di un veicolo non possa essere interrotto, ovvero, se lo scarico del veicolo $i$ sulla linea $j\in L_{i}$ inizia al tempo $t$, allora la linea $j$ deve essere disponibile per tutti gli istanti di tempo $\tau=t,...,t+d_{ij}-1$ (ovvero $\tau \in T_{j}$ per ogni $\tau=t,...,t+d_{ij}-1$).
-Indichiamo con $I_{ij}$ l'insieme degli istanti di tempo in cui può iniziare lo scarico del veicolo $i$ sulla linea $j\in L_{i}$, ovvero per ogni $t\in I_{ij}$ si assume che la linea $j$ disponibile per ogni istante $\tau=i,...,d_{ij}-1$.
+Si assume che lo scarico di un veicolo non possa essere interrotto, ovvero, se lo scarico del veicolo $i$ sulla linea $j\in L_{i}$ inizia al tempo $t$, allora la linea $j$ deve essere disponibile per tutti gli istanti di tempo $\tau=t,\dots,t+d_{ij}-1$ (ovvero $\tau \in T_{j}$ per ogni $\tau=t,\dots,t+d_{ij}-1$).
+Indichiamo con $I_{ij}$ l'insieme degli istanti di tempo in cui può iniziare lo scarico del veicolo $i$ sulla linea $j\in L_{i}$, ovvero per ogni $t\in I_{ij}$ si assume che la linea $j$ disponibile per ogni istante $\tau=i,\dots,d_{ij}-1$.
 
 Sia $c_{ijt}$ è il costo per iniziare lo scarico del veicolo $i\in N$ sulla linea $j\in L{i}$ al tempo $t\in I_{ij}$.\newline
 Il problema richiede che ogni veicolo sia assegnato ad una linea di scarico compatibile in modo che ogni scarico sia fatto senza interruzioni e sia minimo il costo dell'assegnamento.
 
 \subsection{Formulazione matematica F}
-Per ogni $i\in N$, $j\in L_{i}$ e $t\in I_{ij}$ poniamo $\delta_{ijt\tau}=1$ per $\tau=t,...,t+d_{ij}-1$ e $\delta_{ijt\tau}=0$ per ogni $\tau\in T_{j}$ tale che $\tau < t$ oppure $\tau >t+d_{ij}-1$.
+Per ogni $i\in N$, $j\in L_{i}$ e $t\in I_{ij}$ poniamo $\delta_{ijt\tau}=1$ per $\tau=t,\dots,t+d_{ij}-1$ e $\delta_{ijt\tau}=0$ per ogni $\tau\in T_{j}$ tale che $\tau < t$ oppure $\tau >t+d_{ij}-1$.
 
 Indichiamo con $N_{j}\subseteq N$ il sottoinsieme di veicoli che possono essere scaricati sulla linea $j$, ovvero $N_{j}=\{i\in N:\;j\in L_{i}\}$.
 
@@ -299,7 +299,7 @@ Molti problemi reali possono essere risolti rilassando in modo lagrangiano i vin
 \subsection{Lot sizing senza vincoli di capacit\`a}
 Si consideri un'azienda che deve pianificare la propria produzione per un orizzonte temporale di $T$ periodi (ad esempio, $T$ mesi).
 
-Per ciascun periodo $t=1,...,T$ sono noti:
+Per ciascun periodo $t=1,\dots,T$ sono noti:
 \begin{itemize}
 	\item[\textit{$d_{t}$}] domanda complessiva dei clienti;
 	\item[\textit{$A_{t}$}] costo fisso di set up per attivare la produzione;
@@ -311,7 +311,7 @@ Si suppone che la quantità prodotto nel periodo $t$ sia subito disponibile e ch
 L'obiettivo è di minimizzare i costi complessivi di set up, produzione e stoccaggio.
 
 \subsubsection{Formulazione Matematica (modello di Wagner-Whitin)}
-Variabili decisonali associate a ciascun periodo t=1,...,T
+Variabili decisonali associate a ciascun periodo t=1,\dots,T
 \begin{description}
 	\item[$x_{t}$] quantità prodotta all'inizio del periodo $t$;
 	\item[$I_{t}$] livello del magazzino alla fine del periodo $t$;
@@ -320,10 +320,10 @@ Variabili decisonali associate a ciascun periodo t=1,...,T
 
 \begin{flalign}
 	& Min\;z=\sum_{t=1}^{T} (p_{t}x_{t}+h_{t}I_{t}+A_{t}y_{t}) \\
-	&\;\;\;\;\;\;\;\;x_{t}+I_{t-1}=I_{t}+d_{t},\;t=1,...,T \\
-	& \;\;\;\;\;\;\;\;x_{t}\le My_{t},\;t=1,..., \\
-	& \;\;\;\;\;\;\;\;x_{t},\;I_{t}\ge 0,\;t=1,...,T \\
-	& \;\;\;\;\;\;\;\;y_{t}\in \{0,1\},\;t=1,...,T \\
+	&\;\;\;\;\;\;\;\;x_{t}+I_{t-1}=I_{t}+d_{t},\;t=1,\dots,T \\
+	& \;\;\;\;\;\;\;\;x_{t}\le My_{t},\;t=1,\dots, \\
+	& \;\;\;\;\;\;\;\;x_{t},\;I_{t}\ge 0,\;t=1,\dots,T \\
+	& \;\;\;\;\;\;\;\;y_{t}\in \{0,1\},\;t=1,\dots,T \\
 	& dove\;M=\sum_{t=1}^{T}d_{t}\textnormal{ e, per semplicità, si suppone che }I_{0}=0.
 \end{flalign}
 
@@ -355,7 +355,7 @@ Per ciascun periodo $t=1,..,T$ vi sono gli archi:
 \subsubsection{Proprietà della soluzione ottima}
 \textbf{Teorema.} In una soluzione ottima non può mai avvenire che la domanda del periodo $t$ venga soddisfatta sia dalla produzione che dal magazzino, ovvero:
 \begin{center}
-	$I_{t-1}\cdot x_{t}=0;\;t=1,...,T$
+	$I_{t-1}\cdot x_{t}=0;\;t=1,\dots,T$
 \end{center}
 \begin{figure}[H]
 	\caption{}
@@ -366,13 +366,13 @@ Per ciascun periodo $t=1,..,T$ vi sono gli archi:
 
 \subsubsection{Algoritmo di soluzione (di complessità $O(T^{2})$)}
 Si costruisca un grafo aciclico di $T+1$ vertici.\newline
-Si definiscano gli archi $j,k)$ per $j=0,...,T-1$ e $k=j+1,...,T$.
+Si definiscano gli archi $j,k)$ per $j=0,\dots,T-1$ e $k=j+1,\dots,T$.
 
-L'arco $(j,k)$ rappresenta la decisione di produrre all'inizio del periodo $j+1$ quanto serve per soddisfare le domanda complessiva dei periodo $j+1,\;j+2,...,k$.
+L'arco $(j,k)$ rappresenta la decisione di produrre all'inizio del periodo $j+1$ quanto serve per soddisfare le domanda complessiva dei periodo $j+1,\;j+2,\dots,k$.
 
 Il costo $M_{jk}$ dell'arco (j,k) è pari al costo per produrre nel periodo j+1 la quantità $\sum_{r=j+1}^{k}d_{r}$ più i costi di stoccaggio:
 \begin{center}
-	$M_{jk}=A_{j+1}+p_{j+1}\displaystyle\sum_{r=j+1}^{k}d_{r}+\sum_{t=j+1}^{k-1}h_{t}(\sum_{r=t+1}^{k}d_{r})$
+	$M_{jk}=A_{j+1}+p_{j+1}\sum_{r=j+1}^{k}d_{r}+\sum_{t=j+1}^{k-1}h_{t}(\sum_{r=t+1}^{k}d_{r})$
 \end{center}
 \begin{figure}[H]
 	\caption{}

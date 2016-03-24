@@ -212,13 +212,13 @@ Si consideri il tableau ottimo relativo a LP:
 \begin{table}[h]
 	\centering
 	\begin{tabular}{llllllllllllll}
-		&                       z & $x_{1}$ &    & ... &     &      & $x_{m}$ & $x_{m+1}$     & ... & $x_{j}$     & ... & $x_{n}$     & \\ \cline{2-14}
-		& \multicolumn{1}{|l|}{1} & 0       &    & ... &     &      & 0       &               &     &             &     &             & \multicolumn{1}{|l|}{} \\ \cline{2-14}
+		&                       z & $x_{1}$ &    & \dots &     &      & $x_{m}$ & $x_{m+1}$     & \dots & $x_{j}$     & \dots & $x_{n}$     & \\ \cline{2-14}
+		& \multicolumn{1}{|l|}{1} & 0       &    & \dots &     &      & 0       &               &     &             &     &             & \multicolumn{1}{|l|}{} \\ \cline{2-14}
 		$x_{1}$ & \multicolumn{1}{|l|}{}  & 1       &    &     &     &      &         &               &     &             &     &	           & \multicolumn{1}{|l|}{$\bar{b}_{1}$} \\
 		& \multicolumn{1}{|l|}{}  &         & 1  &     &     &      &         &               &     &             &     &             & \multicolumn{1}{|l|}{} \\
-		& \multicolumn{1}{|l|}{}  &         &    & ... &     &      &         &               &     &             &     &             & \multicolumn{1}{|l|}{} \\
-		$x_{r}$ & \multicolumn{1}{|l|}{}  &         &    &     & 1   &      &         & $y_{r}^{m+1}$ & ... & $y_{r}^{j}$ & ... & $y_{r}^{n}$ & \multicolumn{1}{|l|}{$\bar{b}_{r}$} \\
-		& \multicolumn{1}{|l|}{}  &         &    &     &     & ...  &         &               &     &             &     &             & \multicolumn{1}{|l|}{} \\
+		& \multicolumn{1}{|l|}{}  &         &    & \dots &     &      &         &               &     &             &     &             & \multicolumn{1}{|l|}{} \\
+		$x_{r}$ & \multicolumn{1}{|l|}{}  &         &    &     & 1   &      &         & $y_{r}^{m+1}$ & \dots & $y_{r}^{j}$ & \dots & $y_{r}^{n}$ & \multicolumn{1}{|l|}{$\bar{b}_{r}$} \\
+		& \multicolumn{1}{|l|}{}  &         &    &     &     & \dots  &         &               &     &             &     &             & \multicolumn{1}{|l|}{} \\
 		$x_{m}$ & \multicolumn{1}{|l|}{}  &         &    &     &     &      & 1       &               &     &             &     &             & \multicolumn{1}{|l|}{$\bar{b}_{m}$} \\ \cline{2-14}
 	\end{tabular}
 \end{table}
@@ -231,7 +231,7 @@ Supponiamo la soluzione ottima non intera.\\
 L'equazione associata a $x_{r}$ è:
 
 \begin{equation}\label{eq:2.20}
-x_{r} + \displaystyle\sum_{j=m+1}^{n} y_{r}^{j} x_{j} = \bar{b}_{r}
+x_{r} + \sum_{j=m+1}^{n} y_{r}^{j} x_{j} = \bar{b}_{r}
 \end{equation}
 
 Poniamo:
@@ -246,22 +246,22 @@ Inoltre:
 
 Sostituendo, la \ref{eq:2.20} diviene:
 \begin{equation}
-x_{r} + \displaystyle\sum_{j=m+1}^{n} (I_{r}^{j} + F_{r}^{j}) x_{j} = (I_{r} + F_{r})
+x_{r} + \sum_{j=m+1}^{n} (I_{r}^{j} + F_{r}^{j}) x_{j} = (I_{r} + F_{r})
 \end{equation}
 
 o anche:
 \begin{equation}
-\underbrace{x_{r}+\displaystyle\sum_{j=m+1}^{n} I_{r}^{j} x_{j} - I_{r}}_\text{intero per ogni x intero} = \underbrace{F_{r} - \displaystyle\sum_{j=m+1}^{n} F_{r}^{j}x_{j}}_\text{< 1 per $x\ge0$}
+\underbrace{x_{r}+\sum_{j=m+1}^{n} I_{r}^{j} x_{j} - I_{r}}_\text{intero per ogni x intero} = \underbrace{F_{r} - \sum_{j=m+1}^{n} F_{r}^{j}x_{j}}_\text{< 1 per $x\ge0$}
 \end{equation}
 
 Ne segue:
 
 \begin{equation}
-F_{r} - \displaystyle\sum_{j=m+1}^{n} F_{r}^{j} x_{j} \le 0
+F_{r} - \sum_{j=m+1}^{n} F_{r}^{j} x_{j} \le 0
 \end{equation}
 
 \noindent
-La soluzione corrente non soddisfa il vincolo \ref{eq:2.20} in quanto $x_{j} = 0$ $j=m+1,...,n$ mentre $F_{r}>0$ poiché $\bar{b}_{r}$ si è supposto non intero.
+La soluzione corrente non soddisfa il vincolo \ref{eq:2.20} in quanto $x_{j} = 0$ $j=m+1,\dots,n$ mentre $F_{r}>0$ poiché $\bar{b}_{r}$ si è supposto non intero.
 
 Se il vincolo \ref{eq:2.20} viene aggiunto al problema $LP$ allora la soluzione corrente risulterà non ammissibile.\\
 Per determinare una nuova soluzione che soddisfi il vincolo \ref{eq:2.20} può essere impiegato il \emph{Simplesso Duale} partendo dal tableau ottimo relativo alla soluzione corrente.
@@ -270,7 +270,7 @@ Per determinare una nuova soluzione che soddisfi il vincolo \ref{eq:2.20} può e
 \noindent
 Al tableau va aggiunto il vincolo:
 \begin{equation}
-- \displaystyle\sum_{j=m+1}^{j} F_{r}^{j} x_{j} + s = -F_{r}
+- \sum_{j=m+1}^{j} F_{r}^{j} x_{j} + s = -F_{r}
 \end{equation}
 La nuova variabile slack $s$ è una nuova variabile base.\\
 Il nuovo tableau è non ammissibile per il Primale ma duale ammissibile.\\
@@ -322,7 +322,7 @@ Si noti che l'ottimo cade nel punto $x=(1;1)$.
 
 Ricordando che il cut da aggiungere è:
 \begin{equation}
--\displaystyle\sum_{j=m+1}^{n} F_{r}^{j} x_{j} + s = -F_{r}
+-\sum_{j=m+1}^{n} F_{r}^{j} x_{j} + s = -F_{r}
 \end{equation}
 Dalla riga di $x_{2}$ si ha la sequente equzione:
 \begin{equation}
@@ -424,40 +424,40 @@ P_{0}
 \noindent
 \emph{\textbf{Principio base dei metodi Branch and Bound}}
 \\
-Suddividre il problema $P_{0}$ nei sottoproblemi $P_{1},P_{2},...,P_{k}$ a cui corrispondono gli insiemi di soluzioni ammissibili $S_{1},S_{2},...,S_{k}$. La suddivisione è tale per cui 
+Suddividre il problema $P_{0}$ nei sottoproblemi $P_{1},P_{2},\dots,P_{k}$ a cui corrispondono gli insiemi di soluzioni ammissibili $S_{1},S_{2},\dots,S_{k}$. La suddivisione è tale per cui 
 \begin{equation}
-S_{1} \cup S_{2} \cup ... \cup S_{k} = S_{0}
+S_{1} \cup S_{2} \cup \dots \cup S_{k} = S_{0}
 \end{equation}
 
 È evidente che:
 \begin{equation}
-\min_{x \in S_{0}} cx = MIN\{\min_{x\in S_{1}} cx, \min_{x\in S_{1}}cx,...,\min_{x\in S_{k}}cx\}
+\min_{x \in S_{0}} cx = MIN\{\min_{x\in S_{1}} cx, \min_{x\in S_{1}}cx,\dots,\min_{x\in S_{k}}cx\}
 \end{equation}
 
-La risoluzione di ogni sottoproblema $P_{1},P_{2},...,P_{k}$ può risultare molto più semplice della risoluzione di $P_{0}$.
+La risoluzione di ogni sottoproblema $P_{1},P_{2},\dots,P_{k}$ può risultare molto più semplice della risoluzione di $P_{0}$.
 \newpage
-Possiamo rappresentare la suddivisione di $P_{0}$ in $P_{1},P_{2},...,P_{k}$ mediante un albero
+Possiamo rappresentare la suddivisione di $P_{0}$ in $P_{1},P_{2},\dots,P_{k}$ mediante un albero
 
 \centerline{\includegraphics[height=4cm]{images/graph14.png}}
 
 Nel caso in cui la riduzione di uno o più sottoproblemi risulti \emph{difficile} questi possono essere ulteriormente suddivisi.
 
-Supponiamo che $P_{i}$ risulti difficile, allora può essere suddiviso nei sottoproblemi $P_{i1},P_{i2},...,P_{ik}$ a cui corrispondono gli insiemi di soluzioni ammissibili $S_{i1},S_{i2},...,S_{ik}$ tali che $S_{i1}\;\cup\;S_{i2}\;\cup\;...\;\cup\;S_{ik}\;=\;S_{i}$
+Supponiamo che $P_{i}$ risulti difficile, allora può essere suddiviso nei sottoproblemi $P_{i1},P_{i2},\dots,P_{ik}$ a cui corrispondono gli insiemi di soluzioni ammissibili $S_{i1},S_{i2},\dots,S_{ik}$ tali che $S_{i1}\;\cup\;S_{i2}\;\cup\;\dots\;\cup\;S_{ik}\;=\;S_{i}$
 
 Si ha il seguente albero
 
 \centerline{\includegraphics[height=5cm]{images/graph15.png}}
 
 \noindent
-Risolvere $P_{0}$ equivale a risolvere $P_{1},...,P_{i-1},(P_{i1},P_{i2},...,P_{ir}),P_{i+1}...,P_{k}$
+Risolvere $P_{0}$ equivale a risolvere $P_{1},\dots,P_{i-1},(P_{i1},P_{i2},\dots,P_{ir}),P_{i+1}\dots,P_{k}$
 
 Il processo di suddivisione di un problema in un numero finito di sottoproblemi viene chiamato \textbf{BRANCHING}.
 
-Una buona strategia di branching consiste nel suddividere $P_{i}$ nei sottoproblemi $P_{i1},P_{i2},...,P_{ir}$ in modo che, per ogni coppia $P_{i\alpha},P_{i\beta}$ con ($\alpha \neq \beta$), gli insiemi $S_{i\alpha}$ e $S_{i\beta}$ siano disgiunti.
+Una buona strategia di branching consiste nel suddividere $P_{i}$ nei sottoproblemi $P_{i1},P_{i2},\dots,P_{ir}$ in modo che, per ogni coppia $P_{i\alpha},P_{i\beta}$ con ($\alpha \neq \beta$), gli insiemi $S_{i\alpha}$ e $S_{i\beta}$ siano disgiunti.
 
 \centerline{$S_{i\alpha} \cap S_{i\beta} = \emptyset$}
 
-Se la condizione sopra è soddisfatta allora $\{S_{i},...,S_{ir}\}$ è una \textbf{PARTIZIONE} di $S_{i}$.\\
+Se la condizione sopra è soddisfatta allora $\{S_{i},\dots,S_{ir}\}$ è una \textbf{PARTIZIONE} di $S_{i}$.\\
 Si noti che la condizione non è \emph{necessaria} ma rende computazionalmente efficiente il processo di branching.
 
 \subsubsection{Esempi di Branching}
@@ -478,7 +478,7 @@ Ciò si ripete fino ad ottenere un sottoproblema che può essere risolto.
 \textbf{BACKTRACKING}: quando un sottoproblema è risolto viene scelto il penultmo sottoproblema generato e su questo viene effettuato il branching.
 
 \subsubsection{Breadth-first search}
-Il branching procede da livello a livello, ovvero il problema $P_{0}$ è suddiviso in $P_{1},P_{2},...,P_{k}$ che sono i sottoproblemi a livello 1.
+Il branching procede da livello a livello, ovvero il problema $P_{0}$ è suddiviso in $P_{1},P_{2},\dots,P_{k}$ che sono i sottoproblemi a livello 1.
 
 Ogni sottoproblema a livello 1 viene suddiviso in un numero di sottoproblemi che costituiscono il livello 2.
 
@@ -615,7 +615,7 @@ Sia dato il problema
 P_{0}
 \begin{cases}
 \;Min\;\;z=cx\\
-\;\;\;\;\;\;\;\;\;\;\;\displaystyle\sum_{j=1}^{n}a_{ij}x_{j}\ge b_{i}\;\;i=1,...,m_{1}\\
+\;\;\;\;\;\;\;\;\;\;\;\sum_{j=1}^{n}a_{ij}x_{j}\ge b_{i}\;\;i=1,\dots,m_{1}\\
 \;\;\;\;\;\;\;\;\;\;\;Dx=h\;\;m_{2}\;vincoli\\
 \;\;\;\;\;\;\;\;\;\;\;x\ge 0\;\;intero
 \end{cases}
@@ -625,7 +625,7 @@ Si consideri il probelma che si ottiene da $P_{0}$ sostituendo i primi $m_{1}$ v
 SP
 \begin{cases}
 \;Min\;\;z_{SP}=cx\\
-\;\;\;\;\;\;\;\;\;\;\;\displaystyle\sum_{j=1}^{m_{1}}\pi_{i}\displaystyle\sum_{j=1}^{n}a_{ij}^{j}\ge \displaystyle\sum_{i=1}^{m_{1}}\pi_{i}b_{i}\;\;\pi_{i}\ge 0\\
+\;\;\;\;\;\;\;\;\;\;\;\sum_{j=1}^{m_{1}}\pi_{i}\sum_{j=1}^{n}a_{ij}^{j}\ge \sum_{i=1}^{m_{1}}\pi_{i}b_{i}\;\;\pi_{i}\ge 0\\
 \;\;\;\;\;\;\;\;\;\;\;Dx=h\;\;m_{2}\;vincoli\\
 \;\;\;\;\;\;\;\;\;\;\;x\ge 0\;\;intero
 \end{cases}
@@ -682,14 +682,14 @@ ovvero
 \begin{equation}
 	z^{*}_{SP}=cx^{*}\ge z_{LP}^{*}
 \end{equation}
-$\blacksquare$
+$\square$
 
 \section{Assegnamento Generalizzato}
 Allocazione ottimale di $n$ oggetti in $m$ contenitori in modo che ogni oggetto sia assegnato ad un solo contenitore e non sia superata la portata di ogni contenitore.
 
 Indichiamo con:
 \begin{itemize}
-	\item[] $b_{i}: \textnormal{ portata del contenitore }i,i=1,...,m$
+	\item[] $b_{i}: \textnormal{ portata del contenitore }i,i=1,\dots,m$
 	\item[] $a_{ij}: \textnormal{ spazio del contenitore $i$ occupato dall'oggetto $j$ (se $j$ viene assegnato a $i$)}$
 	\item[] $c_{ij}: \textnormal{ costo per assegnare al contenitore $i$ l'oggetto $j$}$
 	\item[] $x_{ij}$ 
@@ -701,10 +701,10 @@ Indichiamo con:
 
 \subsection{Formulazione matematica}
 \begin{flalign}
-	& Min\;\;\displaystyle\sum_{i=1}^{m}\sum_{j=1}^{n}c_{ij}x_{ij} \\
-	& \;\;\;\;\;\;\;\;\;\;\displaystyle\sum_{i=1}^{m}x_{ij},\;j=1,...,n \label{eq:2.45}\\
-	& \;\;\;\;\;\;\;\;\;\;\displaystyle\sum_{j=1}^{n}a_{ij}x_{ij},\;i=1,...,m \label{eq:2.46} \\
-	& \;\;\;\;\;\;\;\;\;\;\displaystyle x_{ij}\in \{0,1\},\;\forall i,j
+	& Min\;\;\sum_{i=1}^{m}\sum_{j=1}^{n}c_{ij}x_{ij} \\
+	& \;\;\;\;\;\;\;\;\;\;\sum_{i=1}^{m}x_{ij},\;j=1,\dots,n \label{eq:2.45}\\
+	& \;\;\;\;\;\;\;\;\;\;\sum_{j=1}^{n}a_{ij}x_{ij},\;i=1,\dots,m \label{eq:2.46} \\
+	& \;\;\;\;\;\;\;\;\;\; x_{ij}\in \{0,1\},\;\forall i,j
 \end{flalign}
 Dove:
 \begin{itemize}
@@ -716,19 +716,19 @@ Dove:
 
 \subsubsection{(a) Rispetto ai vincoli \ref{eq:2.45}}
 \begin{flalign}
-	& L(u)=Min\;\displaystyle\sum_{i=1}^{m}\sum_{j=1}^{n}c_{ij}x_{ij}-\overbrace{\sum_{j=1}^{n}u_{j}(\sum_{i=1}^{m}x_{ij}-1)}^{-u(Ax-b)} =\\
-	& L(u)=Min\;\displaystyle\sum_{i=1}^{m}(\sum_{j=1}^{n}(c_{ij} -u_{j})x_{ij})+\sum_{j=1}^{n}u_{j} \\
-	& \;\;\;\;\;\;\;\;\;\;\;\;\;s.t.\displaystyle\sum_{j=1}^{n}a_{ij}x_{ij}\le b_{i},\;i=1,...,m \\
+	& L(u)=Min\;\sum_{i=1}^{m}\sum_{j=1}^{n}c_{ij}x_{ij}-\overbrace{\sum_{j=1}^{n}u_{j}(\sum_{i=1}^{m}x_{ij}-1)}^{-u(Ax-b)} =\\
+	& L(u)=Min\;\sum_{i=1}^{m}(\sum_{j=1}^{n}(c_{ij} -u_{j})x_{ij})+\sum_{j=1}^{n}u_{j} \\
+	& \;\;\;\;\;\;\;\;\;\;\;\;\;s.t.\sum_{j=1}^{n}a_{ij}x_{ij}\le b_{i},\;i=1,\dots,m \\
 	& \;\;\;\;\;\;\;\;\;\;\;\;\;x_{ij}\in\{0,1\}
 \end{flalign}
 L'ottimo $L(u)$ si ottiene risolvendo $m$ problemi di \textit{Knapsack} per il contenitore $i$ del tipo:
 
 \begin{flalign*}
-	& z_{i}=Min\;\displaystyle\sum_{j=1}^{n}(c_{ij}-u_{j})x_{ij} \\
-	& \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\displaystyle\sum_{j=1}^{n}a_{ij}x_{ij}\le b_{i} \\
+	& z_{i}=Min\;\sum_{j=1}^{n}(c_{ij}-u_{j})x_{ij} \\
+	& \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\sum_{j=1}^{n}a_{ij}x_{ij}\le b_{i} \\
 	& \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;x_{ij}\in\{0,1\}
 \end{flalign*}
-Per cui $L(u)=\displaystyle\sum_{i=1}^{m}z_{i}\sum_{j=1}^{n}u_{j}$
+Per cui $L(u)=\sum_{i=1}^{m}z_{i}\sum_{j=1}^{n}u_{j}$
 
 \textbf{Esempio.}
 
@@ -740,11 +740,11 @@ $b=(30,12)$
 
 Poniamo $u^{0}=0$ e $z^{*}=3$ (soluzione euristica iniziale)
 \begin{flalign}
-	& L(u^{0})=\;\underset{x}{Min}\displaystyle\sum_{i=1}^{m}(\sum_{j=1}^{n}(c_{ij}-u_{j}^{0})x_{ij}+\sum_{j=1}^{n}u_{j}^{0}) \\
+	& L(u^{0})=\;\underset{x}{Min}\sum_{i=1}^{m}(\sum_{j=1}^{n}(c_{ij}-u_{j}^{0})x_{ij}+\sum_{j=1}^{n}u_{j}^{0}) \\
 	& L(u^{0})=;\underset{x}{Min}\;3x_{11}+3x_{12}+4x_{13}+9x_{14}+2x_{21}+6x_{22}-9x_{23}+3x_{24}+0 \\
 	& 5x_{11}+7x_{12}+4x_{13}+2x_{14} \le 30 \\
 	& 3x_{21}+x_{22}+6x_{23}+4x_{24} \le 12 \\
-	& x_{11},...,x_{24}\in \{0,1\}
+	& x_{11},\dots,x_{24}\in \{0,1\}
 \end{flalign}
 Si decompone in due problemi: $L(u^{0})=z_{1}+z_{2}+0$
 
@@ -783,11 +783,11 @@ Si noti che la soluzione di $L(u^{0})$ viola i vincoli \ref{eq:2.45} per $j=1,2,
 
 \textbf{Aggiornamento delle penalità \{u\}}
 \begin{equation}
-	\displaystyle u^{k}=u^{k-1}\alpha_{k}\frac{(z^{*}-L(u^{k-1}))}{||Ax^{k-1}-b||^{2}}\;.\;(Ax^{k-1}-b)
+	 u^{k}=u^{k-1}\alpha_{k}\frac{(z^{*}-L(u^{k-1}))}{||Ax^{k-1}-b||^{2}}\;.\;(Ax^{k-1}-b)
 \end{equation}
 Poniamo $k=1$ ed $\alpha_{1}=2;$ si è già assunto $z^{*}=3$
 \begin{flalign}
-	& u_{j}^{k}=u_{j}^{k-1}-2\cdot\frac{(+3 - (-9))}{\displaystyle\sum_{j=1}^{n}(\sum_{i=1}^{m}x_{ij}-1)^2}\cdot(\sum_{i=1}^{m}x_{ij}-1) \\
+	& u_{j}^{k}=u_{j}^{k-1}-2\cdot\frac{(+3 - (-9))}{\sum_{j=1}^{n}(\sum_{i=1}^{m}x_{ij}-1)^2}\cdot(\sum_{i=1}^{m}x_{ij}-1) \\
 	& u_{1}^{1}=u_{1}^{0}-2\cdot\frac{12}{3}\cdot(-1)=0+8=8 \\
 	& u_{2}^{1}=u_{2}^{0}-2\cdot 4\cdot(-1)=0+8=8 \\
 	& u_{3}^{1}=u_{3}^{0}-2\cdot 4\cdot(0)=0+0=0 \\
@@ -796,7 +796,7 @@ Poniamo $k=1$ ed $\alpha_{1}=2;$ si è già assunto $z^{*}=3$
 
 \textbf{Calcolo di $\boldsymbol{L(u{1})}$}
 \begin{equation}
-	L(u^{1})=\;Min\;\displaystyle\sum_{i=1}^{m}(\sum_{j=1}^{n}(c_{ij}-u_{j}^{1})x_{ij})+\sum_{j=1}^{n}u_{j}^{1}
+	L(u^{1})=\;Min\;\sum_{i=1}^{m}(\sum_{j=1}^{n}(c_{ij}-u_{j}^{1})x_{ij})+\sum_{j=1}^{n}u_{j}^{1}
 \end{equation}
 $c_{ij}=\begin{bmatrix}3 & 3 & 4 & 9 \\ 2 & 6 & -9 & 3\end{bmatrix}$\newline
 $u^{1}=(8,8,0,8)$
@@ -807,7 +807,7 @@ Come fatto in precedenza $L(u^{1})=z_{1}+z_{2}+24$ dove:
 \begin{cases}
 z_{1}=\;Min\;5x_{11}-5x_{12}+4x_{13}+x{14}\\
 \;\;\;\;\;\;\;\;\;5x_{11}+7x_{12}+4x_{13}+2x_{14}\le 30\\
-\;\;\;\;\;\;\;\;\;x_{11},...,x_{14}\in\{0,1\}
+\;\;\;\;\;\;\;\;\;x_{11},\dots,x_{14}\in\{0,1\}
 \end{cases}
 \end{displaymath}
 Soluzione ottima: $z_{1}=-10;\;x_{11}^{1}=x_{12}^{1}=1;\;x_{13}^{1}=x_{14}^{1}=0$
@@ -817,7 +817,7 @@ Soluzione ottima: $z_{1}=-10;\;x_{11}^{1}=x_{12}^{1}=1;\;x_{13}^{1}=x_{14}^{1}=0
 \begin{cases}
 z_{2}=\;Min\;-6x_{21}-2x_{22}-9x_{23}-5x{24}\\
 \;\;\;\;\;\;\;\;\;3x_{21}+x_{22}+6x_{23}+4x_{24}\le 12\\
-\;\;\;\;\;\;\;\;\;x_{21},...,x_{24}\in\{0,1\}
+\;\;\;\;\;\;\;\;\;x_{21},\dots,x_{24}\in\{0,1\}
 \end{cases}
 \end{displaymath}
 Soluzione ottima: $z_{2}=-17;\;x_{21}^{1}=x_{22}^{1}=x_{23}^{1}=1;\;x_{24}^{1}=0$
@@ -843,7 +843,7 @@ x_{11}\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;+x_{21}\;\;\;\;\;\;\;\;\;\;\;\;\;\
 
 Poniamo $k=2$ e manteniamo $\alpha_{2}=2$ in quanto $L(u^{1})>L(u^{0})$
 \begin{flalign}
-& u_{j}^{k}=u_{j}^{k-1}-\alpha_{2}\cdot\frac{(z^{*} -L(u^{k-1}))}{\displaystyle\sum_{j=1}^{n}(\sum_{i=1}^{m}x_{ij}-1)^2}\cdot(\sum_{i=1}^{m}x_{ij}-1) \\
+& u_{j}^{k}=u_{j}^{k-1}-\alpha_{2}\cdot\frac{(z^{*} -L(u^{k-1}))}{\sum_{j=1}^{n}(\sum_{i=1}^{m}x_{ij}-1)^2}\cdot(\sum_{i=1}^{m}x_{ij}-1) \\
 & u_{1}^{2}=u_{1}^{1}-2\cdot\frac{6}{3}\cdot(1)=8-4=4 \\
 & u_{2}^{2}=u_{2}^{1}-2\cdot 2\cdot(1)=8-4=4 \\
 & u_{3}^{2}=u_{3}^{1}-2\cdot 2\cdot(0)=0-0=0 \\
@@ -852,7 +852,7 @@ Poniamo $k=2$ e manteniamo $\alpha_{2}=2$ in quanto $L(u^{1})>L(u^{0})$
 
 \textbf{Calcolo di $\boldsymbol{L(u^{2})}$}
 \begin{equation}
-L(u^{2})=\;Min\;\displaystyle\sum_{i=1}^{m}(\sum_{j=1}^{n}(c_{ij}-u_{j}^{2})x_{ij})+\sum_{j=1}^{n}u_{2}^{1}
+L(u^{2})=\;Min\;\sum_{i=1}^{m}(\sum_{j=1}^{n}(c_{ij}-u_{j}^{2})x_{ij})+\sum_{j=1}^{n}u_{2}^{1}
 \end{equation}
 \begin{equation}
 	L(u^{2})=z_{1}+z_{2}+20
@@ -866,7 +866,7 @@ $u^{2}=(4,4,0,12)$
 \begin{cases}
 z_{1}=\;Min\;-x_{11}-x_{12}+4x_{13}-3x{14}\\
 \;\;\;\;\;\;\;\;\;5x_{11}+7x_{12}+4x_{13}+2x_{14}\le 30\\
-\;\;\;\;\;\;\;\;\;x_{11},...,x_{14}\in\{0,1\}
+\;\;\;\;\;\;\;\;\;x_{11},\dots,x_{14}\in\{0,1\}
 \end{cases}
 \end{displaymath}
 Soluzione ottima: $z_{1}=-5;\;x_{11}^{2}=x_{12}^{2}=1,\;x_{13}^{2}=0,\;x_{14}^{2}=1$
@@ -876,7 +876,7 @@ Soluzione ottima: $z_{1}=-5;\;x_{11}^{2}=x_{12}^{2}=1,\;x_{13}^{2}=0,\;x_{14}^{2
 \begin{cases}
 z_{2}=\;Min\;-2x_{21}+2x_{22}-9x_{23}-9x{24}\\
 \;\;\;\;\;\;\;\;\;3x_{21}+x_{22}+6x_{23}+4x_{24}\le 12\\
-\;\;\;\;\;\;\;\;\;x_{21},...,x_{24}\in\{0,1\}
+\;\;\;\;\;\;\;\;\;x_{21},\dots,x_{24}\in\{0,1\}
 \end{cases}
 \end{displaymath}
 Soluzione ottima: $z_{2}=-18;\;x_{21}^{2}=x_{22}^{2}=0,\;x_{23}^{2}=x_{24}^{2}=1$
@@ -885,7 +885,7 @@ Quindi $L(u^{2})=z_{1}+z_{2}+24=-5-18+20=-3$
 
 L'unico vincolo violato è $x_{14}+x_{24}=1$; per cui
 \begin{equation}
-	u_{j}^{3}=u_{j}^{2}-\alpha_{3}\cdot\frac{(z^{*} -L(u^{2}))}{\displaystyle\sum_{j=1}^{n}(\sum_{i=1}^{m}x_{ij}-1)^2}\cdot(\sum_{i=1}^{m}x_{ij}-1)
+	u_{j}^{3}=u_{j}^{2}-\alpha_{3}\cdot\frac{(z^{*} -L(u^{2}))}{\sum_{j=1}^{n}(\sum_{i=1}^{m}x_{ij}-1)^2}\cdot(\sum_{i=1}^{m}x_{ij}-1)
 \end{equation}
 poniamo $\alpha_{3}=\alpha_{2}/2=1$. Le nuove penalità sono:
 \begin{flalign}
@@ -900,7 +900,7 @@ poniamo $\alpha_{3}=\alpha_{2}/2=1$. Le nuove penalità sono:
 \begin{cases}
 z_{1}=\;Min\;-x_{11}-x_{12}+4x_{13}+3x{14}\\
 \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;5x_{11}+7x_{12}+4x_{13}+2x_{14}\le 30\\
-\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;x_{11},...,x_{14}\in\{0,1\}
+\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;x_{11},\dots,x_{14}\in\{0,1\}
 \end{cases}
 \end{displaymath}
 Soluzione ottima: $z_{1}=-2;\;x_{11}^{3}=x_{12}^{3}=1,\;x_{13}^{3}=x_{14}^{3}=0$
@@ -910,20 +910,20 @@ Soluzione ottima: $z_{1}=-2;\;x_{11}^{3}=x_{12}^{3}=1,\;x_{13}^{3}=x_{14}^{3}=0$
 \begin{cases}
 z_{2}=\;Min\;-2x_{21}+2x_{22}-9x_{23}-3x{24}\\
 \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;3x_{21}+x_{22}+6x_{23}+4x_{24}\le 12\\
-\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;x_{21},...,x_{24}\in\{0,1\}
+\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;x_{21},\dots,x_{24}\in\{0,1\}
 \end{cases}
 \end{displaymath}
 Soluzione ottima: $z_{2}=-12;\;x_{21}^{3}=x_{22}^{3}=0,\;x_{23}^{3}=x_{24}^{3}=1$
 
 Quindi $L(u^{2})=-2-12+14=0$.
 
-$\blacksquare$ Si noti che $x^{3}$ è ammissibile e quindi la soluzione è ottima.
+$\square$ Si noti che $x^{3}$ è ammissibile e quindi la soluzione è ottima.
 
 \subsubsection{(b) Rispetto ai vincoli \ref{eq:2.46}}
 \begin{flalign}
-& L(u)=Min\;\overbrace{\displaystyle\sum_{i=1}^{m}\sum_{j=1}^{n}c_{ij}x_{ij}-\sum_{i=1}^{m}\lambda_{i}(\sum_{j=1}^{n}a_{ij}x_{ij}-b_{i})}^{cx - \lambda(Ax-b)} =\\
-& L(u)=Min\;\displaystyle\sum_{j=1}^{n}(\sum_{i=1}^{m}(c_{ij} -\lambda_{i}a_{ij})x_{ij})+\sum_{i=1}^{m}\lambda_{i}b_{i} \\
-& \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\displaystyle\sum_{i=1}^{m}x_{ij}=1 \\
+& L(u)=Min\;\overbrace{\sum_{i=1}^{m}\sum_{j=1}^{n}c_{ij}x_{ij}-\sum_{i=1}^{m}\lambda_{i}(\sum_{j=1}^{n}a_{ij}x_{ij}-b_{i})}^{cx - \lambda(Ax-b)} =\\
+& L(u)=Min\;\sum_{j=1}^{n}(\sum_{i=1}^{m}(c_{ij} -\lambda_{i}a_{ij})x_{ij})+\sum_{i=1}^{m}\lambda_{i}b_{i} \\
+& \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\sum_{i=1}^{m}x_{ij}=1 \\
 & \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;x_{ij}\in\{0,1\}
 \end{flalign}
 L'ottimo si ottiene ponendo, per ogni $j$
@@ -940,7 +940,7 @@ $b=(30,12)$
 
 Poniamo $\lambda=(0,0)$ e assumiamo $z^{*}=3$ (come in precedenza).
 \begin{flalign}
-	& L(\lambda^{0})=Min\;\displaystyle\sum_{j=1}^{n}(\sum_{i}^{m}(c_{ij}-\lambda_{i}a_{ij})x_{ij}+\sum_{i=1}^{m}\lambda_{i}b_{i}) \\
+	& L(\lambda^{0})=Min\;\sum_{j=1}^{n}(\sum_{i}^{m}(c_{ij}-\lambda_{i}a_{ij})x_{ij}+\sum_{i=1}^{m}\lambda_{i}b_{i}) \\
 	& L(\lambda^{0})=3x_{11}+3x_{12}+4x_{13}+9x_{14}+2x_{21}+6x_{22}-9x_{23}+3x_{24}+0 \\
 	& \begin{cases}
 	x_{11}\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;+x_{21}\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;=1\\
@@ -965,7 +965,7 @@ $x^{1}=(\;0,\;\;1,\;\;\;0,\;\;\;\;0,\;\;\;\;1,\;\;\;0,\;\;\;1,\;\;\;1)$\newline\
 $5x_{11}+7x_{12}+4x_{13}+2x_{14}\le 30$ soddisfatto\newline
 $3x_{21}+x_{22}+6x_{23}+4x_{24}\le 12$ violato!
 
-Ulteriori iterazioni possono migliorare il lower bound...
+Ulteriori iterazioni possono migliorare il lower bound\dots
 
 \subsection{Algoritmo Branch \& Bound}
 \textbf{(Ad esempio)}
