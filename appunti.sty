@@ -117,5 +117,8 @@
 
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 \everymath{\displaystyle}
+
+\let\stdsection\section
+\renewcommand\section{\clearpage\stdsection}
 % Start out normal
 \pagestyle{headings}
