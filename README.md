@@ -34,8 +34,3 @@ TeX rewriting of "Metodi ed algoritmi di ottimizzazione per il problem solving"'
   * Il metodo Dantiz-Wolfe
   * Decomposizione Lagrangiana
   * Esempi applicativi
-
-## 6. Metodi Column Generation
-  * Aspetti teorici
-  * Il Crew Scheduling Problem (CSP)
-  * Il Vehicle Routing Problem (VRP)
