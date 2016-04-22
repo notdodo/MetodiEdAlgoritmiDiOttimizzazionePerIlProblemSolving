@@ -56,7 +56,7 @@ $A_{i}$ è il sottoinsieme degli indici degli archi che incidono sul vertice $i$
 	$A_{i} = \{l:\;l=1,m\;\;s.t.\;\alpha_{l}=i\;or\;\beta_{l}=i\}$
 \end{center}
 
-Per una dato $S\in N$ e $\bar{S} = N\setminus S$ indichiamo con $(S, \bar{S})$ il sottoinsieme degli indici degli archi per cui $\alpha_{l}\in S$ e $\beta_{l}\in \bar{S}$ oppure $\alpha_{l}\in \bar{S}$ e $\beta_{l}\in S$.
+Per una dato $S\subset N$ e $\bar{S} = N\setminus S$ indichiamo con $(S, \bar{S})$ il sottoinsieme degli indici degli archi per cui $\alpha_{l}\in S$ e $\beta_{l}\in \bar{S}$ oppure $\alpha_{l}\in \bar{S}$ e $\beta_{l}\in S$.
 
 Ad ogni arco di incide $l$ è associato un costo $d_{l}=c_{\alpha_{l}\beta_{l}}$ e $x_{l}\in \{0,1\}$ è una variabile che vale 1 se e solo se l'arco di indice $l$ è nella soluzione ottima.
 \begin{equation}
@@ -80,10 +80,10 @@ Sia $u_{i}$ una variabile intera il cui valore sappresenta la posizione che il v
 \end{center}
 
 Miller, Tucker e Zemlin propongono in alternativa a:
-\begin{equation}\tag{*}
+\begin{equation}
 	\sum_{i\in S}^{}\sum_{j\in N\setminus S}^{} x_{ij} \ge 1,\;\;\forall S\subset N
 \end{equation}
-hanno imposto i seguenti vincoli:
+i seguenti vincoli:
 \begin{equation}
 	u_{i}-u_{j}+nx_{ij}\le n-1,\;\; i=1,\dots,n\:,\;j=2,\dots,n
 \end{equation}
@@ -103,17 +103,14 @@ Ogni tour hamiltoniano soddisfa questi vincoli e ogni subtour li viola.\newline
 \end{description}\newpage
 
 \subsection{Il Traveling salesman problem con time windows (TSPTW)}
-È una variante del TSP che ha molte applicazioni.
-
-Sia dato un grafo orientato $G=(V,A)$ di $n+1$ vertici $(V=\{0,1,\dots,n\})$.
-
+È una variante del TSP che ha molte applicazioni.\\
+Sia dato un grafo orientato $G=(V,A)$ di $n+1$ vertici $(V=\{0,1,\dots,n\})$.\\
 Ad ogni arco $(i,j)\in A$ sono associati
 \begin{itemize}
 	\item un costo $c_{ij} \ge 0$
 	\item un tempo di percorrenza $\theta_{ij}\ge 0$
 \end{itemize}
-Ad ogni vertice è associato un intervallo $[r_{i},d_{i}]$ chiamato "time window" che rappresenta l'orario in cui il vertice $i$ può essere vistato dal "salesman".
-
+Ad ogni vertice è associato un intervallo $[r_{i},d_{i}]$ chiamato "time window" che rappresenta l'orario in cui il vertice $i$ può essere vistato dal "salesman".\\
 Ovvero il salesman può visitare $i$ ad ogni tempo $t\in \mathbb{Z}^{+}$ con $r_{i}\le t\le d_{i}$.\newline
 Il problema consiste nel trovare una sequenza dei vertici di $G$ che parte dal vertice $0$ al tempo $0$ e finisce al nodo $0$ tale che sia il minimo il costo del circuito e il tempo di arrivo al nodo $i$ sia nell'intervallo $[r_{i},d_{j}],\;\forall i\in V$.\newline
 Si consideri la sequenza $(0,i,..,i_{k-1},i_{k},\dots,i_{n},0)$ e sia $t_{i_{k}}$ il tempo di arrivo al vertice $i_{k},\; k=0,1,\dots,n+1$.
@@ -123,7 +120,7 @@ I tempi di arrivo sono calcolati come:
 	t_{0}=0
 \end{equation}
 \begin{equation}
-	t_{i_{k}}=\max \{t_{i_{k-1}}+\theta_{i_{k-1}}\cdot i_{k},\; r_{i_{k}}\}
+	t_{i_{k}}=\max \{(t_{i_{k-1}}+\theta_{i_{k-1}}\cdot i_{k}),\ r_{i_{k}}\}
 \end{equation}
 
 \subsubsection{Formulazione del TSPTW}
@@ -138,7 +135,6 @@ Sia $x_{ij}$ una variabile binaria intera che assume il valore $1$ se il vertice
 	& \;\;\;\;\;\;\;\;x_{ij}\in \{0,1\},\;\;\forall \in A \\
 	& \;\;\;\;\;\;\;\;t_{i}\in \mathbb{N}^{+},\;\;\forall i\in V
 \end{flalign}
-
 dove 
 \begin{flalign*}
 	& A_{i}^{+}=\{j\in V:(i,j)\in A\} \\
@@ -149,13 +145,10 @@ dove
 \newpage
 
 \section{Project scheduling with resource constraints (PSR)}
-\`E dato un insieme $\mathbb{X}=\{1,\dots,n\}$ di $n$ jobs.
-
-Sono disponibili $m$ risorse dove ogni risorsa $k$ ha una disponibilità $b_{k}$ ad ogni istante del periodo di scheduling.
-
-Ogni job $i$ ha un tempo di processo $d_{i}$ e la sua esecuzione, una volta iniziata, non può essere interrotta.
-
-Il job $i$ per essere eseguito richiede $b_{ik}$ unità della risorsa $k$ per ciascun intervallo di tempo in cui rimane in esecuzione.\newline
+È dato un insieme $\mathbb{X}=\{1,\dots,n\}$ di $n$ jobs.\\
+Sono disponibili $m$ risorse dove ogni risorsa $k$ ha una disponibilità $b_{k}$ ad ogni istante del periodo di scheduling.\\
+Ogni job $i$ ha un tempo di processo $d_{i}$ e la sua esecuzione, una volta iniziata, non può essere interrotta.\\
+Il job $i$ per essere eseguito richiede $b_{ik}$ unità della risorsa $k$ per ciascun intervallo di tempo in cui rimane in esecuzione.\\
 \`E dato un grafo $G=(X,H)$ di precedenze, dove ogni arco $(i,j)\in H$ impone che il job $j$ può iniziare solo dopo che il job $i$ è stato completato.
 
 \begin{itemize}
@@ -163,17 +156,16 @@ Il job $i$ per essere eseguito richiede $b_{ik}$ unità della risorsa $k$ per ci
 \end{itemize}
 
 \subsection{Esempio di PSR}
-Siano dati $n=11$ jobs e $m=3$ risorse con $b_{1}=b_{2}=b_{3}=4$ e un grafo $H$ delle precedenze corrispondenti agli archi della figura ~\ref{fig:grafoHDellePrecedenze}.
-
-Si osservi che i jobs $2$ e $3$ non possono essere eseguiti in parallelo poiché $r_{2,1}+r_{3,1}=5 > b_{1}$!
+Siano dati $n=11$ jobs e $m=3$ risorse con $b_{1}=b_{2}=b_{3}=4$ e un grafo $H$ delle precedenze corrispondenti agli archi della figura \ref{fig:grafoHDellePrecedenze}.
 
 \begin{figure}[h]
 	\caption{Grafo H delle precedenze}
 	\centering
-	\includegraphics[height=6.5cm]{images/graph2.png}
+	\includegraphics[height=8cm]{images/graph2.png}
 	\label{fig:grafoHDellePrecedenze}
 \end{figure}
-
+Si osservi che i jobs $2$ e $3$ non possono essere eseguiti in parallelo poiché $r_{2,1}+r_{3,1}=5 > b_{1}$!
+\clearpage
 \subsection{Formulazione del PSR}
 Sia $\xi_{it}$ una variabile binaria 0-1 che vale 1 se e solo se il job $i$ viene messo in esecuzione al tempo $t$.
 
@@ -189,25 +181,23 @@ Sia $T_{max}$ un upper bound sulla durata del progetto.
 \end{flalign}
 Si osservi che:
 \begin{flalign*}
-	& \sum_{\tau=t-d_{i}+1}^{t}\xi_{i \tau}=1\;\;\;se\;il\;job\;i\;è\;in\;esecuzione\;al\;tempo\;t
+	& \sum_{\tau=t-d_{i}+1}^{t}\xi_{i \tau}=1\ \textnormal{ se il job $i$ è in esecuzione al temp $t$}
 \end{flalign*}
 \subsubsection{Esempio}
-Sia $d_{i}=4$.
-
+Sia $d_{i}=4$.\\
 Se $\xi_{i3}=1$, allora i è in esecuzione nei tempi 3,4,5 e 6.
 Infatti avremo: \newline $\sum_{\tau=t-d_{i}+1}^{t}\xi_{i \tau} = 1$ per $t=3,4,5,6\;$ e $\sum_{\tau=t-d_{i}+1}^{t}\xi_{i \tau} = 0$ per $t<3$ e $t>6$
-\newpage
-\section{Fixed Charge Transportation Problem (FCTP)}
-Il Problema del Trasporto di Carico Fisso è una generalizzazione del classico Problema del Trasporto.
 
+\section{Fixed Charge Transportation Problem (FCTP)}
+Il Problema del Trasporto di Carico Fisso è una generalizzazione del classico Problema del Trasporto.\\
 Si differenzia nel definire che il costo per la spedizione di una quantità non-zero di beni, da ogni origine alla sua destinazione, è composto da un costo proporzionale all'ammontare dei beni inviati più un costo fisso. 
 
 \subsection{Descrizione del FCTP}
 Il FCTP è definito su un grafo completo e bipartito $G=(S,T,A)$ dove $S={1,2,\dots,m}$ è un insieme di $m$ sorgenti e $T={1,2,\dots,n}$ è un insieme di $n$ destinazioni.
 
-Per ogni sorgente $i\in S$ è disponibile è una quantità intera $a_{i}>0$ di merce e per ogni destinazione $j\in T$ è necessaria una quantità intera $b_{j}>0$ di merce dalle sorgenti.\newline
+Per ogni sorgente $i\in S$ è disponibile una quantità intera $a_{i}>0$ di merce e per ogni destinazione $j\in T$ è necessaria una quantità intera $b_{j}>0$ di merce dalle sorgenti.\newline
 L'insieme $A$ degli archi è definito come: $A=\{(i,j):\;i\in S,\;j\in T\}$; ogni arco $(i,j)\in A$ è
-associato ad un costo unitario $c_{ij}$ per il trasporto di una unità della merce dalla sorgente $i$ alla destinazione $j$ più un costo fisso $f_{ij}$ for usare l'arco $(i,j)$.
+associato ad un costo unitario $c_{ij}$ per il trasporto di una unità della merce dalla sorgente $i$ alla destinazione $j$ più un costo fisso $f_{ij}$ per usare l'arco $(i,j)$.
 
 Senza perdere di generalità si assume che:
 \begin{flalign*}
@@ -217,8 +207,8 @@ Senza perdere di generalità si assume che:
 \subsection{Formulazione del FCTP}
 Sia $x_{ij}$ una variabile rappresentante la quantità di merce trasportata dalla sorgente $i$ alla destinazione $j$ e $y_{ij}$ una variabile (0-1) che vale $1$ se e solo se $x_{ij}>0$.
 
-Sia $m_{ij}=min{a_{i},b_{j},\;(i,j)\in A}$.\newline
-Una semplice formulazione matematiche del FCTP è:
+Sia $m_{ij}=min\{a_{i},b_{j}\},\ (i,j)\in A$.\newline
+Una semplice formulazione matematica del FCTP è:
 \begin{flalign}
 	& z(F0) = min \sum_{i\in S}^{}\sum_{j\in T}^{}(c_{ij}x_{ij}+f_{ij}y_{ij}) \\
 	\label{con:1.27}
@@ -229,32 +219,28 @@ Una semplice formulazione matematiche del FCTP è:
 	& \;\;\;\;\;\;\;\;\;\;\;\;\;\;x_{ij}\ge 0,\;\;\;\;\;\;\;\;\;\;\;(i,j)\in A \\
 	& \;\;\;\;\;\;\;\;\;\;\;\;\;\;y_{ij}\in \{0,1\}
 \end{flalign}
-Si denota con $LF0$ il rilassamento lineare del problema $F0$ e con $z(LF0)$ il costo della soluzione ottima. Notare che, per ogni soluzione ottima di $LF0$, le variabili $x_{ij}>0$ corrispondono ad una soluzione base fattibile dei vincoli \ref{con:1.27} e \ref{con:1.28}, e $y_{ij}=x_{ij}/m_{ij}\;con\;(i,j)\in A$.
+Si denota con $LF0$ il rilassamento lineare del problema $F0$ e con $z(LF0)$ il costo della soluzione ottima. Notare che, per ogni soluzione ottima di $LF0$, le variabili $x_{ij}>0$ corrispondono ad una soluzione base accettabile dei vincoli \ref{con:1.27} e \ref{con:1.28}, e $y_{ij}=x_{ij}/m_{ij}$ con $(i,j)\in A$.
 \newpage
 \section{Assegnamento dei veicoli alle baie di carico}
-Sia dato un insieme $N$ di veicoli che devono scaricare presso un deposito che ha un insieme $L$ di linee di scarico.
-
-Per ogni linea di scarico $j\in L$ è definito l'insieme degli istanti di tempo $T_{j}$ in cui è operativa.\newline
+Sia dato un insieme $N$ di veicoli che devono scaricare presso un deposito che ha un insieme $L$ di linee di scarico. Per ogni linea di scarico $j\in L$ è definito l'insieme degli istanti di tempo $T_{j}$ in cui è operativa.\newline
 Per ogni veicolo $i\in N$ sono noti:
 \begin{itemize}
 	\item il sottoinsieme di linee $L_{i}\subseteq L$ compatibili con le operazioni di scarico richieste dal veicolo;
 	\item iltempo di arrivo $a_{i}$ del veicolo al deposito;
 	\item la durata dello scarico $d_{ij}$ sulla linea $j\in L_{i}$.
 \end{itemize}
-Si assume che lo scarico di un veicolo non possa essere interrotto, ovvero, se lo scarico del veicolo $i$ sulla linea $j\in L_{i}$ inizia al tempo $t$, allora la linea $j$ deve essere disponibile per tutti gli istanti di tempo $\tau=t,\dots,t+d_{ij}-1$ (ovvero $\tau \in T_{j}$ per ogni $\tau=t,\dots,t+d_{ij}-1$).
-Indichiamo con $I_{ij}$ l'insieme degli istanti di tempo in cui può iniziare lo scarico del veicolo $i$ sulla linea $j\in L_{i}$, ovvero per ogni $t\in I_{ij}$ si assume che la linea $j$ disponibile per ogni istante $\tau=i,\dots,d_{ij}-1$.
-
-Sia $c_{ijt}$ è il costo per iniziare lo scarico del veicolo $i\in N$ sulla linea $j\in L{i}$ al tempo $t\in I_{ij}$.\newline
+Si assume che lo scarico di un veicolo non possa essere interrotto, ovvero, se lo scarico del veicolo $i$ sulla linea $j\in L_{i}$ inizia al tempo $t$, allora la linea $j$ deve essere disponibile per tutti gli istanti di tempo $\tau=t,\dots,t+d_{ij}-1$ (ovvero $\tau \in T_{j}$ per ogni $\tau=t,\dots,t+d_{ij}-1$).\\
+Indichiamo con $I_{ij}$ l'insieme degli istanti di tempo in cui può iniziare lo scarico del veicolo $i$ sulla linea $j\in L_{i}$, ovvero per ogni $t\in I_{ij}$ si assume che la linea $j$ disponibile per ogni istante $\tau=i,\dots,d_{ij}-1$.\\
+Sia $c_{ijt}$ il costo per iniziare lo scarico del veicolo $i\in N$ sulla linea $j\in L_{i}$ al tempo $t\in I_{ij}$.\newline
 Il problema richiede che ogni veicolo sia assegnato ad una linea di scarico compatibile in modo che ogni scarico sia fatto senza interruzioni e sia minimo il costo dell'assegnamento.
 
-\subsection{Formulazione matematica F}
-Per ogni $i\in N$, $j\in L_{i}$ e $t\in I_{ij}$ poniamo $\delta_{ijt\tau}=1$ per $\tau=t,\dots,t+d_{ij}-1$ e $\delta_{ijt\tau}=0$ per ogni $\tau\in T_{j}$ tale che $\tau < t$ oppure $\tau >t+d_{ij}-1$.
-
+\subsection{Formulazione matematica}
+Per ogni $i\in N$, $j\in L_{i}$ e $t\in I_{ij}$ poniamo $\delta_{ijt\tau}=1$ per $\tau=t,\dots,t+d_{ij}-1$ e $\delta_{ijt\tau}=0$ per ogni $\tau\in T_{j}$ tale che $\tau < t$ oppure $\tau >t+d_{ij}-1$.\\
 Indichiamo con $N_{j}\subseteq N$ il sottoinsieme di veicoli che possono essere scaricati sulla linea $j$, ovvero $N_{j}=\{i\in N:\;j\in L_{i}\}$.
 
+\clearpage
 \subsubsection{Variabili}
-$x_{ijt}$ è una variabile (0-1) che vale 1 se e solo se il veicolo $i\in N$ inizia lo scarico sulla linea $j\in L_{i}$ al tempo $t\in I_{ij}$.
-
+$x_{ijt}$ è una variabile (0-1) che vale 1 se e solo se il veicolo $i\in N$ inizia lo scarico sulla linea $j\in L_{i}$ al tempo $t\in I_{ij}$.\\
 $s_{j\tau}$ è una variabile (0-1) che vale 1 se e solo se la linea $j$ non viene utilizzata nell'istante di tempo $\tau$.\newline
 La formulazione matematica $F$ del problema è la seguente.
 \begin{flalign}
@@ -271,24 +257,20 @@ La formulazione matematica $F$ del problema è la seguente.
 	s_{j\tau}\in {0,1},\;\;\;\;\;\;\;\;\;\;\;\;\;\;
 	j\in L,\;\tau\in T_{j}
 \end{flalign}
-Il vincolo \ref{con:1.33} impone che ad ogni veicolo venga assegnato una linea compatibile ed un tempo di scarico a sua volta compatibile sia con il veicolo stesso che con la linea a lui assegnata.
-
+Il vincolo \ref{con:1.33} impone che ad ogni veicolo venga assegnato una linea compatibile ed un tempo di scarico a sua volta compatibile sia con il veicolo stesso che con la linea a lui assegnata.\\
 Il vincolo \ref{con:1.34} impone che per ogni linea ed ogni istante di tempo compatibile con la linea vi sia in scarico al più un solo veicolo.\newline
-La formulazione $F$ richiede $\hat{n}=|N|\times|L|\times\hat{I}$ variabili, dove $\hat{I}=max{|I_{ij}|:i\in N,\;j\in L_{i}}$ e al più $\hat{m}=|N|+|L|\times \hat{T}$ vincoli, dove $\hat{T}=max{|T_{j}|:\;j\in L}$.
+La formulazione $F$ richiede $\hat{n}=|N|\times|L|\times\hat{I}$ variabili, dove $\hat{I}=max\{|I_{ij}|:i\in N,\;j\in L_{i}\}$ e al più $\hat{m}=|N|+|L|\times \hat{T}$ vincoli, dove $\hat{T}=max\{|T_{j}|:\;j\in L\}$.
 
 Supponiamo di discretizzare il tempo a 5 minuti, che ogni linea sia disponibile al più 10 ore (i.e. $\hat{T}=120$) e che un veicolo quando arriva non possa aspettare più di 5 ore (i.e. $\hat{I}=60$). Avremo $\hat{n}=200\cdot20\cdot60=240.000$ e $\hat{m}=200+20\cdot120=2600$.
-\newpage
 
 \section{Lot Sizing Problem}
 Il termine \textit{\textbf{Lot Sizing}} indica il processo decisionale mediante il quale un'azienda definisce la politica ottima di investimenti, produzione e stoccaggio dei prodotti per soddisfare le richieste dei clienti nel rispetto dei vincoli di produzione e di magazzino.
 
-Non esiste un unico modello di lot sizing che rappresenti in modo generale le varie realtà operative. Sistemi di produzione anche marginalmente diversi possono richiedere modelli aventi complessità computazionale molto diverse.
+Non esiste un unico modello di lot sizing che rappresenti in modo generale le varie realtà operative. Sistemi di produzione anche marginalmente diversi possono richiedere modelli aventi complessità computazionale molto diverse.\\
+Non esiste in letteratura un modello generale che contenga come sottocasi tutti i problemi reali noti di lot sizing. Per questi motivi non esistono software commerciali general pourpose.\\
+Diverse aziende di consulenze nel settore della supply chain vendono software basati su modelli semplificati che non necessariamente producono soluzioni operative ma lasciano all'utente il compito di modificare manualmente la soluzione prodotta per tener conto delle specifiche complessità del problema reale.
 
-Non esiste in letteratura un modello generale che contenga come sottocasi tutti i problemi reali noti di lot sizing.
-
-Per questi motivi non esistono software commerciali general pourpose.\newline
-Diverse aziende di consulenze nel settore della supply chain vendono software basati su modelli semplificati che non necessariamente producono soluzioni operative ma lasciano all'utente il compito di modificare manualmente la soluzione prodotta per tener conto delle specifiche complessità del problema reale.\newline
-I problemi reali sono varianti complesse delle seguenti tre classi di lot sizing problem di un singolo prodotto che sono risolvibili in tempo polinomiale:
+I problemi reali sono varianti complesse delle seguenti tre classi di \textit{lot sizing problem} di un singolo prodotto che sono risolvibili in tempo polinomiale:
 \begin{itemize}
 	\item lot sizing senza vincoli di capacità produttiva;
 	\item lot sizing con back logging senza vincoli di capacità;
@@ -306,16 +288,18 @@ Per ciascun periodo $t=1,\dots,T$ sono noti:
 	\item[\textit{$p_{t}$}] costo per produrre un'unità di prodotto;
 	\item[\textit{$h_{t}$}] costo per unità di prodotto presente nel magazzino alla fine del periodo $t$. 
 \end{itemize}
-Per ciascun periodo $t$, deve essere deciso il numero di unità che devono essere prodotto al fine di soddisfare la domanda in ciascun periodo.\newline
-Si suppone che la quantità prodotto nel periodo $t$ sia subito disponibile e che la quantità non venduta alla fine di ogni mese viene depositata in magazzino.
+Per ciascun periodo $t$, deve essere deciso il numero di unità che devono essere prodotte al fine di soddisfare la domanda in ciascun periodo.
+
+Si suppone che la quantità prodotta nel periodo $t$ sia subito disponibile e che la quantità non venduta alla fine di ogni mese venga depositata in magazzino.
+
 L'obiettivo è di minimizzare i costi complessivi di set up, produzione e stoccaggio.
 
 \subsubsection{Formulazione Matematica (modello di Wagner-Whitin)}
-Variabili decisonali associate a ciascun periodo t=1,\dots,T
+Variabili decisonali associate a ciascun periodo $t=1,\dots,T$:
 \begin{description}
 	\item[$x_{t}$] quantità prodotta all'inizio del periodo $t$;
 	\item[$I_{t}$] livello del magazzino alla fine del periodo $t$;
-	\item[$y_{i}\in (0,1): y_{t}=1$] se nel periodo $t$ vi è produzione, $y_{t}=0$ altrimenti. 
+	\item[$y_{i}\in\{0,1\}: y_{t}=1$] se nel periodo $t$ vi è produzione, $y_{t}=0$ altrimenti. 
 \end{description}
 
 \begin{flalign}
@@ -353,7 +337,9 @@ Per ciascun periodo $t=1,..,T$ vi sono gli archi:
 \end{figure}
 
 \subsubsection{Proprietà della soluzione ottima}
-\textbf{Teorema.} In una soluzione ottima non può mai avvenire che la domanda del periodo $t$ venga soddisfatta sia dalla produzione che dal magazzino, ovvero:
+\textbf{Teorema}.
+
+In una soluzione ottima non può mai avvenire che la domanda del periodo $t$ venga soddisfatta sia dalla produzione che dal magazzino, ovvero:
 \begin{center}
 	$I_{t-1}\cdot x_{t}=0;\;t=1,\dots,T$
 \end{center}
@@ -364,13 +350,12 @@ Per ciascun periodo $t=1,..,T$ vi sono gli archi:
 	\label{fig:PossibileSoluzione}
 \end{figure}
 
-\subsubsection{Algoritmo di soluzione (di complessità $O(T^{2})$)}
-Si costruisca un grafo aciclico di $T+1$ vertici.\newline
-Si definiscano gli archi $j,k)$ per $j=0,\dots,T-1$ e $k=j+1,\dots,T$.
-
+\subsubsection{Algoritmo di soluzione (di complessità $\boldsymbol{O(T^{2})}$)}
+Si costruisca un grafo aciclico di $T+1$ vertici.\\
+Si definiscano gli archi $(j,k)$ per $j=0,\dots,T-1$ e $k=j+1,\dots,T$.\\
 L'arco $(j,k)$ rappresenta la decisione di produrre all'inizio del periodo $j+1$ quanto serve per soddisfare le domanda complessiva dei periodo $j+1,\;j+2,\dots,k$.
 
-Il costo $M_{jk}$ dell'arco (j,k) è pari al costo per produrre nel periodo j+1 la quantità $\sum_{r=j+1}^{k}d_{r}$ più i costi di stoccaggio:
+Il costo $M_{jk}$ dell'arco $(j,k)$ è pari al costo per produrre nel periodo $j+1$ la quantità $\sum_{r=j+1}^{k}d_{r}$ più i costi di stoccaggio:
 \begin{center}
 	$M_{jk}=A_{j+1}+p_{j+1}\sum_{r=j+1}^{k}d_{r}+\sum_{t=j+1}^{k-1}h_{t}(\sum_{r=t+1}^{k}d_{r})$
 \end{center}
