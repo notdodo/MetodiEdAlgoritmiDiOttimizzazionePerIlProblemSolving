@@ -1,7 +1,7 @@
 \chapter{Programmazione dinamica}
 \section{Motivazioni}
 Si consideri il problema del cammino minimo di un grafo da $s$ a $t$.\\
-\centerline{\includegraphics[height=5cm]{images/graph37.png}}
+\centerline{\includegraphics[height=4.25cm]{images/graph37.png}}
 \subsection{Osservazione 1}
 Se il cammino minimo $(s,t)$ passa per il vertice $p$, allora, i sottocammini $(s,p)$ e $(p,t)$ sono i cammini minimi di $s$ a $p$ e da $p$ a $t$, rispettivamente.
 \subsubsection{Dimostrazione}
@@ -18,9 +18,9 @@ Tale osservazione non è sufficiente per stabilire un algoritmo per calcolare il
 Sia $G=(V,A)$ un grafo orientato aciclico di $n=|V|$ vertici e $m=|A|$ archi i cui vertici sono ordinati così che $i<j$ $\forall(i,j)\in A$ (ovvero $i<v$, $\forall i\in\Gamma^{-1}(v)$).\\
 Supponiamo siano noti i costi $d(1),d(2),\dots,d(k)$ dei cammini minimi dal vertice $1$ ai vertici $(1,2,\dots,k)\subset V$.\\
 Allora, per come è stato definite il grafo aciclico $G$, sono noti i costi $d(i)$, $\forall i\in\Gamma^{-1}_{k+1}$ e quindi
-\begin{equation}
+\begin{equation*}
 	d_{k+1}=\underset{i\in\Gamma^{-1}_{k+1}}{min}[d(i)+c_{i,k+1}]
-\end{equation}
+\end{equation*}
 
 \section{Algoritmo}
 \begin{enumerate}
@@ -33,9 +33,9 @@ Allora, per come è stato definite il grafo aciclico $G$, sono noti i costi $d(i
 \begin{enumerate}
 	\item Poni $d(1)=0$ e $d(j)=\infty$, $\forall j\in V\setminus\{1\}$; sia $v=1$;
 	\item Per ogni $j\in\Gamma(v)$ aggiorna:
-	\begin{equation}
+	\begin{equation*}
 		d(j)=min[d(j),d(v)+c_{vj}]
-	\end{equation}
+	\end{equation*}
 	\item Se $v=n-1$ STOP, altrimenti poni $v=v+1$ e ritorna allo step 2.
 \end{enumerate}
 
@@ -47,19 +47,19 @@ Sia $D(k,j)$ il costo del cammino minimo da $s$ a $j$ contenente al più $k$ arc
 Si hanno due casi:
 \begin{enumerate}
 	\item Il cammino minimo di costo $D(k,j)$ contiene al più $k-1$ archi, quindi
-	\begin{equation}
+	\begin{equation*}
 		D(k,j)=D(k-1,j)
-	\end{equation}
+	\end{equation*}
 	\item Il cammino minimo di costo $D(k,j)$ contiene $k$ archi, quindi
 	\begin{equation}
-		D(k,j)=\underset{i\in\Gamma^{-1}(j)}{min}[D(k-1,i),+c_{ij}] \label{eq:4.5}
+		D(k,j)=\underset{i\in\Gamma^{-1}(j)}{min}[D(k-1,i),+c_{ij}] \label{eq:4.2}
 	\end{equation}
 \end{enumerate}
-Partendo dalla \ref{eq:4.5} si a che la ricorsione è:
+Partendo dalla \ref{eq:4.2} si a che la ricorsione è:
 \begin{equation}
-	D(k,j)=min[D(k-1,j),\underset{i\in\Gamma^{-1}(j)}{min}[D(k-1,i)+c_{ij}]] \label{eq:4.6}
+	D(k,j)=min[D(k-1,j),\underset{i\in\Gamma^{-1}(j)}{min}[D(k-1,i)+c_{ij}]] \label{eq:4.3}
 \end{equation}
-La ricorsione \ref{eq:4.6} impone un ordine implicito di calcolo:\\
+La ricorsione \ref{eq:4.3} impone un ordine implicito di calcolo:\\
 prima $D(1,j),\ \forall j\in V$, poi $D(2,j)$, $D(3,j)$, \dots, $D(n-1,j)$.
 
 \subsection{Schema dell'algoritmo cammini minimi da 1 ad ogni $\boldsymbol{j\in V}$}
@@ -85,33 +85,39 @@ Sono dati $n$ items ed un \textit{knapsack} di capacità $b$.\\
 L'item $j$ ha peso $a_{j}$ e profitto $c_{j}$.\\
 Si vuole riempire il knapsack massimizzando il profitto complessivo degli items caricati.\\
 Assumiamo che i coefficienti $\{a_{j}\}$ e $b$ siano interi positivi
-\begin{numcases}{KP}
-	z = max\sum_{j=1}^{n}c_{j}x_{j} \\
-	\sum_{j=1}^{n}a_{j}b_{j}\le b \\
-	x_{j}\in\{0,1\},\ \ j=1,\dots,n
-\end{numcases}
+\begin{equation*}
+	KP
+	\begin{cases}
+		z = max\sum_{j=1}^{n}c_{j}x_{j} \\
+		\ \ \ \ \ \ \ \ \ \ \ \ \sum_{j=1}^{n}a_{j}b_{j}\le b \\
+		\ \ \ \ \ \ \ \ \ \ \ \ x_{j}\in\{0,1\},\ \ j=1,\dots,n
+	\end{cases}
+\end{equation*}
 
 \subsection{Esempio}
 \begin{displaymath}
 	\begin{cases}
 		z=max 10x_{1}+7x_{2}+25x_{3}+24x_{4}\\
-		\ \ \ \ \ \ \ \ \ \ \ \ \ \ 2x_{1}+1x_{2}+6x_{3}+5x_{4}\le 7 \\
-		\ \ \ \ \ \ \ \ \ \ \ \ \ \ x_{j}\in\{0,1\},\ \ j=1,\dots,4
+		\ \ \ \ \ \ \ \ \ \ \ \ \ 2x_{1}+1x_{2}+6x_{3}+5x_{4}\le 7 \\
+		\ \ \ \ \ \ \ \ \ \ \ \ \ x_{j}\in\{0,1\},\ \ j=1,\dots,4
 	\end{cases}
 \end{displaymath}
 La soluzione ottima è $x_{i}^{*}=1,\ x_{2}^{*}=0,x_{3}^{*}=0,x_{4}^{*}=1$.
 
 \subsection{Osservazione 1}\label{ss:osservazione_1}
 Se $x^{*}=(x_{1}^{*},x_{2}^{*},\dots,x_{n}^{*})$ è una soluzione ottima di $KP$ allora $(x_{1}^{*},x_{2}^{*},\dots,x_{k}^{*})$ con $k\le n$ è una soluzione ottima del seguente sottoproblema $KP_{k}(q)$.
-\begin{numcases}{KP_{k}(q)}
-	f_{k}(q)=max\sum_{j=1}^{k}c_{j}x_{j}\\
-	\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \sum_{j=1}^{k}a_{j}x_{j}\le q \\
-	\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x_{j}\in\{0,1\},\ \ j=1,\dots,k \\
-	\ \ \ \ \ \ \ \ \ \ \ \ \textnormal{dove }q=\sum_{j=1}^{k}a_{j}x_{j}^{*}
-\end{numcases}
+\begin{equation*}
+	KP_{k}(q)
+	\begin{cases}
+		f_{k}(q)=max\sum_{j=1}^{k}c_{j}x_{j}\\
+		\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \sum_{j=1}^{k}a_{j}x_{j}\le q \\
+		\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x_{j}\in\{0,1\},\ \ j=1,\dots,k \\
+		\ \ \ \ \ \ \ \ \ \ \textnormal{dove }q=\sum_{j=1}^{k}a_{j}x_{j}^{*}
+	\end{cases}
+\end{equation*}
 \subsubsection{Esempio}
 $(x_{1}^{*}=1,x_{2}^{*}=0,x_{3}^{*}=0)$ deve essere la soluzione ottima del seguente problema
-\begin{equation}
+\begin{equation*}
 	KP_{3}(q)
 	\begin{cases}
 		f_{3}(q)=max 10x_{1}+7x_{2}+25x_{3} \\
@@ -119,24 +125,26 @@ $(x_{1}^{*}=1,x_{2}^{*}=0,x_{3}^{*}=0)$ deve essere la soluzione ottima del segu
 		x_{1},x_{2},x_{3}\in\{0,1\}
 		\textnormal{dove }q=2x_{1}^{*}+1x_{2}^{*}+6x_{3}^{*}=2
 	\end{cases}
-\end{equation}
-La dimostrazione dell'\hyperref[ss:osservazione_1]{osservazionee 1} è ovvia!\\
+\end{equation*}
+La dimostrazione dell'\hyperref[ss:osservazione_1]{osservazione 1} è ovvia!\\
 Si consideri la famiglia degli $n(b+1)$ sottoproblemi
-\begin{equation}
+\begin{equation*}
 	\{KP_{k}(q):1\le k\le n,\ 0\le q\le b\}\ \ \ \ q\textnormal{ intero}
-\end{equation}
-dove $q$ è detto stato e $k$ è detto stadio.\\
-Il problema originario $KP$ è un membro di tale famiglia: $KP=KP_{n}(b)$ e $z=f_{n}(b)$ ($z$: costo ottimo di $KP$).\\\\
-Come risolvere $KP_{k}(q)$ per un dato $k\le n$ e $q\le b$?\\
+\end{equation*}
+dove $q$ è detto 'stato' e $k$ è detto 'stadio'.\\
+Il problema originario $KP$ è un membro di tale famiglia: $KP=KP_{n}(b)$ e $z=f_{n}(b)$ ($z$: costo ottimo di $KP$).\\
+
+Come risolvere $KP_{k}(q)$ per un dato $k\le n$ e $q\le b$?
+
 Sia $(x_{1}^{*},\dots,x_{k-1}^{*},x_{k}^{k})$ la soluzione ottima di $KP_{k}(q)$ di costo $f_{k}(q)$. Si hanno due casi:
 \begin{enumerate}
 	\item $x_{k}^{*}=0$, allora $q=\sum_{j=1}^{k}a_{j}x_{j}^{*}\equiv\sum_{j=1}^{k-1}a_{j}x_{j}^{*}$ e quindi $((x_{1}^{*},\dots,x_{k-1}^{*})$ è la soluzione ottima di $KP_{k-1}(q)$ ovvero $f_{k}(q)=f_{k-1}(q)$;
 	\item $x_{k}^{*}=1$, allora $q=\sum_{j=1}^{k-1}a_{j}x_{j}^{*}+a_{k}$ e quindi $(x_{1}^{*},\dots,x_{k-1}^{*})$ è la soluzione ottima di $KP_{k-1}(q-ax)$ ovvero $f_{k}(q)=f_{k-1}(q-ax)+c_{k}$
 \end{enumerate}
 Se conosciamo $f_{k-1}(q)$ e $f_{k-1}(q-ax)$ si ha la seguente ricorsione:
-\begin{equation}
+\begin{equation*}
 	f_{k}(q)=max[f_{k-1}(q),\ f_{k-1}(q-ax)+c_{k}]
-\end{equation}
+\end{equation*}
 Per calcolare $f_{k}(q)$, $\forall q$ per un dato $k$ dobbiamo conoscere i valori $f_{k-1}(q)$, $\forall q$.\\
 Partiamo ponendo $f_{0}(q)=0$, per ogni $q$ tale che $0\le q\le b$. Ciò consente di calcolare $f_{1}(q)$, $\forall q$, mediante la ricorsione.\\
 Quindi, $f_{1}(\cdot)$ consente di calcolare $f_{2}(\cdot),\dots$, infine, $f_{n-1}(\cdot)$ consente di calcolare $f_{n}(\cdot)$.
@@ -176,9 +184,9 @@ Soluzione ottima:
 
 \subsection{Grafo dello spazio degli stati}
 Alla ricorsione
-\begin{equation}
+\begin{equation*}
 	f_{k}(q)=max[f_{k-1}(q),f_{k-1}(q-a_{k})+c_{k}],\ \ \ \ q\le b,\ \ k=1,\dots,n
-\end{equation}
+\end{equation*}
 si può associare un grafo aciclico $H=(X,A)$ così fatto:
 \begin{itemize}
 	\item $X$ si compone di $n+1$ partizioni $X_{0},X_{1},X_{2},\dots,X_{n}$.\\
@@ -205,107 +213,112 @@ Qual è un algoritmo migliore per implementare la ricorsione per il knapsack 0-1
 	\item Poni $f_{0}(0)=0$ e $f_{0}(q)=-\infty$, $q=1,\dots,b$. Sia $k=0$;
 	\item inizializza $f_{k+1}(q)=-\infty$, $q=0,1,\dots,b$;
 	\item Per ogni $q=0,1,\dots,b$ tale che $f_{k}(q)\ge 0$ aggiorna 
-	\begin{equation}
+	\begin{equation*}
 		f_{k+1}(q)=max\ [f_{k+1}(q),f_{k}(q)] 
-	\end{equation}
+	\end{equation*}
 	se $q+a_{k+1}\le b$ allora
-	\begin{equation}
+	\begin{equation*}
 		f_{k+1}(q+a_{k+1})=max\ [f_{k+1}(q+a_{k+1}),f_{k}(q)+c_{k+1}]
-	\end{equation}
+	\end{equation*}
 	\item Se $k=n-1$ \textit{STOP}, altrimenti poni $k=k+1$ e ritorna allo step 2.
 \end{enumerate}
 
 \section{Programmazione a numeri interi}
-\begin{flalign}
+\begin{flalign*}
 	& F^{*}=Min\ \sum_{j=1}^{n}C_{j}x_{j} \\
-	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \sum_{j=1}^{n}a_{1j}x_{j}=b_{1} \\
-	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \sum_{j=1}^{n}a_{2j}x_{j}=b_{2} \\
-	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \vdots\ \ \ \ \ \ \ \vdots \\
-	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \sum_{j=1}^{n}a_{mj}x_{j}=b_{m} \\
-	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x_{j}\ge 0 \textnormal{ e intero}
-\end{flalign}
+	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \sum_{j=1}^{n}a_{1j}x_{j}=b_{1} \\
+	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \sum_{j=1}^{n}a_{2j}x_{j}=b_{2} \\
+	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \vdots\ \ \ \ \ \ \ \vdots \\
+	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \sum_{j=1}^{n}a_{mj}x_{j}=b_{m} \\
+	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x_{j}\ge 0 \textnormal{ e intero}
+\end{flalign*}
 Per semplicità assumiamo che
 \begin{flalign*}
 	& a_{ij}\ge 0\ \ \ \ \ \ \ \forall i,j \\
-	& \ \ b_{i}\ge 0\ \ \ \ \ \ \ \forall i
+	& \ \,b_{i}\ge 0\ \ \ \ \ \ \;\forall i
 \end{flalign*}
 
 \section{Programmazione Dinamica}
-\begin{flalign}
+\begin{flalign*}
 	& F_{k}(\ubar{v})=Min\ \sum_{j=1}^{k}C_{j}x_{j} \\
-	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \sum_{j=1}^{k}a_{1j}x_{j}=v_{1} \\
-	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \sum_{j=1}^{k}a_{2j}x_{j}=v_{2} \\
-	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \vdots\ \ \ \ \ \ \ \vdots \\
-	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \sum_{j=1}^{k}a_{mj}x_{j}=v_{m} \\
-	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x_{1},x_{2},\dots,x_{k}\ge 0 \textnormal{ e intero}
-\end{flalign}
+	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \sum_{j=1}^{k}a_{1j}x_{j}=v_{1} \\
+	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \sum_{j=1}^{k}a_{2j}x_{j}=v_{2} \\
+	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \vdots\ \ \ \ \ \ \ \vdots \\
+	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \sum_{j=1}^{k}a_{mj}x_{j}=v_{m} \\
+	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x_{1},x_{2},\dots,x_{k}\ge 0 \textnormal{ e intero}
+\end{flalign*}
 $F_{k}(V)$ venga calcolato per $k=1,\dots,n$; $\forall \ubar{v}\le \ubar{b}$ e $\ubar{v}\ge 0$.\\
 La soluzione ottima è data da
-\begin{equation}
+\begin{equation*}
 	F^{*}=F_{n}(\ubar{b})
-\end{equation}
+\end{equation*}
 
 \section{Ricorsione di Programmazione Dinamica}
 Le funzioni $F_{k}(\ubar{v})$ si possono calcolare come segue:
-\begin{equation}
-	F(\ubar{v}=Min\ \{F_{k-1}(\ubar{v}),\ \underset{\underset{x_{k}\ intero}{x_{k}>0}}{Min}[F_{k-1}(\ubar{v}-a^{k}x_{k})+c_{k}x_{k}]\})
-\end{equation}
-per $k=1,\dots,n"$; $\forall \ubar{v}\le \ubar{b}$.\\
-La ricorsione richide di conoscere $F_{0}(\ubar{v})$
-\begin{equation}
+\begin{equation*}
+	F(\ubar{v})=Min\ \{F_{k-1}(\ubar{v}),\ \underset{\underset{x_{k}\ intero}{x_{k}>0}}{Min}[F_{k-1}(\ubar{v}-a^{k}x_{k})+c_{k}x_{k}]\})
+\end{equation*}
+per $k=1,\dots,n$; $\forall \ubar{v}\le \ubar{b}$.\\
+La ricorsione richiede di conoscere $F_{0}(\ubar{v})$
+\begin{equation*}
 	F_{0}(\ubar{v})
 	\begin{cases}
 		0 \textnormal{ per }v={0}\\
 		\infty \textnormal{ per ogni } 0 < \ubar{v}\le b
 	\end{cases}
-\end{equation}
+\end{equation*}
 $k$ rappresenta lo \textbf{stadio} della ricorsione mentre $v$ è la \textbf{variabile di stato}.
 
 \section{Programmazione Dinamica: il TSP}
-È dato un grafo $G=(X,A)$ di $n=|X|$ vertici ed $m=|A|$ archi. Ad ogni archo $(x_{i},x_{j})\in A$ è associato un costo $c_{ij}$.\\\\
-Determinare il cammino di costo minimo che parte da $x_{1}$, attraversa tutti i vertici di $G$ una ed una sola volta e termina in $x_{1}$.\\\\
+È dato un grafo $G=(X,A)$ di $n=|X|$ vertici ed $m=|A|$ archi. Ad ogni arco $(x_{i},x_{j})\in A$ è associato un costo $c_{ij}$.
+
+Determinare il cammino di costo minimo che parte da $x_{1}$, attraversa tutti i vertici di $G$ una ed una sola volta e termina in $x_{1}$.
 \begin{itemize}
-	\item[$f(S,x_{i})$:] costo minimo di un cammino che parte da $x_{i}$, attraversa tutti i vertici di $S\in X\setminus{x_{i}}$ una ed una sola volta e termina in $x_{i}\in S$.
+	\item[] $f(S,x_{i})$: costo minimo di un cammino che parte da $x_{i}$, attraversa tutti i vertici di $S\in X\setminus{x_{i}}$ una ed una sola volta e termina in $x_{i}\in S$.
 \end{itemize}
 
 \subsection{Ricorsione per il calcolo di $\boldsymbol{f(S,x_{i})}$}
-\begin{equation}
+\begin{equation*}
 	f(S,x_{i})=\underset{x_{j}\in S\setminus{x_{i}}}{Min}\{f(S\setminus{x_{i}},x_{j})+c_{ji}\}
-\end{equation}
+\end{equation*}
 Le $f(S,x_{i})$ vanno calcolate:
-\begin{equation}
+\begin{equation*}
 	\forall S\subseteq X \textnormal{ tale che }x_{1}\in S,\ |S|\ge 2,\ \forall x_{i}\in S\setminus{x_{1}}
-\end{equation}
+\end{equation*}
 \subsubsection{Calcolo del valore $\boldsymbol{z^{*}}$ della soluzione ottima}
-\begin{equation}
+\begin{equation*}
 	z^{*}=\underset{x_{i}\in X\setminus{X_{1}}}{Min}\{f(X,x_{i})+c_{i1}\}
-\end{equation}
+\end{equation*}
 È richiesta la seguente inizializzazione:
-\begin{equation}
+\begin{equation*}
 	f(\{x_{1}\},x_{1})=0
-\end{equation}
+\end{equation*}
+\clearpage
 \subsection{Considerazioni computazionali}
 Il calcolo di $f(S,x_{i})$ richiede di conoscere il valore di $f(S\setminus\{x_{i}\}, x_{j})$ $\forall x_{j}\in S\setminus\{x_{i}\}$\\\\
 \textbf{Esempio:} calcolo di $f(\{x_{2},x_{3},x_{4}x_{5}\},x_{2})$
-\begin{equation}
+\begin{equation*}
 	f(\{x_{2},x_{3},x_{4}x_{5}\},x_{2})=\underset{x_{j}\in\{x_{3},x_{4},x_{5}\}}{Min}[f(\{x_{3},x_{4},x_{5}\},x_{j})+c_{j2}]
-\end{equation}
+\end{equation*}
 e quindi bisogna conoscere:
-\begin{equation}
+\begin{equation*}
 	f(x_{3},x_{4}x_{5}\},x_{3});\ \ f(\{x_{3},x_{4}x_{5}\},x_{4});\ \ f(\{x_{3},x_{4}x_{5}\},x_{5})
-\end{equation}
+\end{equation*}
 
 Le \textbf{variabili di stato} sono rappresentate da
-\begin{equation}
+\begin{equation*}
 	(S,x_{i});\ \ \ \ \forall\ S\subseteq X\setminus\{x_{i}\},\ \ \forall\ X_{i}\in S
-\end{equation}
-Lo stadio può essere definito in modi diversi; deve corrispondere al sequente principio:\\\\
-"se lo stato $(S,x_{i})$ è associato allo stadio $K$ allora ognuno degli stati $(S\setminus\{x_{i}\},x_{j})$ deve essere associato ad uno stadio $K^{'}<K^{''}$."\\\\
+\end{equation*}
+Lo stadio può essere definito in modi diversi; deve corrispondere al sequente principio:\\
+
+"se lo stato $(S,x_{i})$ è associato allo stadio $K$ allora ognuno degli stati $(S\setminus\{x_{i}\},x_{j})$ deve essere associato ad uno stadio $K^{'}<K^{''}$."\\
+
 \textbf{Ad esempio:} stadio: $|S|$ cardinalità di S.\\
 È ovvio che allo stadio 1 vengono calcolate le $f(S,x_{i})$ $\forall\ S$ per cui $|S|=1$.\\
 Allo stadio 2 si calcola $f(S,x_{i})$, $\forall\ S$ per cui $|S|=2$.\\
 \vdots\\
 Allo stadio k si calcola $f(S,x_{i})$, $\forall\ S$ per cui $|S|=k$ e quindi sono note le $f(S\setminus\{x_{i}\},x_{j})$ in quanto sono state calcolate allo stadio $k-1$.\\
+
 Lo stadio può essere definito diversamente:
 \begin{itemize}
 	\item Si associ un peso $q_{i}\ge 1$ ad ogni $x_{i}\in X$. Si assegni ad ogni stato $(S,x_{i})$ allo stadio $\sum_{i\in S}^{q_{i}}$. In tal modo gli stati vengono suddivisi in $\sum_{i=1}^{n}q_{i}$ stadi;
@@ -322,14 +335,15 @@ $[c_{ij}]=
 		6 & 15 & 7 & - & 5 \\
 		4 & 9 & 8 & 13 & 6 -
 	\end{bmatrix}$\\
+	
 Applichiamo la ricorsione:
 \begin{equation*}
 	f(S,x_{i})=\underset{x_{j}\in S\setminus\{x_{i}\}}{Min}\{f(S\setminus\{x_{i},x_{j}\})+c_{ji}\}
 \end{equation*}
 Inizializzazione:
-\begin{equation}
+\begin{equation*}
 	f(\{x_{i}\},x_{i})=c_{1i};\ \ \ \ \forall\ x_{i}\in X\setminus\{x_{1}\}
-\end{equation}
+\end{equation*}
 \begin{flalign*}
 	& f(\{2\},2)=6\\
 	& f(\{3\},3)=11\\
@@ -337,7 +351,7 @@ Inizializzazione:
 	& f(\{5\},5)=4\\
 \end{flalign*}
 
-\subsubsection{Stadio 2: Calcolo $\boldsymbol{f(S,x_{i}),\ \forall\ S\subset X\setminus\{x_{i},\ s.t.\ |S|=2;\ \forall\ x_{i}\in S}$}
+\subsubsection{Stadio 2: Calcolo $\boldsymbol{f(S,x_{i}),\ \forall\ S\subset X\setminus\{x_{i},\ s.t.\ |S|=2;\ \forall\ x_{i}\in S\}}$}
 \begin{flalign*}
 	& f(S,x_{i})=\underset{x_{j}\in S\setminus\{x_{j}\}}{Min}\{f(S\setminus\{x_{i}\},x_{j})+c_{ji}\} \\\\
 	& f(\{2,3\},2)=f(\{3\},3)+c_{3,2}=11+5=16 \\
@@ -356,7 +370,7 @@ Similarmente:
 	& f(\{4,5\},4)=17 \\
 	& f(\{4,5\},5)=8 \\\\
 \end{flalign*}
-\subsubsection{Stadio 3: $\boldsymbol{f(S,x_{i}),\ \forall\ S\subset X\setminus\{x_{i},\ s.t.\ |S|=3;\ \forall\ x_{i}\in S}$}
+\subsubsection{Stadio 3: $\boldsymbol{f(S,x_{i}),\ \forall\ S\subset X\setminus\{x_{i},\ s.t.\ |S|=3;\ \forall\ x_{i}\in S\}}$}
 \begin{flalign*}
 	& f(\{2,3,4\},2)=\underset{x_{j}\in\{3,4\}}{Min}\{f(\{3,4\},x_{j})+c_{j2}\}\\\\
 	& f(\{2,3,4\},2)=Min\ \{f(\{3,4\},3)+c_{3,2};\ f(\{3,4\},4)+c_{4,2}\}=Min\ \{10+5;\ 21+15\}=15 \\
@@ -401,7 +415,8 @@ Similarmente
 \begin{enumerate}
 	\item $\mathscr{L}_{0}=\{(\{1\},1)\}$, $f(\{1\},1)=0$, $p(\{1\},1)=0$. Inizializza $\mathscr{L}_{r}=\emptyset$, $r=1,\dots,n$. Definisci $k=1$.
 	\item Espansione degli stati del set $\mathscr{L}_{k-1}$: per ogni stato $(S,i)\in\mathscr{L}_{k-1}$ ripeti lo step 3.
-	\item Genera/Aggiorna gli stati di $\mathscr{L}_{k}$ raggiungibili da $(S,i)$: per ogni vertice $j\in\Gamma_{i}\setminus S$ considera lo stato $(S',i)$, dove $S'=S\cup\{j\}$, che si ottiene aggiungendo l'arco $(i,j)$. Il costo di $(S',j)$ è $h=f(S,i)+c_{ij}$.\\
+	\item Genera/Aggiorna gli stati di $\mathscr{L}_{k}$ raggiungibili da $(S,i)$: per ogni vertice $j\in\Gamma_{i}\setminus S$ considera lo stato $(S',i)$, dove $S'=S\cup\{j\}$, che si ottiene aggiungendo l'arco $(i,j)$.\\
+	Il costo di $(S',j)$ è $h=f(S,i)+c_{ij}$.\\
 	Si hanno i seguenti casi:
 	\begin{itemize}
 		\item $(S',j)\in\mathscr{L}_{k}$, allora $\mathscr{L}_{k}=\mathscr{L}_{k}\cup \{f(S',j)\}$ e $f(S',j)=h$. Poni $p(S',j)=(S,i)$;
@@ -409,9 +424,9 @@ Similarmente
 	\end{itemize}
 	\item Poni $k=k+1$; se $k\le n$ vai allora step 2.
 	\item Il costo ottimo $z^{*}$ del TSP si ottiene come segue:
-	\begin{equation}
+	\begin{equation*}
 		z^{*}=\underset{(X,j)\in\mathscr{L}_{n}}{Min}[f(X,j)+c_{j1}]
-	\end{equation}
+	\end{equation*}
 \end{enumerate}
 
 \section{Taglio 2-dimesionale a ghigliottina}
@@ -419,7 +434,7 @@ Similarmente
 \begin{itemize}
 	\item Il rettangolo e i pezzi hanno dimensioni intere e non possono essere ruotati;
 	\item Sono ammessi solo tagli a ghigliottina;
-	\item Ogni tipo di pesso è disponibile in quantità illimitata
+	\item Ogni tipo di pezzo è disponibile in quantità illimitata
 \end{itemize}
 
 \textbf{Obiettivo}: massimizzare il profitto totale dei pezzi tagliati.
@@ -430,13 +445,15 @@ Similarmente
 	\caption{Esempio di taglio a ghigliottina}
 \end{figure}
 Indichiamo con:\\
+
 $F(x,y)$ il profitto massimo per tagliare un rettangolo di dimensione $(x,y)$ con $x\le L$ e $y\le H$.\\
 $F(L,H)$ il valore della soluzione ottima.
 
+\clearpage
 \subsection{Calcolo di $\boldsymbol{F(x,y)}$}
 Si hanno tre casi:
 \begin{enumerate}
-	\item Il rettangolo $(x,y)$ contiene al più un pezzo (o nessuno) $F(x,y)=max\;[0,\ v{i}:\ l_{i}\le x,\ h_{i}\le y,\ i=1,\dots,m]$
+	\item Il rettangolo $(x,y)$ contiene al più un pezzo (o nessuno) $F(x,y)=max\ [0,\ v{i}:\ l_{i}\le x,\ h_{i}\le y,\ i=1,\dots,m]$
 	\item Il rettangolo $(x,y)$ contiene due o più pezzi che per essere tagliati richiedono almeno un taglio a ghigliottina o parallelo alla lunghezza in posizione $\beta$ parallelo all'altezza in posizione $\alpha$.
 	\centerline{\includegraphics[height=4cm]{images/shape3.png}}
 	$F(x,y)=F(x,\beta)+F(x,y-\beta)$ o $F(x,y)=F(\alpha,y)=F(x-\alpha,y)$
@@ -444,20 +461,20 @@ Si hanno tre casi:
 
 \subsection{Inizializzazione}
 Per ogni $x=1,...,L$ e $y=1,\dots,H$ poni
-\begin{equation}
+\begin{equation*}
 	F^{0}(x,y)=max\ [0,\ v_{i}:\ l_{i}\le x,\ h_{i}\le y,\ i=1,\dots,m]
-\end{equation}
+\end{equation*}
 \begin{itemize}
 	\item se $F^{0}(x,y)=v_{i^{*}}$ poni $X-cut(x,y)=l_{i^{*}}$ e $Y-cut(x,y)=h_{i^{*}}$
 	\item se $F^{0}(x,y)=0$ poni $X-cut(x,y)=Y-cut(x,y)=0$
 \end{itemize}
 La ricorsione: per ogni $x=1,\dots,L$ e $y=1,\dots,H$ calcola
-\begin{equation}
+\begin{equation*}
 	F(x,y)=max\ [F^{0}(x,y);\ F(x,\beta)+F(x,y-\beta),\ \beta=1,\dots,y-1,\ F(\alpha,y)+F(x-\alpha,y),\ \alpha=1,\dots,x-1]
-\end{equation}
+\end{equation*}
 \begin{itemize}
-	\item se $F(x,y)=F(x,\beta^{*})+F(x,y-\beta^{*})$ per qualche $\beta^{*}$ poni $X-cut(x,y)=0$ e $Y-cut(x,y)=\beta^{*}$
-	\item se $F(x,y)=F(\alpha^{*},x)+F(x-\alpha^{*},y)$ per qualche $\alpha^{*}$ poni $X-cut(x,y)=\alpha^{*}$ e $Y-cut(x,y)=0$
+	\item se $F(x,y)=F(x,\beta^{*})+F(x,y-\beta^{*})$ per qualche $\beta^{*}$ poni\\ $X-cut(x,y)=0$ e $Y-cut(x,y)=\beta^{*}$
+	\item se $F(x,y)=F(\alpha^{*},x)+F(x-\alpha^{*},y)$ per qualche $\alpha^{*}$ poni \\$X-cut(x,y)=\alpha^{*}$ e $Y-cut(x,y)=0$
 \end{itemize}
 Si può migliorare la ricorsione sostituendo
 \begin{flalign*}
@@ -469,16 +486,18 @@ Sia $y=5$
 \begin{flalign*}
 	F(x,5)=max\ [F^{0}(x,5),\ \overbrace{F(x,1)+F(x,4)}^{T_{1}},\overbrace{F(x,2)+F(x,3)}^{T_{2}},\underbrace{F(x,3)+F(x,2)}_{T_{3}},\underbrace{F(x,4)+F(x,1)}_{T_{4}},\dots]
 \end{flalign*}
-Si noti che $T_{1}\equiv T_{4}$ e $T_{2}\equiv T_{3}$ è ciò giustifica la sostituzione di $\beta=1,\dots,y-1$ con $1\le\beta\le y/2$.\\
+Si noti che $T_{1}\equiv T_{4}$ e $T_{2}\equiv T_{3}$ è ciò giustifica la sostituzione di $\beta=1,\dots,y-1$ con $1\le\beta\le y/2$.
+
 Complessità: $O(L\cdot H(L+H))$.
 
 \subsection{Normal Cuts}
-Riduce la complessità in molte situazioni reali
+Riduce la complessità in molte situazioni reali.
 \begin{figure}[h]
 	\centering
-	\includegraphics[height=4cm]{images/shape4.png}
+	\includegraphics[height=2.0cm]{images/shape4.png}
 	\caption{Sono equivalenti}
 \end{figure}
+
 I pezzi possono essere spostati in basso e a sinistra fino a che il lato sinistro e il lato inferiore di ogni pezzo sono adiacenti ad un taglio o al lato sinistro e inferiore del rettangolo.\\
 I tagli a ghigliottina possono avvenire solo nelle seguenti posizioni.
 
@@ -519,9 +538,10 @@ Vedremo come il metodo state space relaxation fornisca un lower bound da usare a
 Il metodo della \textbf{State Space Relaxation} si basa sulla sequente semplice idea che consente di calcolare un lower bound al costo del cammino minimo in un grafo.
 \begin{figure}[!h]
 	\centering
-	\includegraphics[height=6cm]{images/graph42.png}
+	\includegraphics[height=7cm]{images/graph42.png}
 	\caption{Il costo del cammino del grafo $G=(X,A)$ da $s$ a $t$ è 8}
 \end{figure}
+
 I vertici sono clusterizzati in 4 cluster come mostrato (non è importante il criterio di clustering per quanto segue).\\
 Ogni $v_{k}\subset X$, $k=1,\dots,4$ e $v_{k}\cap V_{j}=\emptyset$ $j\neq k=1\,dots,4$.
 
@@ -540,9 +560,10 @@ Il costo del cammino minimo da $v_{0}$ a $v_{5}\in\bar{G}$ ($ =7$) è un valido 
 \subsubsection{Esempio}
 \begin{figure}[!h]
 	\centering
-	\includegraphics[height=5.5cm]{images/graph44.png}
+	\includegraphics[height=6cm]{images/graph44.png}
 \end{figure}
-Nel caso di un grafo aciclico, come nell'esempio, può essere conveniente che ogni cluster $v_{k}$ sia tale che $\forall\ j,j\in v_{k}(i<j)$ non esista l'arco $(i,j)$ in A.\newline\newline
+Nel caso di un grafo aciclico, come nell'esempio, può essere conveniente che ogni cluster $v_{k}$ sia tale che $\forall\ j,j\in v_{k}(i<j)$ non esista l'arco $(i,j)$ in A.
+
 \textbf{Grafo rilassato}\\
 \begin{figure}[H]
 	\centering
@@ -550,12 +571,14 @@ Nel caso di un grafo aciclico, come nell'esempio, può essere conveniente che og
 \end{figure}
 
 \subsection{Sitema discreto multistadio}
-$s=(s_{1},\dots,s_{m})$: variabile di stato\\
-$\mathscr{L}_{k}$: insieme degli stati allo stadio k\\
-$f_{k}(s)$ è il costo minimo per cambiare lo stato del sistema dallo stato iniziale (allo stadio $0$) allora stato $s\in\mathscr{L}_{k}$ allora stadio $k$.
-\begin{equation}
+$s=(s_{1},\dots,s_{m})$: variabile di stato
+
+$\mathscr{L}_{k}$: insieme degli stati allo stadio k
+
+$f_{k}(s)$ è il costo minimo per cambiare lo stato del sistema dallo stato iniziale (allo stadio $0$) allora stato $s\in\mathscr{L}_{k}$ allora stadio $k$
+\begin{equation*}
 	f_{k}(s)=\underset{s'\in\Delta^{-1}(s)}{min}[f_{k-1}(s')+v(s',s)],\ \ \ \ \forall\ s\in\mathscr{L}_{k}
-\end{equation}
+\end{equation*}
 dove $\Delta^{-1}(s)$ sono gli stati che raggiungono lo stato $s$ e $v(s',s)$ è il costo per cambiare il sistema dallo stato $s'$ allo stato $s$.
 
 \subsubsection{Esempio: il TSP}
@@ -570,20 +593,24 @@ Definiamo (ad esempio)
 	 & v((S\setminus\{i\},j),(S,i))=c_{ji}
 \end{flalign*}
 Sia $g(\cdot)$ una funzione di "mapping" dallo spazio degli stati $\mathscr{L}$ allo spazio ridotto $R$.\\
-\centerline{\includegraphics[height=8cm]{images/graph46.png}}
+\centerline{\includegraphics[height=6.1cm]{images/graph46.png}}
 
-Più stati di $\mathscr{L}$ vengono associati ad un unico stato di $R$.\\
-Per ogni $s'\in\Delta^{-1}(s)$ esiste l'arco $(g(s'),g(s))$.\\
-$F^{-1}(\alpha)$: predecessori di $\alpha\in R$ (ad esempio: $F^{-1}(\alpha)=\{t',t''\}$).\\
+Più stati di $\mathscr{L}$ vengono associati ad un unico stato di $R$.
+
+Per ogni $s'\in\Delta^{-1}(s)$ esiste l'arco $(g(s'),g(s))$.
+
+$F^{-1}(\alpha)$: predecessori di $\alpha\in R$ (ad esempio: $F^{-1}(\alpha)=\{t',t''\}$).
+
 $\bar{v}(\alpha,\beta)$: $min[v(s',s):\forall s',s\in\mathscr{L}\ t.c.\ g(s')=\alpha\ e\ g(s)=\beta]$.\\
 
 \textbf{Esempio}\\
+
 $\bar{v}(t',\alpha)=min[a,b,c]$, $\bar{v}(t'',\alpha)=min[d,e]$\\
 
 Nello spazio $R$ la ricorsione diviene
-\begin{equation}
+\begin{equation*}
 	f_{k}(g(s))=\underset{t\in F^{-1}(g(s))}{min}[f_{k-1}(t)+\bar{v}(t,g(s))]
-\end{equation}
+\end{equation*}
 Si noti che $f_{k}(g(s))\le f_{k}(s)$, $\forall\ s\in\mathscr{L}$, ovvero, $f_{k}(g(s))$ è un lower bound a $f_{k}(s)$.\\
 La funzione $g(\cdot)$ deve essere tale per cui
 \begin{enumerate}
@@ -592,39 +619,42 @@ La funzione $g(\cdot)$ deve essere tale per cui
 \end{enumerate}
 
 \subsection{Rilassamento dello spazio degli stati per il TSP}
-\begin{equation}
+\begin{equation*}
 	f(s,i)=\underset{j\in S\setminus{i,1}}{min}[f(S\setminus{i},j)+c_{ji}],\ \ |S|\ge 2
-\end{equation}
+\end{equation*}
 $(s,i)$: variabile di stato\\
 
 Funzione di mapping: $(s,i)\rightarrow (g(s),i)$
-\begin{flalign}
+\begin{flalign*}
 	& \Delta^{-1}(s,i)=\{(S\setminus{i},j):\ j\in S\setminus\{i,1\}\} \\
 	& F^{-1}(g(s),i)=\{(g(S\setminus\{i\}),j):\ j\in S\setminus\{i,1\}\}\subseteq\{g(S\setminus\{i\},j):\ j\in \Gamma^{-1}\} \\
 	& v((S\setminus\{i\},j)), (s,i))=c_{ji}
-\end{flalign}
+\end{flalign*}
 quindi $v()$ non dipende da $S$, per cui
-\begin{equation}
+\begin{equation*}
 	\bar{v}((g(S\setminus\{i\}),j),(g(s),i))=c_{ji}
-\end{equation}
+\end{equation*}
 La ricorsione nello spazio rilassato diviene
-\begin{equation}
+\begin{equation*}
 	f(g(s),i)=\underset{j\in\Gamma^{-1}\setminus\{1\}}{min}[f(g(S\setminus\{i\}),j)+c_{ji}],\ \ \ |S|\ge 2
-\end{equation}
+\end{equation*}
 Inizializzazione
-\begin{equation}
+\begin{equation*}
 	f(g(\{1,i\}),i)=c_{1j},\ \ \forall\ i
-\end{equation}
+\end{equation*}
 
+\clearpage
 \subsection{Funzioni di mapping $\boldsymbol{g(\cdot)}$ per il TSP}
 \subsubsection{Rilassamento \textit{n-path}}
 $g(S)=|S|:\ (S,i)\rightarrow(k,i)$ dove $k=|S|$
-\begin{equation}
+\begin{equation*}
 	f(k,i)=\underset{j\in\Gamma^{-1}_{i}\setminus\{1\}}{min}[f(k-1,j)+c_{ji}],\ \ k\ge 2
-\end{equation}
-Inizializza $f(1,i)=c_{1i}$, $\forall\ i$\\
-$f(k,1)$: cammino minimo di cardinalità $k$ da 1 a $i$ (tale cammino può essere non elementare).\\
-$z^{*}=\underset{i}{min}[f(n-1,i)+c_{i1}]$ è un lower bound al $TSP$.\\
+\end{equation*}
+Inizializza $f(1,i)=c_{1i}$, $\forall\ i$
+
+$f(k,1)$: cammino minimo di cardinalità $k$ da 1 a $i$ (tale cammino può essere non elementare).
+
+$z^{*}=\underset{i}{min}[f(n-1,i)+c_{i1}]$ è un lower bound al $TSP$
 
 \begin{table}[!h]
 	\begin{tabular}{m{8cm} m{5cm}}
@@ -634,16 +664,17 @@ $z^{*}=\underset{i}{min}[f(n-1,i)+c_{i1}]$ è un lower bound al $TSP$.\\
 \textbf{Miglior lower bound}\\
 Si penalizzi in modo Lagrangiano i vertici non visitati esattamente una ed una sola volta.
 
+\clearpage
 \subsection{Rilassamento q-path}
 Ad ogni vertice $i$ si associ un peso $q_{i}\le 1$ e $q_{1}=0$
-\begin{equation}
+\begin{equation*}
 	g(S)=\sum_{i\in S}q_{i}:\ (S,i)\rightarrow(q,i)\textnormal{ dove }q=\sum_{i\in S}q_{i}
-\end{equation}
-\begin{equation}
+\end{equation*}
+\begin{equation*}
 	f(q,i)=\underset{j\in\Gamma^{-1}_{i}\setminus\{1\}}{min}[f(q-q_{i},j)+c_{ji}],\ q>q_{i}
-\end{equation}
+\end{equation*}
 Inizializza:
-\begin{flalign}
+\begin{flalign*}
 	&f(q,i)=
 	\begin{cases}
 		c_{1i}, \textnormal{ se }q=q_{i} \\
@@ -651,17 +682,18 @@ Inizializza:
 	\end{cases}
 	,\ \ \forall i \textnormal{ e }\forall\ q=1,\dots,Q \\
 	& \textnormal{dove }Q=\sum_{i=1}^{k}q_{i}
-\end{flalign}
+\end{flalign*}
 Il lower bound al $TSP$ è dato da
-\begin{equation}
+\begin{equation*}
 	z^{*}=\underset{i}{min}[f(Q,i)+c_{j1}]
-\end{equation}
+\end{equation*}
 Il cammino di costo $f(q,i)$ può essere non elementare e quindi anche il circuito corrispondente a $z^{*}$.\\
-Un miglior lower bound, anche in questo caso si ottiene mediante un ascent lagrangiano in cui vengono penalizzati i vertici non visitati esattamento una sola volta.
+Un miglior lower bound, anche in questo caso, si ottiene mediante un ascent lagrangiano in cui vengono penalizzati i vertici non visitati esattamento una sola volta.
 
 \subsection{Eliminazione dei loops di 2 vertici}
 Sia $f(k,1)$ che $f(q,i)$ possono produrre cammini non elementari con loops di 2 vertici (vedi esempio)
-\centerline{\includegraphics[height=5cm]{images/graph48.png}}\\
+
+\centerline{\includegraphics[height=5cm]{images/graph48.png}}
 I loops di 2 vertici possono essere eliminati senza aumentare la complessità delle ricorsioni $f(k,i)$ e $f(q,i)$ con il "trucco" qui descritto per $f(q,i)$.
 
 \subsubsection{Definizioni}
@@ -675,22 +707,22 @@ I loops di 2 vertici possono essere eliminati senza aumentare la complessità de
 Per il calcolo di $f(q,i)$ e $\phi(q,i)$, $\forall\ i$ e un dato $q$ si procede come segue.\\
 Sia $h_{ji}$ il costo del cammino minimo di peso $q$ e senza loops di 2 vertici da 1 a $i$ dove $j$ precede $i$.\\
 $h_{ji},\ \forall i$ e $j$ si calcola come segue
-\begin{equation}
+\begin{equation*}
 	h_{ji}=
 	\begin{cases}
 	f(q-q_{i},j)+c_{ji},\textnormal{ se }\pi(q-q_{i},j)\neq=i \\
 	\phi(q-q_{i},j)+c_{ji}\textnormal{, altrimenti}
 	\end{cases},\ \forall\ i,j
-\end{equation}
+\end{equation*}
 Quindi calcola per ogni vertiche $i$
-\begin{flalign}
+\begin{flalign*}
 	& f(q,i)=\underset{j}{min}[h_{ji}],\textnormal{ sia $j^{*}$ il vertice che produce il $min$} \\
 	& \pi(q,i)=j^{*}\\
 	& \phi(q,i)=\underset{j\neq j^{*}}{min}[h_{ji}]\textnormal{, sia $\hat{j}$ il vertiche che produce il $min$} \\
 	& \gamma(q,i)=\hat{j}
-\end{flalign}
+\end{flalign*}
 Inizializza
-\begin{flalign}
+\begin{flalign*}
 	& f(q,i)=
 	\begin{cases}
 		c_{1i}\textnormal{, se }q=q_{i} \\
@@ -699,8 +731,9 @@ Inizializza
 	& \pi(q_{i},i)=1 \\
 	& \phi(q,i)=\infty,\ \ \forall\ i \textnormal{ e }\forall\ q \\
 	& \gamma(q,i)=0
-\end{flalign}
+\end{flalign*}
 
+\clearpage
 \subsection{Revers function per il TSP}
 $f'(S,i)$: costo del cammino che parte dalla città $i\in S$ visita una e una sola volta tutti i vertici di $S$ e termina nella città $1$.
 \begin{table}[!h]
@@ -721,27 +754,31 @@ In modo simile si possono calcolare le funzioni $f'(k,1)$, $f'(q,i)$.
 
 \subsection{Algoritmo DP+Lower Bound per il TSP}
 È la combinazione della "ricorsione forward" con la reverse function $f'(k,1)$ per eliminare stati che non possono condurre ad alcuna soluzione ottima.\\
-Al posto di $f'(k,i)$ si può usare $f'(q,i)$ o qualsiasi altra funzione che derivi da un diverso rilassamento dello spazio degli stati.\\\\
-Sia $z^{*}$ il costo del $TSP$ ottimo.\\
+Al posto di $f'(k,i)$ si può usare $f'(q,i)$ o qualsiasi altra funzione che derivi da un diverso rilassamento dello spazio degli stati.
+
+Sia $z^{*}$ il costo del $TSP$ ottimo.
+
 Se lo stato $(S,i)$ fa parte della soluzione ottima di costo $z^{*}$ allora
+
 \begin{table}[!h]
 	\begin{tabular}{m{8cm} m{7.5cm}}
-		\includegraphics[height=5cm]{images/graph50.png} &
-		\begin{equation}
+		\includegraphics[height=4cm]{images/graph50.png} &
+		\begin{equation*}
 			f(S,i)+f'(X\setminus S,i)=z^{*}
-		\end{equation}
+		\end{equation*}
 	\end{tabular}
 \end{table}
-Sia $z_{UB}$ un upper bound a $z^{*}$ calcolato con un euristico. Sia $k=|S|$ per cui $|X\setminus S|=n-k$.\\
+Sia $z_{UB}$ un upper bound a $z^{*}$ calcolato con un euristico. Sia $k=|S|$ per cui $|X\setminus S|=n-k$.
+
 Lo stato $(S,i)$ non può far parte del $TSP$ ottimo se:
-\begin{equation}
+\begin{equation*}
 	f(S,i)+
 	\begin{cases}
 		f'(n-k,i),\ \textnormal{se }\pi'(n-k,i)\in S \\
 		\phi'(n-k,i)\ \textnormal{se }\pi'(n-k,i)\in S
 	\end{cases}
 	\ge z_{UB}
-\end{equation}
+\end{equation*}
 
 \subsection{Algoritmo di programmazione dinamica per il TSP}
 \begin{enumerate}
