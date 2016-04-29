@@ -6,8 +6,8 @@ Si consideri il seguente problema di programmazione lineare:
 	(P)
 	\begin{cases}
 		Min\ cx \\
-		\ \ \ Ax=b
-		\ \ \ x\in X
+		\ \ \ \ \ \ Ax=b \\
+		\ \ \ \ \ \ x\in X
 	\end{cases}
 	A\textnormal{ è ($m$ x $n$)}
 \end{equation*}
@@ -22,21 +22,21 @@ Per il teorema della rappresentazione, essendo per ipotesi $X$ un insieme limita
 Sostituendo $x$ così definito in $P$ si ottiene la seguente formulazione equivalente di $P$ nelle variabili $\lambda_{1},\lambda_{2},\dots,\lambda_{t}$.
 
 \begin{numcases}{P'}
-		z'=Min\ \sum_{j=1}^{t}(cx^{j})\lambda_{j} \\
-		s.t.\ \sum_{j=1}^{t}(Ax^{j})\lambda_{j}=b \label{eq:5.2} \\
-		\ \ \ \ \ \sum_{j=1}^{t}\lambda_{j}=1 \label{eq:5.3} \\
-		\ \ \ \ \ \ \ \ \ \ \lambda\ge 0,\ j=1,\dots,t
+	z'=Min\ \sum_{j=1}^{t}(cx^{j})\lambda_{j} \\
+	\ \ \ \ \ \ \ \ s.t.\ \sum_{j=1}^{t}(Ax^{j})\lambda_{j}=b \label{eq:5.2} \\
+	\ \ \ \ \ \ \ \ \ \ \ \ \ \ \sum_{j=1}^{t}\lambda_{j}=1 \label{eq:5.3} \\
+	\ \ \ \ \ \ \ \ \ \ \ \ \ \ \lambda\ge 0,\ j=1,\dots,t
 \end{numcases}
 
-\subsection{Metodo di solzione di $\boldsymbol{P'}$}
+\subsection{Metodo di soluzione di $\boldsymbol{P'}$}
 $P'$ non può essere risolto direttamente poichè il numero $t$ di punti estremi di $X$ è (di solito) molto grande e tali punti non possono essere enumerati a priori.
 
 Si cerca quindi di risolvere $P'$ senza dover generare tutti i punti estremi di $X$.
 
-\newpage
+\clearpage
 \subsubsection{Schema dell'algoritmo}
 \begin{enumerate}
-	\item Problema Master
+	\item \textbf{Problema Master}
 		\begin{itemize}
 			\item Si risolva $P'$ usando un insieme limitato di $k$ punti estremi $x^{1},\dots,x^{k}$ dove $k\ll t$.
 			\item Sia $(w,\alpha)$ la soluzione duale ottima di $P'$ usando i $k$ punti estremi generati.\\
@@ -45,12 +45,12 @@ Si cerca quindi di risolvere $P'$ senza dover generare tutti i punti estremi di 
 				D'
 				\begin{cases}
 					Max\ w b+\alpha \\
-					s.t.\ \ w(Ax^{j})+\alpha\le cx{j},\ j=1,\dots,k \\
-					\ \ \ \ \ \ w\in\mathscr{R}^{m},\ \alpha\in\mathscr{R} \\
+					\ \ s.t.\ w(Ax^{j})+\alpha\le cx^{j},\ j=1,\dots,k \\
+					\ \ \ \ \ \ \ w\in\mathscr{R}^{m},\ \alpha\in\mathscr{R} \\
 				\end{cases}
 			\end{equation*}
 		\end{itemize}
-	\item Ottimalità della soluzione del Master $P'$\\
+	\item \textbf{Ottimalità della soluzione del Master $\boldsymbol{P'}$}\\
 	La soluzione ottima di $P'$ è ottima per l'intero problema se e solo se $(w,\alpha)$ soddisfa i vincoli duali dei punti estremi $x^{k+1},x^{k+2},\dots,x^{t}$ non considerati di $P'$, ovvero:
 	\begin{equation*}
 		w(Ax^{j})+\alpha\le cx^{j},\ j=k+1,\dots,t
@@ -133,26 +133,27 @@ Ogni $(x_{1},x_{2},x_{3},x_{4})\in X$ ha le prime due componenti in $X_{1}$ e le
 	& X_{2}=\{(x_{3},x_{4}):-x_{3}+x_{4}\le 2,\ 2x_{3}+x_{4}\le 6,\ x_{3},x_{4}\ge 0\}
 \end{flalign*}
 \subsection{Inizializzazione}
-Siano $x^{1},x_{2},\dots,x_{t}$ i punti estremi di $X$.\\
-Poniamo $\hat{c}_{j}=cx_{j}$ il costo del punto estremo $x^{j}$, $j=1\,dots,t$
+Siano $x^{1},x^{2},\dots,x^{t}$ i punti estremi di $X$.\\
+Poniamo $\hat{c}_{j}=cx^{j}$ il costo del punto estremo $x^{j}$, $j=1,\dots,t$
 \begin{equation*}
 	P'
 	\begin{cases}
 		Min\ \sum_{j=1}^{t}\hat{c}_{j}\lambda_{j} \\
 		\ \ \ \ \ \ \ \sum_{j=1}^{t}(Ax^{j})\lambda_{j}+s=b \\
 		\ \ \ \ \ \ \ \sum_{j=1}^{t}\lambda_{j}=1 \\
-		\ \ \ \ \ \ \ \ \ \ \ \ \lambda_{j}\ge 0,\ j=1,\dots,t
+		\ \ \ \ \ \ \ \lambda_{j}\ge 0,\ j=1,\dots,t
 	\end{cases}
 \end{equation*}
+\clearpage
 Si può partire con il punto estremo $x^{1}=(0,0,0,0)$ di costo $\hat{c}_{1}=0$
 \begin{equation*}
 	P'
 	\begin{cases}
 		z^{1}=Min\ 0\lambda_{1} \\
-		s_{1}=2\ \ \ \ \ \ \ \ \ \ \ \ w_{1}\\
-		s_{3}=3\ \ \ \ \ \ \ \ \ \ \ \ w_{2}\\
-		\lambda_{1}=1\ \ \ \ \ \ \ \ \ \ \ \ \alpha\\
-		s_{1},s_{2},\lambda_{1}\ge 0
+		\ \ \ \ \ \ \ \ \ s_{1}=2\ \ \ \ \ \ \ \ \ \ \ \ w_{1}\\
+		\ \ \ \ \ \ \ \ \ s_{2}=3\ \ \ \ \ \ \ \ \ \ \ \ w_{2}\\
+		\ \ \ \ \ \ \ \ \ \lambda_{1}=1\ \ \ \ \ \ \ \ \ \ \ \ \alpha\\
+		\ \ \ \ \ \ \ \ \ s_{1},s_{2},\lambda_{1}\ge 0
 	\end{cases}
 \end{equation*}
 Ottimo: $\lambda_{1}=1$, $s_{1}=2$, $s_{2}=3$, $z^{1}=0$ e $(w_{1},w_{2},\alpha)=(0,0,0,0)$.\\
@@ -160,20 +161,28 @@ Ottimo: $\lambda_{1}=1$, $s_{1}=2$, $s_{2}=3$, $z^{1}=0$ e $(w_{1},w_{2},\alpha)
 La soluzione primale di $P$ di costo $z^{1}=0$ è $x=\lambda_{1}x^{1}=0x^{1}=(0,0,0,0)$.
 
 \subsubsection{Iterazione 1}
-\begin{flalign*}
-	& SP\ \ \ \ \ \ \ \ \ Max\ (w A-c)x+\alpha \\
-	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ s.t.\ \ x\in X 
-\end{flalign*}
+\begin{equation*}
+	SP
+	\begin{cases}
+		Max\ \ (w A-c)x+\alpha \\
+		\ \ \ \ \ \ \ \ \ s.t. \ x\in X
+	\end{cases}
+\end{equation*}
 Poichè $(w_{1},w_{2},\alpha)=0$
+
 \begin{flalign*}
 & SP\ \ \ \ \ \ \ \ \ Max\ 2x_{1}+x_{2}+x_{3}-x_{4}+0 \\
 & \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\in X \textnormal{ o }(x_{1},x_{2})\in X_{1},\ (x_{3},x_{4})\in X_{2}
 \end{flalign*}
+
 $SP$ è separabile nei vettori $(x_{1},x_{2})\in X_{1}$ e $(x_{3},x_{4})\in X_{2}$ per cui, come si vede in \ref{fig:5.1.3}, si ha che una soluzione ottima di $SP$ è data dal punto estremo
+
 \begin{equation*}
 	x^{2}=(2,\frac{3}{2},3,0)
 \end{equation*}
-$z_{2}-\hat{c}_{2}=(w A-c)x^{2}+\alpha=-cx^{2}=\frac{17}{2}>0$\\
+
+$z_{2}-\hat{c}_{2}=(w A-c)x^{2}+\alpha=-cx^{2}=\frac{17}{2}>0$
+
 Lower bound $z^{1}-(z_{2}-\hat{c}_{2})=-\frac{17}{2}=-8.5$ e $x_{2}$ entra nel Master
 
 \clearpage
@@ -339,7 +348,7 @@ Per ogni sottoinsieme $X_{k}$ (limitato) indichiamo con $x^{1}_{k},x^{2}_{k},\do
 \begin{equation*}
 	\begin{rcases}
 		x_{k}=\sum_{j=1}^{t_{k}}\lambda_{kj}x_{k}^{j}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \\
-		\sum_{j=1}^{t_{k}}\lambda_{kj}=1\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \\
+		\sum_{j=1}^{t_{k}}\lambda_{kj}=1\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \\
 		\lambda_{kj}\ge 0,\ j=1,\dots,t_{k}
 	\end{rcases}
 	k=1,\dots,T
@@ -370,7 +379,7 @@ Si fa uso della particolare struttura di $X$.
 	\item \textbf{Ottimalità della soluzione del Master}\\
 	La soluzione del Master è ottima se $(w,\alpha)$ soddisfa i vincoli duali per i punti estremi non generati; ovvero, se per ogni $k=1,\dots,T$
 	\begin{equation*}
-		w(A_{k}x_{k}^{j})+\alpha_{k}\le c_{k}x_{k}^{j},\ j=r_{k}\mp 1,\dots,t_{k}
+		w(A_{k}x_{k}^{j})+\alpha_{k}\le c_{k}x_{k}^{j},\ j=r_{k}+1,\dots,t_{k}
 	\end{equation*}
 	ovvero se
 	\begin{equation*}
@@ -406,26 +415,27 @@ o anche
 \end{equation*}
 sommando
 \begin{equation*}
-	\sum_{k=1}^{T}c_{k}x_{k}\ge w\sum_{k=1}^{T}A_{k}x_{k}+\sum_{k=1}^{T}A_{k}x_{k}+\sum_{k=1}^{T}\alpha_{k}-\sum_{k=1}^{T}z_{SP}^{k}
+	\sum_{k=1}^{T}c_{k}x_{k}\ge w\sum_{k=1}^{T}A_{k}x_{k}+\sum_{k=1}^{T}\alpha_{k}-\sum_{k=1}^{T}z_{SP}^{k}
 \end{equation*}
 
 Si consideri un qualunque $x=(x_{1},...,x_{T})$ che soddisfi $x_{k}\in X_{k}$, $\forall k$ e $A_{1}x_{1}+A_{2}x_{2}+\dots,A_{T}x_{T}=b$ si ha
 \begin{equation*}
 	\sum_{k=1}^{T}c_{k}x_{k}\ge w b+\sum_{k=1}^{T}\alpha_{k}-\sum_{k=1}^{T}z_{SP}^{k}
 \end{equation*}
-Quindi $LB=\underbrace{w b+\sum_{k}\alpha_{k}}_{z'}-\sum_{k}z^{k}_{SP}$.\\
+Quindi $LB=\underbrace{w b+\sum_{k}\alpha_{k}}_{z'}-\sum_{k}z^{k}_{SP}$.
+
 $LB$ è un limite inferiore al costo della soluzione ottima.
 
 \section{Assegnamento Generalizzato}
 \begin{itemize}
 	\item[m] contenitori di capacità $Q_{1},\dots,Q_{m}$
 	\item[n] oggetti che devono essere caricati nei contenitori
-	\item[$c_{oj}$] costo per caricare l'oggetto $i$ nel contenitore $j$
+	\item[$c_{ij}$] costo per caricare l'oggetto $i$ nel contenitore $j$
 	\item[$q_{ji}$] spazio del contenitore $j$ occupato da $i$ se $i$ viene caricato nel contenitore $j$.
 \end{itemize}
 Si vogliono caricare tutti gli oggetti nei contenitori minimizzando il costo complessivo.
 \begin{numcases}{P}
-	Min\ \sum_{i=1}^{n}\sum_{j=1}^{m}c_{ij}x_{ij} \label{eq:5.12}\\
+	Min\ \,\sum_{i=1}^{n}\sum_{j=1}^{m}c_{ij}x_{ij} \label{eq:5.12}\\
 	\ \ s.t.\ \sum_{j=1}^{m}x_{ij}=1,\ i=1,\dots,n \label{eq:5.13} \\
 	\ \ \ \ \ \ \ \ \sum_{i=1}^{n}q_{ij}x_{ij}\le Q,\ j=1,\dots,m \label{eq:5.14}\\
 	\ \ \ \ \ \ \ \ \ \ \ \ \ x_{ij}\in\{0,1\},\ \forall i,j \label{eq:5.15}
@@ -444,7 +454,7 @@ Per il teorema della rappresentazione abbiamo:
 \begin{flalign}
 	& \begin{rcases} \label{eq:5.16}
 		x_{ij}=\sum_{r=1}^{t_{j}}\lambda_{jr}x_{ij}^{r},\ i=1,\dots,m \\
-		\sum_{r=1}^{t_{j}}\lambda_{jr}=1\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \\
+		\sum_{r=1}^{t_{j}}\lambda_{jr}=1\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \,\\
 		\lambda_{jr}\ge 0\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
 	  \end{rcases} j=1,\dots,m
 \end{flalign}
@@ -479,13 +489,15 @@ Si consideri il sequente esempio dei \ref{eq:5.20} per un dato $j$ per il quale 
 \end{equation*}
 Ogni soluzione frazionaria di $\lambda$ induce una soluzione frazionaria in $x_{ij}$.
 
-\clearpage
 \textbf{Esempio.}
 
-$\lambda_{ji}=\frac{1}{2}$, $\lambda_{j2}=\frac{1}{2}$ e $\lambda_{j3}=\lambda_{j4}=\lambda_{j5}=0$ \\
-induce\\
+$\lambda_{ji}=\frac{1}{2}$, $\lambda_{j2}=\frac{1}{2}$ e $\lambda_{j3}=\lambda_{j4}=\lambda_{j5}=0$
+
+induce
+
 $x_{1j}=1$, $x_{2j}=\frac{1}{2}$, $x_{3j}=\frac{1}{2}$, $x_{4j}=\frac{1}{2}$ e $x_{5j}=0$.\\
 
+\clearpage
 Affinchè soluzioni frazionarie $\lambda$ inducano soluzioni intere $x$ è necessario che i punti estremi $x_{j}^{r}$, corrispondenti a $\lambda_{jr}>0$, coincidano; ma ciò non avviene perchè i punti estremi di $conv(X)$ sono ovviamente distinti.
 
 Quindi l'unica possibilità affinchè $x_{ij}\in\{0,1\}$ è che anche $\lambda_{jr}\in\{0,1\}$.\\
@@ -493,15 +505,13 @@ Quindi l'unica possibilità affinchè $x_{ij}\in\{0,1\}$ è che anche $\lambda_{
 $P'$ può essere riscritto come segue:
 \begin{numcases}{P'}
 	Min\ \sum_{j=1}^{m}\sum_{r=1}^{t_{j}}c(x_{j}^{r})\lambda_{jr} \\
-	\ s.t.\  \sum_{j=1}^{m}\sum_{r=1}^{t_{j}}x_{ij}^{r}\lambda_{jr}=1,\ i=1,\dots,n \label{eq:5.22} \\
+	\ \ s.t.\ \sum_{j=1}^{m}\sum_{r=1}^{t_{j}}x_{ij}^{r}\lambda_{jr}=1,\ i=1,\dots,n \label{eq:5.22} \\
 	\ \ \ \ \ \ \ \ \sum_{r=1}^{t_{j}}\lambda_{jr}=1,\ j=1,\dots,m \label{eq:5.23} \\
 	\ \ \ \ \ \ \ \ \ \ \ \ \ \lambda_{jr}\in\{0,1\} \label{eq:5.24}
 \end{numcases}
 dove $c(x_{j}^{r})=\sum_{i=1}^{n}c_{ij}x_{ij}^{r}$ è il costo del punto estremo $x_{j}^{r}$.\\
-Indichiamo con $LP'$ il rilassamento lineare di $P'$ (sostituiamo \ref{eq:5.24} con $\lambda_{jr}\ge 0$).\\
-$LP'$ può essere risolto usando il metodo Dantzig-Wolfe.
+Indichiamo con $LP'$ il rilassamento lineare di $P'$ (sostituiamo \ref{eq:5.24} con $\lambda_{jr}\ge 0$). $LP'$ può essere risolto usando il metodo Dantzig-Wolfe.
 
-\clearpage
 \subsection{Duale di DP'}
 $w_{i}$, $i=1,\dots,n$: variabili duali dell'equazione \ref{eq:5.22}\\
 $\alpha_{j}$, $j=1,\dots,m$: variabili duali dell'equazione \ref{eq:5.23}
@@ -516,6 +526,7 @@ $\alpha_{j}$, $j=1,\dots,m$: variabili duali dell'equazione \ref{eq:5.23}
 	\end{cases}
 \end{equation*}
 
+\clearpage
 \begin{table}[h]
 	\centering
 	\caption{Tableau di $P'$}
@@ -533,11 +544,10 @@ $\alpha_{j}$, $j=1,\dots,m$: variabili duali dell'equazione \ref{eq:5.23}
 	\end{tabular}
 \end{table}
 
-\clearpage
 \subsection{Algoritmo per risolvere LP'}
 \begin{enumerate}
 	\item \textbf{Master iniziale}\\
-	Si generino $E_{j}$ punti estremi di $conv(X_{j})$, $j=1\,dots,m$.
+	Si generino $E_{j}$ punti estremi di $conv(X_{j})$, $j=1,\dots,m$.
 	\item Si risolva $LP'$ usando i correnti $E_{j}$ punti estremi e sia $(w,\alpha)$ la soluzione del duale $DLP'$
 	\item \textbf{Ottimalità della soluzione}\\
 	La soluzione è ottima se
@@ -572,8 +582,8 @@ Il vettore $w=c_{B}B^{-1}$ e la matrice $B^{-1}$ possono essere indentificati ne
 \begin{equation*}
 	\begin{cases}
 		Min\ z=cx \\
-		\ \ \ \ \ \ Ax\le b\ \ (b\ge 0) \\
-		\ \ \ \ \ \ \ \ x\ge 0
+		\ \ \ \ \ \ \ Ax\le b\ \ (b\ge 0) \\
+		\ \ \ \ \ \ \ \ \ x\ge 0
 	\end{cases}
 \end{equation*}
 Si aggiungano $m$ variabili slack $x_{n+1},\dots,x_{n+m}$.\\
@@ -581,26 +591,26 @@ La base iniziale è $B=[a_{n+1},\dots,a_{n+m}]\equiv I$.
 \begin{table}[h]
 	\centering
 	\caption{$1^{o}$ Tableau}
-	\begin{tabular}{c|c|cccc|cccc|}
-		& z & $x_{1}$ & $x_{2}$ & $\dots$ & $x_{n}$ & $x_{n+1}$ & $x_{n+1}$ & $\dots$ & $x_{n+m}$ \\ \cline{2-10}
-		z & 1 & $-c_{1}$ & $-c_{2}$ & $\dots$ & $-c_{n}$ & 0 & 0 & $\dots$ & 0 \\ \cline{2-10}
-		$x_{n+1}$ & 0 &  &  &  &  & 1 &  &  & $b_{1}$ \\
-		$x_{n+2}$ & 0 &  & A &  &  &  & 1 &  & $b_{1}$ \\
-		$\vdots$ & $\vdots$ &  &  &  &  &  & $\ddots$ & & $\vdots$ \\
-		$x_{n+1}$ & 0 &  &  &  &  &  &  & 1 & $b_{m}$ \\ \cline{2-10}
+	\begin{tabular}{c|c|cccc|cccc|c|}
+		& z & $x_{1}$ & $x_{2}$ & $\dots$ & $x_{n}$ & $x_{n+1}$ & $x_{n+1}$ & $\dots$ & $x_{n+m}$ & \\ \cline{2-11}
+		z & 1 & $-c_{1}$ & $-c_{2}$ & $\dots$ & $-c_{n}$ & 0 & 0 & $\dots$ & 0 & 0 \\ \cline{2-11}
+		$x_{n+1}$ & 0 &  &  &  &  & 1 &  &  & & $b_{1}$ \\
+		$x_{n+2}$ & 0 &  & A &  &  &  & 1 &  & & $b_{1}$ \\
+		$\vdots$ & $\vdots$ &  &  &  &  &  & & $\ddots$ & & $\vdots$ \\
+		$x_{n+1}$ & 0 &  &  &  &  &  &  & & 1 & $b_{m}$ \\ \cline{2-11}
 	\end{tabular}
 \end{table}
 
 \begin{table}[h]
 	\centering
 	\caption{Tableau iterazione $t$}
-	\begin{tabular}{c|c|cccc|cccc|}
-		& z & $x_{1}$ & $x_{2}$ & $\dots$ & $x_{n}$ & $x_{n+1}$ & $x_{n+1}$ & $\dots$ & $x_{n+m}$ \\ \cline{2-10}
-		z & 1 & $z_{1}-c_{1}$ & $z_{2}-c_{2}$ & $\dots$ & $z_{n}-c_{n}$ & $w_{1}$ & $w_{2}$ & $\dots$ & $w_{m}c_{B}\bar{b}$ \\ \cline{2-10}
-		$x_{n+1}$ & 0 &  &  &  &  &  &  &  & $\bar{b}_{1}$ \\
-		$x_{n+2}$ & 0 & & $(y^{-1})$ &  &  &  &  &  & $\bar{b}_{1}$ \\
-		$\vdots$ & $\vdots$ &  &  & $B^{-1}A$ &  &  & $B^{-1}$ & & $\vdots$ \\
-		$x_{n+1}$ & 0 &  &  &  &  &  &  &  & $\bar{b}_{m}$ \\ \cline{2-10}
+	\begin{tabular}{c|c|cccc|cccc|c|}
+		& z & $x_{1}$ & $x_{2}$ & $\dots$ & $x_{n}$ & $x_{n+1}$ & $x_{n+1}$ & $\dots$ & $x_{n+m}$ & \\ \cline{2-11}
+		z & 1 & $z_{1}-c_{1}$ & $z_{2}-c_{2}$ & $\dots$ & $z_{n}-c_{n}$ & $w_{1}$ & $w_{2}$ & $\dots$ & $w_{m}$ & $c_{B}\bar{b}$ \\ \cline{2-11}
+		$x_{n+1}$ & 0 &  &  &  &  &  &  &  & & $\bar{b}_{1}$ \\
+		$x_{n+2}$ & 0 & & $(y^{-1})$ &  &  &  &  &  & & $\bar{b}_{1}$ \\
+		$\vdots$ & $\vdots$ &  &  & $B^{-1}A$ &  &  & $B^{-1}$ & & & $\vdots$ \\
+		$x_{n+1}$ & 0 &  &  &  &  &  &  &  & & $\bar{b}_{m}$ \\ \cline{2-11}
 	\end{tabular}
 \end{table}
 All'iterazione $t$ sia $B^{-1}$ l'inversa della base $B$.
@@ -650,7 +660,7 @@ Si può procedere come segue:
 	\end{table}
 	
 	Si effettui il pivoting su $y_{r}^{k}$ dove $\frac{\bar{b}_{r}}{y_{r}^{k}}=Min\ [\frac{\bar{b}_{i}}{y^{k}_{i}}:\ y_{i}^{k}>0]$ ignorando le colonne da 1 a $n$ ad eccezione della colonna $k$.\\
-	Dopo il pivoting nelle colonne $n+1-n+m$ ci sarà l'inversa della nuova base\\ $B'=(a_{B_{i}},\dots,a_{k},\dots,a_{B_{m}})$ e nella riga 0 avremo $w'=c'_{B}B'^{-1}$.
+	Dopo il pivoting nelle colonne da $n+1$ a $n+m$ ci sarà l'inversa della nuova base\\ $B'=(a_{B_{i}},\dots,a_{k},\dots,a_{B_{m}})$ e nella riga 0 avremo $w'=c'_{B}B'^{-1}$.
 \end{itemize}
 
 \subsubsection{Esempio}
@@ -661,7 +671,7 @@ Si può procedere come segue:
 	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x_{3}+x_{4}+2x_{5}+x_{6}\ \ \ \ \ \ \ \ \ \ \ \ \ \ +x_{9} = 4 \\
 	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x_{1},\dots,x_{9}\ge 0\\
 \end{flalign*}
-base iniziale $B=[a_{7},a_{8},a_{9}]$, $w=c_{B}B^{-1}=(0,0,0,0)$ $\bar{b}=(6,4,4,4)^{T}$ e $c_{B}\bar{b}=0$.
+base iniziale $B=[a_{7},a_{8},a_{9}]$, $w=c_{B}B^{-1}=(0,0,0)$ $\bar{b}=(6,4,4)^{T}$ e $c_{B}\bar{b}=0$.
 Calcolo $z_{5}-c_{5}=4\ge z_{j}-c_{j}$, $j=1,\dots,6$, quindi
 \begin{table}[h]
 	\centering
@@ -688,7 +698,7 @@ Dopo aver fatto il pivoting si ottiene
 	\end{tabular}
 \end{table}
 
-Calcolo $z_{j}=c_{j}=w a_{j}-c_{j}$ per le variabili non base dove $w=(0,0,-2)$.\\
+Calcolo $z_{j}-c_{j}=w a_{j}-c_{j}$ per le variabili non base dove $w=(0,0,-2)$.\\
 Si ha:
 \begin{table}[h]
 	\centering
@@ -723,6 +733,7 @@ Dopo aver fatto il pivoting si ottiene:
 		0 & 0 & $\frac{1}{2}$ & 2 & $x_{5}$ \\ \cline{1-4}
 	\end{tabular}
 \end{table}
+
 Calcolo $z_{j}-c_{j}$ per le variabili non base usando $w=(-2,0,1)$
 \begin{table}[h]
 	\centering
@@ -731,6 +742,7 @@ Calcolo $z_{j}-c_{j}$ per le variabili non base usando $w=(-2,0,1)$
 		$z_{j}-c_{j}$ & -1 & -3 & -2 & -5 & -1
 	\end{tabular}
 \end{table}
+
 La soluzione è ottima!
 
 \section{Metodo del Simplesso Revisionato}
@@ -813,16 +825,16 @@ Se alla fine della prima fase si ha che il costo ottimo è nullo, allora, bisogn
 Si consideri l'esempio già visto in precedenza
 \begin{flalign*}
 	& Min\ z=x_{1}-2x_{2} \\
-	& \ \ \ \ \ \ \ \ \ \ \ \ \ x_{1}+x_{2}-x_{3}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ = 2 \\
-	& \ \ \ \ \ \ \ \ \ \ -x_{1}+x_{2}\ \ \ \ \ \ \ -x_{4}\ \ \ \ \ \ \ \ = 1 \\
-	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x_{2}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +x_{5} = 3 \\
+	& \ \ \ \ \ \ \ \ \ \ \ \ \,x_{1}+x_{2}-x_{3}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ = 2 \\
+	& \ \ \ \ \ \ \ \ \ -x_{1}+x_{2}\ \ \ \ \ \ \ -x_{4}\ \ \ \ \ \ \ \ = 1 \\
+	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \,x_{2}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +x_{5} = 3 \\
 	& \ \ \ \ \ \ \ \ \ \ \ \ \ x_{1},\dots,x_{5}\ge 0
 \end{flalign*}
 \textbf{Fase 1}
 \begin{flalign*}
 	& Min\ z=x_{6}+x_{7} \\
 	& \ \ \ \ \ \ \ \ \ \ \ \ \ x_{1}+x_{2}-x_{3}\ \ \ \ \ \ \ \ \ \ \ \ \ \ +x_{6}\ \ \ \ \ \ \ =2 \\
-	& \ \ \ \ \ \ \ \ \ \;-x_{1}+x_{2}\ \ \ \ \ \ \ -x_{4}\ \ \ \ \ \ \ \ \ \ \ \ \ \ +x_{7}=1 \\
+	& \ \ \ \ \ \ \ \ \ \,-x_{1}+x_{2}\ \ \ \ \ \ \ -x_{4}\ \ \ \ \ \ \ \ \ \ \ \ \ \ +x_{7}=1 \\
 	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x_{2}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +x_{5}\ \ \ \ \ \ \ \ \ \ \ \ \ =3 \\
 	& \ \ \ \ \ \ \ \ \ \ \ \ \ x_{1},\dots,x_{7}\ge 0
 \end{flalign*}
@@ -920,6 +932,7 @@ Quindi $c_{B}=(c_{1},c_{2},c_{5})=(1,-2,0)$\\
 $\Rightarrow\ \ w=(-\frac{1}{2},-\frac{3}{2},0)$\\
 $\Rightarrow\ \ c_{B}\bar{b}=(1,-2,0)(\frac{1}{2},\frac{3}{2},\frac{3}{2})^{T}=-\frac{5}{2}$\\
 Si parte quindi con:
+
 \begin{table}[!h]
 	\centering
 	\def\arraystretch{2}
@@ -931,7 +944,6 @@ Si parte quindi con:
 		$-\frac{1}{2}$ & $-\frac{1}{2}$ & 1 & $\frac{3}{2}$ & $x_{5}$ \\ \cline{1-4}
 	\end{tabular}
 \end{table}
-
 Si calcolino i costi $z_{j}-c{j}$ per le variabili non base e si continui.
 
 \clearpage
@@ -957,8 +969,8 @@ Computazionalmente si ha il seguente confronto
 \end{table}
 Sembra vantaggioso il Simplesso Tableau.
 
-Nei problemi reali $d=\frac{\textnormal{numero elementi }\neq 0\textnormal{ di }A}{m\textnormal{x}n}~0.0.5$\\
-il calcolo di $z_{c}-c_{j}=\sum_{i=1}^{m}w_{i}a_{ij}-c_{j}$ può essere accellerato da:
+Nei problemi reali $d=\frac{\textnormal{numero elementi }\neq 0\textnormal{ di }A}{m\textnormal{x}n}\sim 0.05$\\
+il calcolo di $z_{c}-c_{j}=\sum_{i=1}^{m}w_{i}a_{ij}-c_{j}$ può essere accelerato da:
 \begin{equation*}
 	\sum_{i\in R_{j}}w_{i}a_{ij}-c_{j} 
 \end{equation*}

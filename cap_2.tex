@@ -224,9 +224,8 @@ Si consideri il tableau ottimo relativo a LP:
 	\end{tabular}
 \end{table}
 
-Supponiamo la soluzione ottima non intera.
-
-\emph{Sia $\bar{b}_{r}$ non intero.}
+Supponiamo che la soluzione ottima sia non intera.\\
+Sia $\bar{b}_{r}$ non intero.
 
 L'equazione associata a $x_{r}$ è:
 \begin{equation}\label{eq:2.1}
@@ -266,11 +265,11 @@ Il nuovo tableau è non ammissibile per il Primale ma duale ammissibile.\\
 
 \textbf{Esempio.}
 \begin{flalign*}
-& Min\  - x_{2} \\
-& \ \ \ \ \ \ \ \ \ 3x_{1}+2x_{2}\le 6 \\
-& \ \ \ \ \ -3x_{1}+2x_{2}\le 0 \\
-& \ \ \ \ \ \ \ \ \ x_{1},\ x_{2}\ge 0 \\
-& \ \ \ \ \ \ \ \ \ x_{1},\ x_{2}\ intere\ \ge 0 \\
+	& Min\,\;- x_{2} \\
+	& \ \ \ \ \ \ \ \ \ \ 3x_{1}+2x_{2}\le 6 \\
+	& \ \ \ \ \ \ \,-3x_{1}+2x_{2}\le 0 \\
+	& \ \ \ \ \ \ \ \ \ \ \ \,x_{1},\ x_{2}\ge 0 \\
+	& \ \ \ \ \ \ \ \ \ \ \ \,x_{1},\ x_{2}\ intere\\
 \end{flalign*}
 Si noti che l'ottimo cade nel punto $x=(1;1)$.
 
@@ -407,13 +406,13 @@ P_{0}
 \end{equation*}
 
 \subsection{Principio base dei metodi Branch and Bound}
-Suddividre il problema $P_{0}$ nei sottoproblemi $P_{1},P_{2},\dots,P_{k}$ a cui corrispondono gli insiemi di soluzioni ammissibili $S_{1},S_{2},\dots,S_{k}$. La suddivisione è tale per cui:
+Suddividere il problema $P_{0}$ nei sottoproblemi $P_{1},P_{2},\dots,P_{k}$ a cui corrispondono gli insiemi di soluzioni ammissibili $S_{1},S_{2},\dots,S_{k}$. La suddivisione è tale per cui:
 \begin{equation*}
 S_{1} \cup S_{2} \cup \dots \cup S_{k} = S_{0}
 \end{equation*}
 È evidente che:
 \begin{equation*}
-\min_{x \in S_{0}} cx = MIN\{\min_{x\in S_{1}} cx, \min_{x\in S_{1}}cx,\dots,\min_{x\in S_{k}}cx\}
+\min_{x \in S_{0}} cx = Min\{\min_{x\in S_{1}} cx, \min_{x\in S_{1}}cx,\dots,\min_{x\in S_{k}}cx\}
 \end{equation*}
 La risoluzione di ogni sottoproblema $P_{1},P_{2},\dots,P_{k}$ può risultare molto più semplice della risoluzione di $P_{0}$.\\
 Possiamo rappresentare la suddivisione di $P_{0}$ in $P_{1},P_{2},\dots,P_{k}$ mediante un albero
@@ -429,46 +428,46 @@ Si ha il seguente albero
 
 \centerline{\includegraphics[height=5cm]{images/graph15.png}}
 
-\noindent
-Risolvere $P_{0}$ equivale a risolvere $P_{1},\dots,P_{i-1},(P_{i1},P_{i2},\dots,P_{ir}),P_{i+1}\dots,P_{k}$.\\
-Il processo di suddivisione di un problema in un numero finito di sottoproblemi viene chiamato \textbf{BRANCHING}.
+Risolvere $P_{0}$ equivale a risolvere $P_{1},\dots,P_{i-1},(P_{i1},P_{i2},\dots,P_{ir}),P_{i+1}\dots,P_{k}$.
 
+Il processo di suddivisione di un problema in un numero finito di sottoproblemi viene chiamato \textbf{Branching}.\\
 Una buona strategia di branching consiste nel suddividere $P_{i}$ nei sottoproblemi $P_{i1},P_{i2},\dots,P_{ir}$ in modo che, per ogni coppia $P_{i\alpha},P_{i\beta}$ con ($\alpha \neq \beta$), gli insiemi $S_{i\alpha}$ e $S_{i\beta}$ siano disgiunti.\\
 
 \centerline{$S_{i\alpha} \cap S_{i\beta} = \emptyset$}
 
-Se la condizione sopra è soddisfatta allora $\{S_{i},\dots,S_{ir}\}$ è una \textbf{PARTIZIONE} di $S_{i}$.\\
-Si noti che la condizione non è \emph{necessaria} ma rende computazionalmente efficiente il processo di branching.
+Se la condizione sopra è soddisfatta allora $\{S_{i},\dots,S_{ir}\}$ è una \textbf{partizione} di $S_{i}$.\\
+Si noti che la condizione \textit{non è necessaria} ma rende computazionalmente efficiente il processo di branching.
 
 \subsubsection{Esempi di Branching}
 Si consideri il problema $P_{i}$ in $n$ variabili dove la variabile $x_{j}$ può assumere i valori $1$,$2$,$3$,$4$.
 \centerline{\includegraphics[height=4cm]{images/graph16.png}}
-
 \clearpage
+
 \subsection{Tipi di Branching}
 Ogni sottoproblema che non può essere risolto può essere suddiviso in sottoproblemi più piccoli.\\
 Dato un insieme di sottoproblemi da suddividere quale sottoproblema suddividere per primo?
-\subsubsection{Dept-first search}
+\subsubsection{Depth-first search}
 In 	questo tipo di branching il sottoproblema che viene suddiviso per primo è l'ultimo generato.\\
-Ciò si ripete fino ad ottenere un sottoproblema che può essere risolto.
+Ciò si ripete fino ad ottenere un sottoproblema che può essere risolto.\\
 
-\centerline{\includegraphics[height=6cm]{images/graph17.png}}
+\centerline{\includegraphics[height=8cm]{images/graph17.png}}
 
-\textbf{BACKTRACKING}: quando un sottoproblema è risolto viene scelto il penultimo sottoproblema generato e su questo viene effettuato il branching.
+\textbf{Backtracing}: quando un sottoproblema è risolto viene scelto il penultimo sottoproblema generato e su questo viene effettuato il branching.
 
 \subsubsection{Breadth-first search}
 Il branching procede da livello a livello, ovvero il problema $P_{0}$ è suddiviso in $P_{1},P_{2},\dots,P_{k}$ che sono i sottoproblemi a livello 1.\\
-Ogni sottoproblema a livello 1 viene suddiviso in un numero di sottoproblemi che costituiscono il livello 2.\\
-In generale quando viene esaminato un sottoproblema a livello $K$ sono stati già esaminati tutti i sottoproblemi a livello $K-1$.
+Ogni sottoproblema a livello 1 viene suddiviso in un numero di sottoproblemi che costituiscono il livello 2.
 
+In generale quando viene esaminato un sottoproblema a livello $K$ sono stati già esaminati tutti i sottoproblemi a livello $K-1$.
+\clearpage
 \begin{center}
-	\includegraphics[height=8cm]{images/graph18.png}
+	\includegraphics[height=8.2cm]{images/graph18.png}
 	\captionof{figure}{* Problemi risolti}
 \end{center}
 
 \subsection{Bounds}
-La ricerca della solutione ottima di $P_{0}$ è completa quando sono stati risolti tutti i sottoproblemi generati.\\
-Questo processo può essere migliorato calcolando, per ogni sottoproblemi $P_{j}$ un \textit{bound} (\textit{Lower Bound} se il problema è di minimizzazione).
+La ricerca della soluzione ottima di $P_{0}$ è completa quando sono stati risolti tutti i sottoproblemi generati.\\
+Questo processo può essere migliorato calcolando, per ogni sottoproblema $P_{j}$ un \textbf{bound} (\textit{Lower Bound} se il problema è di minimizzazione).\\
 
 \textbf{Lower Bound}: diremo che $LB_{i}$ è un lower bound al sottoproblema $P_{i}$ se
 \begin{equation*}
@@ -481,18 +480,19 @@ UB_{i}\ge\ \underset{x\in S_{0}}{Min}\{cx\}
 \end{equation*}
 È possible trascurare il sottoproblema $P_{i}$ se $LB_{i}\ge UB$, infatti, poiché $LB_{i}\le \underset{x\in S_{i}}{Min}\{cx\}$ si avrebbe $\underset{x\in S_{i}}{Min}\{cx\}\ge UB$ e quindi il sottproblema $P_{i}$ non contiene la soluzione ottima.
 \clearpage
+
 \subsubsection{Calcolo del Lower Bound}
 Sia dato il problema
 \begin{displaymath}
 P_{0}
 \begin{cases}
 \ Min\ \ z=cx\\
-\ \ \ \ \ \ \ \ \ \ \ A x = b\\
-\ \ \ \ \ \ \ \ \ \ \ x \ge 0\ e\:intero
+\ \ \ \ \ \ \ \ \ A x = b\\
+\ \ \ \ \ \ \ \ \ x \ge 0\ e\:intero
 \end{cases}
 \end{displaymath}
 Sia $z^{*}$ il costo della soluzione ottima di $P_{0}$.\\
-I seguenti metodi producono validi Lower Bounds a $P_{0}$.
+I seguenti metodi producono validi lower bound a $P_{0}$.
 
 \subsubsection{Rilassamento continuo}
 
@@ -517,13 +517,14 @@ $P_{0}$ è suddiviso in due sottoproblemi $P_{1}\ e\ P_{2}$
 	\item $P_{2}$ imponiamo che $x_{1}\ge 2$
 \end{itemize}
 
-\centerline{\includegraphics[height=6cm]{images/graph20.png}}
+\centerline{\includegraphics[height=4cm]{images/graph20.png}}
 Si usi una strategia Depth-First e quindi si esamini il problema $P_{2}$.
 
-\textbf{Esame del sottoproblema $P_{2}$}\\
+\textbf{Esame del sottoproblema $\boldsymbol{P_{2}}$}
+
 Il lower bound si ottiene imponendo il vincolo $x_{1}\ge 2$.
 
-\centerline{\includegraphics[height=6cm]{images/graph21.png}}
+\centerline{\includegraphics[height=6.5cm]{images/graph21.png}}
 L'ottimo per $P_{2}$ è $z_{LP}^{*}=-3.5$ con componenti $x_{1}^{*}=2$ e $1<x_{2}^{*}<2$
 
 Il problema $P_{2}$ viene suddiviso in $P_{3}$ e $P_{4}$ dove
@@ -563,9 +564,9 @@ Si consideri il problema
 P_{0}
 \begin{cases}
 \ Min\ \ z=cx\\
-\ \ \ \ \ \ \ \ \ \ \ A x = b\ \ m_{1}\ vincoli\\
-\ \ \ \ \ \ \ \ \ \ \ Dx=h\ \ m_{2}\ vincoli\\
-\ \ \ \ \ \ \ \ \ \ \ x\ge 0\ \ intero
+\ \ \ \ \ \ \ \ \ \ A x = b\ \ m_{1}\ vincoli\\
+\ \ \ \ \ \ \ \ \ \ Dx=h\ \ m_{2}\ vincoli\\
+\ \ \ \ \ \ \ \ \ \ x\ge 0\ \ intero
 \end{cases}
 \end{displaymath}
 Si consideri il problema RP che deriva da $P_{0}$ eliminando i vincoli $Ax=b$
@@ -573,13 +574,13 @@ Si consideri il problema RP che deriva da $P_{0}$ eliminando i vincoli $Ax=b$
 RP
 \begin{cases}
 \ Min\ \ z_{RP}=cx\\
-\ \ \ \ \ \ \ \ \ \ \ Dx=b\\
-\ \ \ \ \ \ \ \ \ \ \ x \ge 0\ e\:intero
+\ \ \ \ \ \ \ \ \ \ Dx=b\\
+\ \ \ \ \ \ \ \ \ \ x \ge 0\ e\:intero
 \end{cases}
 \end{displaymath}
 Sia $z_{RP}^{*}$ il valore ottimo di RP; si ha
 \begin{equation*}
-	z_{RP}^{*}\le z^{*} \ \ \ (\ z^{*}\textnormal{ ottimo di } P_{0}\ )
+	z_{RP}^{*}\le z^{*} \ \ \ \ \ (z^{*}\textnormal{ ottimo di } P_{0})
 \end{equation*}
 L'estensione di questo metodo è il Rilassamento Lagrangiano mediante il quale è possibile tener conto dei vincoli rilassati nella funzione obiettivo.
 
@@ -589,9 +590,9 @@ Sia dato il problema
 P_{0}
 \begin{cases}
 \ Min\ \ z=cx\\
-\ \ \ \ \ \ \ \ \ \ \ \sum_{j=1}^{n}a_{ij}x_{j}\ge b_{i}\ \ i=1,\dots,m_{1}\\
-\ \ \ \ \ \ \ \ \ \ \ Dx=h\ \ m_{2}\ vincoli\\
-\ \ \ \ \ \ \ \ \ \ \ x\ge 0\ \ intero
+\ \ \ \ \ \ \ \ \ \sum_{j=1}^{n}a_{ij}x_{j}\ge b_{i}\ \ i=1,\dots,m_{1}\\
+\ \ \ \ \ \ \ \ \ Dx=h\ \ m_{2}\ vincoli\\
+\ \ \ \ \ \ \ \ \ x\ge 0\ \ intero
 \end{cases}
 \end{displaymath}
 Si consideri il problema che si ottiene da $P_{0}$ sostituendo i primi $m_{1}$ vincoli $a^{i}x\ge b_{i}$ con una loro combinazione lineare
@@ -599,9 +600,9 @@ Si consideri il problema che si ottiene da $P_{0}$ sostituendo i primi $m_{1}$ v
 SP
 \begin{cases}
 \ Min\ \ z_{SP}=cx\\
-\ \ \ \ \ \ \ \ \ \ \ \sum_{j=1}^{m_{1}}\pi_{i}\sum_{j=1}^{n}a_{ij}^{j}\ge \sum_{i=1}^{m_{1}}\pi_{i}b_{i}\ \ \pi_{i}\ge 0\\
-\ \ \ \ \ \ \ \ \ \ \ Dx=h\ \ m_{2}\ vincoli\\
-\ \ \ \ \ \ \ \ \ \ \ x\ge 0\ \ intero
+\ \ \ \ \ \ \ \ \ \sum_{j=1}^{m_{1}}\pi_{i}\sum_{j=1}^{n}a_{ij}^{j}x_{j}\ge \sum_{i=1}^{m_{1}}\pi_{i}b_{i}\ \ \pi_{i}\ge 0\\
+\ \ \ \ \ \ \ \ \ Dx=h\ \ m_{2}\ vincoli\\
+\ \ \ \ \ \ \ \ \ x\ge 0\ \ intero
 \end{cases}
 \end{displaymath}
 $z_{SP}^{*}$, ottimo di SP, è un valido lower bound a $P_{0}$.
@@ -611,50 +612,51 @@ $z_{SP}^{*}$, ottimo di SP, è un valido lower bound a $P_{0}$.
 P
 \begin{cases}
 \ z^{*}=\ Min\ cx\\
-\ \ \ \ \ \ \ \ \ \ \ s.t.\ Ax\ge b\\
-\ \ \ \ \ \ \ \ \ \ \ x\ge 0\ \ intero
+\ \ \ \ \ \ \ \ \ s.t.\ Ax\ge b\\
+\ \ \ \ \ \ \ \ \ x\ge 0\ \ intero
 \end{cases}
 \end{displaymath}
 Rilassamento lineare
 \begin{displaymath}
 LP
 \begin{cases}
-\ z_{LP}^{*}=\ Min\ cx\ \ \ \ \ \ \ =\ Max\ \omega b\\
-\ \ \ \ \ \ \ \ \ \ \ s.t.\ Ax\ge b\ \ \ \ \ \ \ \ \ \ \omega A\le c\\
-\ \ \ \ \ \ \ \ \ \ \ x\ge 0\ \ intero\ \ \ \ \ \ \ \omega \ge 0
+\ z_{LP}^{*}=\ Min\ cx\ \ \ \ \ \ \ =\ Max\ w b\\
+\ \ \ \ \ \ \ \ \ \ \ s.t.\ Ax\ge b\ \ \ \ \ \ \ \ \ \ w A\le c\\
+\ \ \ \ \ \ \ \ \ \ \ x\ge 0\ \ intero\ \ \ \ \ \ \ w \ge 0
 \end{cases}
 \end{displaymath}
-Sia $\omega^{*}$ la soluzione duale ottima.
+Sia $w^{*}$ la soluzione duale ottima.
 \begin{displaymath}
 SP
 \begin{cases}
 \ z_{SP}^{*}=\ Min\ cx\\
-\ \ \ \ \ \ \ \ \ \ \ (\omega^{*}A)x\ge\omega^{*}b\\
+\ \ \ \ \ \ \ \ \ \ \ (w^{*}A)x\ge w^{*}b\\
 \ \ \ \ \ \ \ \ \ \ \ x\ge 0\ \ intero
 \end{cases}
 \end{displaymath}
 Ottenuto tramite \textbf{rilassamento surrogato}.
 
-\textbf{Teorema.}
+\clearpage
+\subsubsection{Teorema}
 
-$z_{SP}^{*}\ge z_{LP}^{*}$
+$z_{SP}^{*}\ge z_{LP}^{*}$\\
 Poiché $w^{*}$ è la soluzione ottima del duale di LP si ha
 \begin{equation*}
-	z_{LP}^{*}=\omega^{*}b\ \ \ \textnormal{ e }\ \ \ c-\omega^{*}Ax^{*}
+	z_{LP}^{*}=w^{*}b\ \ \ \textnormal{ e }\ \ \ c-w^{*}A\ge 0
 \end{equation*}
 Sia $x^{*}$ la soluzione ottima intera di SP; si ha:
 \begin{equation}
 	\label{eq:2.3}
-	(c-\omega^{*}A)x^{*}\ge 0\ \ \ \textnormal{ ovvero }\ \ \ cx^{*}\ge \omega^{*}Ax^{*} 
+	(c-w^{*}A)x^{*}\ge 0\ \ \ \textnormal{ ovvero }\ \ \ cx^{*}\ge w^{*}Ax^{*} 
 \end{equation}
 ma anche (da SP):
 \begin{equation}
 	\label{eq:2.4}
-	\omega^{*}Ax^{*}\ge\omega^{*}b
+	w^{*}Ax^{*}\ge w^{*}b
 \end{equation}
 Da \ref{eq:2.3} e \ref{eq:2.4}:
 \begin{equation*}
-	cx^{*}\ge \omega^{*}Ax^{*}\ge\omega^{*}b=z^{*}_{LP}
+	cx^{*}\ge w^{*}Ax^{*}\ge w^{*}b=z^{*}_{LP}
 \end{equation*}
 ovvero
 \begin{equation*}
@@ -678,10 +680,10 @@ Indichiamo con:
 
 \subsection{Formulazione matematica}
 \begin{flalign}
-	& Min\ \ \sum_{i=1}^{m}\sum_{j=1}^{n}c_{ij}x_{ij} \\
-	& \ \ \ \ \ \ \ \ \ \ \sum_{i=1}^{m}x_{ij},\ j=1,\dots,n \label{eq:2.6}\\
-	& \ \ \ \ \ \ \ \ \ \ \sum_{j=1}^{n}a_{ij}x_{ij},\ i=1,\dots,m \label{eq:2.7} \\
-	& \ \ \ \ \ \ \ \ \ \  x_{ij}\in \{0,1\},\ \forall i,j
+	& Min\;\,\sum_{i=1}^{m}\sum_{j=1}^{n}c_{ij}x_{ij} \\
+	& \ \ \ \ \ \ \ \ \sum_{i=1}^{m}x_{ij}=1,\ \ j=1,\dots,n \label{eq:2.6}\\
+	& \ \ \ \ \ \ \ \ \sum_{j=1}^{n}a_{ij}x_{ij}le b_{i},\ \ i=1,\dots,m \label{eq:2.7} \\
+	& \ \ \ \ \ \ \ \ x_{ij}\in \{0,1\},\ \forall i,j
 \end{flalign}
 Dove:
 \begin{itemize}
@@ -727,23 +729,23 @@ Si decompone in due problemi: $L(u^{0})=z_{1}+z_{2}+0$
 \begin{displaymath}
 1^{0} problema
 \begin{cases}
-z_{1}=\ Min\ 3x_{11}+3x_{12}+4x_{13}+9x{14}\\
-\ \ \ \ \ \ \ \ \ 5x_{11}+7x_{12}+4x_{13}+2x_{14}\le 30\\
+z_{1}=\ Min\ 3x_{11}+3x_{12}+4x_{13}+9x_{14}\\
+\ \ \ \ \ \ \ \ 5x_{11}+7x_{12}+4x_{13}+2x_{14}\le 30\\
 \end{cases}
 \end{displaymath}
 Soluzione ottima: $z_{1}=0;\ x_{11}^{0}=x_{12}^{0}=x_{13}^{0}=x_{14}^{0}=0$
 \begin{displaymath}
 2^{0} problema
 \begin{cases}
-z_{1}=\ Min\ 2x_{21}+6x_{22}-9x_{23}+3x{24}\\
-\ \ \ \ \ \ \ \ \ 3x_{21}+x_{22}+6x_{23}+4x_{24}\le 12\\
+z_{1}=\ Min\ 2x_{21}+6x_{22}-9x_{23}+3x_{24}\\
+\ \ \ \ \ \ \ \ 3x_{21}+x_{22}+6x_{23}+4x_{24}\le 12\\
 \end{cases}
 \end{displaymath}
 Soluzione ottima: $z_{2}=-9;\ x_{21}^{0}=x_{22}^{0}=0,\ x_{23}^{0}=1,\ x_{24}^{0}=0$
 
 Quindi $L(u^{0})=z_{1}+z_{2}+0=0-9+0=-9$
 
-La soluzione di $L(u*{0})$ non soddisfa i vincoli \ref{eq:2.6}; infatti:\\  $x=(x_{11},x_{12},x_{13},x_{14},x_{21},x_{22},x_{23},x_{24})$\\
+La soluzione di $L(u^{0})$ non soddisfa i vincoli \ref{eq:2.6}; infatti:\\  $x=(x_{11},x_{12},x_{13},x_{14},x_{21},x_{22},x_{23},x_{24})$\\
 $x^{0}=(\ 0,\ \ 0,\ \ \ 0,\ \ \ \ 0,\ \ \ \ 0,\ \ \ 0,\ \ \ 1,\ \ \ 0)$
 
 \begin{displaymath}
@@ -782,8 +784,8 @@ Come fatto in precedenza $L(u^{1})=z_{1}+z_{2}+24$ dove:
 1^{0}\ problema
 \begin{cases}
 z_{1}=\ Min\ 5x_{11}-5x_{12}+4x_{13}+x{14}\\
-\ \ \ \ \ \ \ \ \ 5x_{11}+7x_{12}+4x_{13}+2x_{14}\le 30\\
-\ \ \ \ \ \ \ \ \ x_{11},\dots,x_{14}\in\{0,1\}
+\ \ \ \ \ \ \ \ 5x_{11}+7x_{12}+4x_{13}+2x_{14}\le 30\\
+\ \ \ \ \ \ \ \ x_{11},\dots,x_{14}\in\{0,1\}
 \end{cases}
 \end{displaymath}
 Soluzione ottima: $z_{1}=-10;\ x_{11}^{1}=x_{12}^{1}=1;\ x_{13}^{1}=x_{14}^{1}=0$
@@ -791,17 +793,18 @@ Soluzione ottima: $z_{1}=-10;\ x_{11}^{1}=x_{12}^{1}=1;\ x_{13}^{1}=x_{14}^{1}=0
 2^{0}\ problema
 \begin{cases}
 z_{2}=\ Min\ -6x_{21}-2x_{22}-9x_{23}-5x{24}\\
-\ \ \ \ \ \ \ \ \ 3x_{21}+x_{22}+6x_{23}+4x_{24}\le 12\\
-\ \ \ \ \ \ \ \ \ x_{21},\dots,x_{24}\in\{0,1\}
+\ \ \ \ \ \ \ \ 3x_{21}+x_{22}+6x_{23}+4x_{24}\le 12\\
+\ \ \ \ \ \ \ \ x_{21},\dots,x_{24}\in\{0,1\}
 \end{cases}
 \end{displaymath}
 Soluzione ottima: $z_{2}=-17;\ x_{21}^{1}=x_{22}^{1}=x_{23}^{1}=1;\ x_{24}^{1}=0$.
 
 Quindi $L(u^{1})=z_{1}+z_{2}+24=-10-17+24=-3$.\\
-I vincoli \ref{eq:2.6} sono violati dalla soluzione $x{1}$ di $L(u^{1})$.
+I vincoli \ref{eq:2.6} sono violati dalla soluzione $x_{1}$ di $L(u^{1})$.
 
-$x=(x_{11},x_{12},x_{13},x_{14},x_{21},x_{22},x_{23},x_{24})$\\
 $x^{1}=(\ 1,\ \ 1,\ \ \ 0,\ \ \ \ 0,\ \ \ \ 1,\ \ \ 1,\ \ \ 1,\ \ \ 0)$
+
+I vincoli impongono:
 \begin{displaymath}
 \begin{cases}
 x_{11}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +x_{21}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =1\\
@@ -813,7 +816,6 @@ x_{11}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +x_{21}\ \ \ \ \ \ \ \ \ \ \ \ \ \
 \emph{Tutti i vincoli, eccetto il terzo, sono violati!}
 
 \textbf{Aggiornamento delle penalità}
-
 Poniamo $k=2$ e manteniamo $\alpha_{2}=2$ in quanto $L(u^{1})>L(u^{0})$
 \begin{flalign}
 & u_{j}^{k}=u_{j}^{k-1}-\alpha_{2}\cdot\frac{(z^{*} -L(u^{k-1}))}{\sum_{j=1}^{n}(\sum_{i=1}^{m}x_{ij}-1)^2}\cdot(\sum_{i=1}^{m}x_{ij}-1) \\
@@ -837,18 +839,18 @@ $u^{2}=(4,4,0,12)$
 \begin{displaymath}
 1^{0}\ problema
 \begin{cases}
-z_{1}=\ Min\ -x_{11}-x_{12}+4x_{13}-3x{14}\\
-\ \ \ \ \ \ \ \ \ 5x_{11}+7x_{12}+4x_{13}+2x_{14}\le 30\\
-\ \ \ \ \ \ \ \ \ x_{11},\dots,x_{14}\in\{0,1\}
+z_{1}=\ Min\ -x_{11}-x_{12}+4x_{13}-3x_{14}\\
+\ \ \ \ \ \ \ \ 5x_{11}+7x_{12}+4x_{13}+2x_{14}\le 30\\
+\ \ \ \ \ \ \ \ x_{11},\dots,x_{14}\in\{0,1\}
 \end{cases}
 \end{displaymath}
 Soluzione ottima: $z_{1}=-5;\ x_{11}^{2}=x_{12}^{2}=1,\ x_{13}^{2}=0,\ x_{14}^{2}=1$
 \begin{displaymath}
 2^{0}\ problema
 \begin{cases}
-z_{2}=\ Min\ -2x_{21}+2x_{22}-9x_{23}-9x{24}\\
-\ \ \ \ \ \ \ \ \ 3x_{21}+x_{22}+6x_{23}+4x_{24}\le 12\\
-\ \ \ \ \ \ \ \ \ x_{21},\dots,x_{24}\in\{0,1\}
+z_{2}=\ Min\ -2x_{21}+2x_{22}-9x_{23}-9x_{24}\\
+\ \ \ \ \ \ \ \ 3x_{21}+x_{22}+6x_{23}+4x_{24}\le 12\\
+\ \ \ \ \ \ \ \ x_{21},\dots,x_{24}\in\{0,1\}
 \end{cases}
 \end{displaymath}
 Soluzione ottima: $z_{2}=-18;\ x_{21}^{2}=x_{22}^{2}=0,\ x_{23}^{2}=x_{24}^{2}=1$
@@ -870,9 +872,9 @@ poniamo $\alpha_{3}=\alpha_{2}/2=1$. Le nuove penalità sono:
 \begin{displaymath}
 1^{0} problema
 \begin{cases}
-z_{1}=\ Min\ -x_{11}-x_{12}+4x_{13}+3x{14}\\
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 5x_{11}+7x_{12}+4x_{13}+2x_{14}\le 30\\
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x_{11},\dots,x_{14}\in\{0,1\}
+z_{1}=\ Min\ -x_{11}-x_{12}+4x_{13}+3x_{14}\\
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 5x_{11}+7x_{12}+4x_{13}+2x_{14}\le 30\\
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x_{11},\dots,x_{14}\in\{0,1\}
 \end{cases}
 \end{displaymath}
 Soluzione ottima: $z_{1}=-2;\ x_{11}^{3}=x_{12}^{3}=1,\ x_{13}^{3}=x_{14}^{3}=0$
@@ -880,9 +882,9 @@ Soluzione ottima: $z_{1}=-2;\ x_{11}^{3}=x_{12}^{3}=1,\ x_{13}^{3}=x_{14}^{3}=0$
 \begin{displaymath}
 2^{0} problema
 \begin{cases}
-z_{2}=\ Min\ -2x_{21}+2x_{22}-9x_{23}-3x{24}\\
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 3x_{21}+x_{22}+6x_{23}+4x_{24}\le 12\\
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x_{21},\dots,x_{24}\in\{0,1\}
+z_{2}=\ Min\ -2x_{21}+2x_{22}-9x_{23}-3x_{24}\\
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 3x_{21}+x_{22}+6x_{23}+4x_{24}\le 12\\
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x_{21},\dots,x_{24}\in\{0,1\}
 \end{cases}
 \end{displaymath}
 Soluzione ottima: $z_{2}=-12;\ x_{21}^{3}=x_{22}^{3}=0,\ x_{23}^{3}=x_{24}^{3}=1$
@@ -921,7 +923,7 @@ Poniamo $\lambda=(0,0)$ e assumiamo $z^{*}=3$ (come in precedenza).
 	\ \ \ \ \ \ \ \ \ \ \ \ \ \ x_{14}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +x_{24}\ \ =1\\
 	\end{cases}
 \end{flalign*}
-\newpage
+
 Poniamo $x_{i^{*}j}=1$ dove $c_{i{*}j}=\underset{i}{Min}\{c_{ij}\};\ \ \forall j$
 
 Dal $1^{o}$ vincolo $x_{11}=0,\ x_{21}=1$\\

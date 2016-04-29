@@ -4,9 +4,9 @@ Si consideri il seguente problema $P$ di programmazione a numeri interi:
 P:
 \begin{cases}
 	z(P)=Min\ cx \\
-	\ \ \ \ \ \ \ \ \ \ \ \ s.t.\ Ax\ge b \\
-	\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Bx\ge d \\
-	\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\in\{0,1\}^{n} 
+	\ \ \ \ \ \ \ \ \ \ \ s.t.\ Ax\ge b \\
+	\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Bx\ge d \\
+	\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\in\{0,1\}^{n} 
 \end{cases}
 \end{displaymath}
 Il valore ottimo $z(LP)$ del rilassamento lineare $LP$ del problema $P$ fornisce un valido lower bound, ovvero
@@ -29,36 +29,36 @@ In molti casi:
 	\item $z(LP)$ è troppo distante da $z(P)$ e quindi non utilizzabile in un algoritmo Branch and Bound.
 \end{itemize}
 
-\section{Rilassamento Lagrangiano di $P$ rispetto ai vincoli $Ax\ge b$}
-Viene così definito il problema $RL_{u}$ che si ottiene da $P$ rimuovendo i vincoli $Ax\ge b$ e sottraendo dalla funzione obiettivo il termine $u(Ax-b)$ dove $u\ge 0$ è il vettore dei \textbf{Moltiplicatori Lagrangiani}.
+\section{Rilassamento Lagrangiano di $\boldsymbol{P}$ rispetto ai vincoli $\boldsymbol{Ax\ge b}$}
+Viene così definito il problema $RL_{u}$ che si ottiene da $P$ rimuovendo i vincoli $Ax\ge b$ e sottraendo dalla funzione obiettivo il termine $u(Ax-b)$ dove $u\ge 0$ è il vettore dei \textbf{moltiplicatori lagrangiani}.
 \begin{displaymath}
 	RL_{u}:
 	\begin{cases}
 		L(u)=Min\ cx-u(Ax-b) \\
-		\ \ \ \ \ \ \ \ \ \ \ \ s.t.\ Bx\ge d \\
-		\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\in\{0,1\}
+		\ \ \ \ \ \ \ \ \ \ \ s.t.\ Bx\ge d \\
+		\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\in\{0,1\}
 	\end{cases}
 \end{displaymath}
-$L(u)$ viene detta "\textit{Funzione Lagrangiana}"
+$L(u)$ viene detta \textit{funzione lagrangiana}
 
 \subsection{Esempio}
 \begin{displaymath}
 P:
 \begin{cases}
 z(P)=Min\ 3x_{1}+7x_{2}+10x_{3} \\
-\ \ \ \ \ \ \ \ \ \ \ \ s.t.\ x_{1}+3x_{2}+5x_{3}\ge 7 \\
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x_{1},x_{2},x_{3}\in\{0,1\}
+\ \ \ \ \ \ \ \ \ \ \ \ \ \,s.t.\ x_{1}+3x_{2}+5x_{3}\ge 7 \\
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x_{1},x_{2},x_{3}\in\{0,1\}
 \end{cases}
 \end{displaymath}
 \begin{displaymath}
 RL_{u}:
 \begin{cases}
-L(u)=Min\ x_{1}+7x_{2}+10x{3}-u(x_{1}+3x_{2}+5x_{3}-7) \\
+L(u)=Min\ 3x_{1}+7x_{2}+10x_{3}-u(x_{1}+3x_{2}+5x_{3}-7) \\
 \ \ \ \ \ \ \ \ \ \ \ \ s.t.\ x_{1},x_{2},x_{3}\in\{0,1\}
 \end{cases}
 \end{displaymath}
 
-\section{Validità e importanza di $RL_{u}$}
+\section{Validità e importanza di $\boldsymbol{RL_{u}}$}
 Possiamo dimostrare che $L(u)\le z(P),\ \forall u\ge0$ e quindi $\underset{u\ge 0}{Max}[L(u)]\le z(P)$.\\
 In certe condizioni la soluzione ottima di $RL_{u}$ è anche la soluzione ottima di $P$.
 \subsection{Esempio}
@@ -66,31 +66,33 @@ In certe condizioni la soluzione ottima di $RL_{u}$ è anche la soluzione ottima
 P:
 \begin{cases}
 z(P)=Min\ 2x_{1}+3x_{2}+4x_{3}+5x_{4} \\
-\ \ \ \ \ \ \ \ \ \ \ \ s.t.\ x_{1}+x_{3}\ge 1 \\
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x_{1}+x_{4}\ge 1 \\
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x_{2}+x_{3}+x_{4}\ge 1 \\
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \forall i \in \{0,1\},\ i=1,\dots,4 \\
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ s.t.\ x_{1}+x_{3}\ge 1 \\
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x_{1}+x_{4}\ge 1 \\
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x_{2}+x_{3}+x_{4}\ge 1 \\
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \forall i \in \{0,1\},\ i=1,\dots,4 \\
 \end{cases}
 \end{displaymath}
-La soluzione ottima è $x_{1}=x_{2}=1,\ x_{3}=x_{4}=0$ e $z(P)=S$.\\
+
+La soluzione ottima è $x_{1}=x_{2}=1,\ x_{3}=x_{4}=0$ e $z(P)=S$.
+
 Il rilassamento lagrangiano dei tre vincoli richiede tre moltiplicatori $u_{1},u_{2},u_{3}$; quindi
 \begin{flalign*}
 	& (RL_{u})\ \ \ \ L(u)=Min\ 2x_{1}+3x_{2}+4x_{3}+5x_{4} -u_{1}(x_{1}+x_{3}-1) \\
-	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -u_{2}(x_{1}+x_{4}-1) \\
-	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -u_{3}(x_{2}+x_{3}+x_{4}-1 ) \\
-	&\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ s.t.\  x_{i}\in\{0,1\},\ i=1,\dots,4
+	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -u_{2}(x_{1}+x_{4}-1) \\
+	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -u_{3}(x_{2}+x_{3}+x_{4}-1 ) \\
+	&\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ s.t.\  x_{i}\in\{0,1\},\ i=1,\dots,4
 \end{flalign*}
 ma anche
 \begin{flalign*}
 	& (RL_{u})\ L(u)=Min\ (2-u_{1}-u_{2})x_{1}+(3-u_{3})x_{2}+(4-u_{1}-u_{3})x_{3}+(5-u_{2}-u_{3})x_{4}+u_{1}+u_{2}+u_{3} \\
 	& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ s.t.\ x_{i}\in\{0,1\},\ i=1,\dots,4
 \end{flalign*}
-Dato $u$, la soluzione ottima di $RL_{u}$, il valore di $L(u)$ si ottiene ponendo
+Data $u$, la soluzione ottima di $RL_{u}$, il valore di $L(u)$ si ottiene ponendo
 \begin{flalign*}
 	& x_{i}=0\textnormal{ se il coefficiente di $x_{i}$ è }\ge 0 \\
 	& x_{i}=1\textnormal{ se il coefficiente di $x_{i}$ è }< 0 \\
 \end{flalign*}
-Poniamo $u_{1}=1.5$, $u_{2}=1.6$ e $u_{3})=2.2$
+Poniamo $u_{1}=1.5$, $u_{2}=1.6$ e $u_{3}=2.2$
 \begin{equation*}
 	L(u)=Min\  -1.1x_{1}+0.8x_{2}+0.3x_{3}+1.2x_{4}+1.5+1.6+2.2
 \end{equation*}
@@ -115,7 +117,7 @@ di costo $L(u)=0+0+0+0+1+1+3=5\equiv z(P)$.
 Si noti che esistono soluzioni ottime alternative tutte di costo $L(u)$=5 che si ottengono ponendo $x_{1}=1$ e/o $x_{2}=1$ e/o $x_{3}=1$ e $x_{4}=0$.\\
 Fra tali soluzioni esiste quella ottima! $x_{1}=x_{2}=1$ e $x_{3}=x_{4}=0$
 
-\section{TEOREMA: Dualità Lagrangiana debole}
+\section{Teorema: Dualità Lagrangiana debole}
 Il valore ottimo $z(P)$ del problema
 \begin{displaymath}
 P:
@@ -137,7 +139,8 @@ L(u)=Min\ cx-u(Ax-b) \\
 \end{cases}
 \end{displaymath}
 \subsection{Dimostrazione}
-Sia $x^{*}$ la soluzione ottima di $P$. Si noti che $x^{*}$ è anche una soluzione ammissibile per $RL_{u}$ per ogni $u\ge 0$, ma non necessariamente l'ottimo di $RL_{u}$ per un dato $u$.\\
+Sia $x^{*}$ la soluzione ottima di $P$.\\
+Si noti che $x^{*}$ è anche una soluzione ammissibile per $RL_{u}$ per ogni $u\ge 0$, ma non necessariamente l'ottimo di $RL_{u}$ per un dato $u$.\\
 Si ha, quindi, che
 \begin{equation*}
 	cx^{*}-u(Ax^{*}-b)\ge L(u)
@@ -170,8 +173,8 @@ Si consideri il caso in cui $\bar{x}$ è anche l'ottimo di $P$, ovvero, $z(P)=c\
 \begin{displaymath}
 P:
 \begin{cases}
-z(P)=Min\ 3_x{1}+7x_{2}+10x_{3} \\
-\ \ \ \ \ \ \ \ \ \ \ s.t.\ x_{1}+3x_{2}+5x_{3}\ge 7 \\
+z(P)=Min\ 3x_{1}+7x_{2}+10x_{3} \\
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ s.t.\ x_{1}+3x_{2}+5x_{3}\ge 7 \\
 \end{cases}
 \end{displaymath}
 \begin{equation*}
@@ -191,7 +194,7 @@ Per calcolare $z(D_{L})\underset{u\ge 0}{Max}[L(u)]$ calcoliamo $L(u)$, $u\ge 0$
 \end{flalign*}
 Quindi $z(D_{L})=\frac{44}{3}$ mentre $z(P)=17$ e $x^{*}=(0,1,1)$ che corrisponde ad una delle soluzioni di $L(\frac{7}{3})=\frac{44}{3}$ ma esiste un gap di dualità.
 
-\section{TEOREMA: Dualità Lagrangiana Forte}
+\section{Teorema: Dualità Lagrangiana Forte}
 Sia $\bar{x}$ la soluzione ottima di $L(u)$, per un dato $\bar{x}\ge 0$.\\
 Se $\bar{x}$, $\bar{u}$ soddisfano le seguenti condizioni:
 \begin{flalign}
@@ -253,7 +256,7 @@ Si osservi che l'ottimo del problema Lagrangiano:
 \end{displaymath}
 corrisponde ad un punto estremo di $conv(X)$
 \clearpage
-\subsection{TEOREMA}
+\subsection{Teorema}
 Il Lagrangiano Duale $D_{L}$ corrisponde al seguente problema di programmazione lineare.
 \begin{displaymath}
 D_{L}
@@ -276,43 +279,47 @@ e, per come è stato definito $X$, il problema $RL_{u}$ diviene
 \end{equation*}
 Quindi, il problema $D_{L}$ può essere scritto come:
 \begin{equation*}
-	D_{L}\ \ \ \ \ z(D_{L})=\underset{u\ge 0}{Max}\ [\underbrace{\underset{x\in X}{Min)}\ (cx-u(Ax-b))]}_{L(u)}
+	D_{L}\ \ \ \ \ z(D_{L})=\underset{u\ge 0}{Max}\ [\underbrace{\underset{x\in X}{Min}\ (cx-u(Ax-b))]}_{L(u)}
 \end{equation*}
 o anche
 \begin{equation*}
-D_{L}\ \ \ \ \ z(D_{L})=\underset{u\ge 0}{Max}\ [\underset{x\in conv(X)}{Min)}\ (cx-u(Ax-b))]
+D_{L}\ \ \ \ \ z(D_{L})=\underset{u\ge 0}{Max}\ [\underset{x\in conv(X)}{Min}\ (cx-u(Ax-b))]
 \end{equation*}
-poichè $L(u)$ raggiunge l'ottimo in un punto estremo di $conv(X)$.\\
+poichè $L(u)$ raggiunge l'ottimo in un punto estremo di $conv(X)$.
+
 Indichiamo con $x^{i},\ i=1,\dots,t$ i punti estremi di $conv(X)$. Il problema $D_{L}$ può essere scritto come:
 \begin{equation*}
 	D_{L}\ \ \ \ \ z(D_{L})=\underset{u\ge 0}{Max}\ [\underset{1\le i\ge t}{Min}\ (cx^{i}-u(Ax^{i}-b))]
 \end{equation*}
 quest'ultimo problema può essere riformulato mediante la programmazione lineare come segue:
+
 \begin{equation*}
 	D_{L}
 	\begin{cases}
-	z(D_{L})=Max\  v \\
-	\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ s.t.\  v\le cx^{i}-u(Ax^{i}-b),\ i=1,\dots,t\\
-	\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textnormal{v qualsiasi} \\
-	\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ u\ge 0
+	z(D_{L})=Max\ \,v \\
+	\ \ \ \ \ \ \ \ \ \ \ \ \ \ \;s.t.\ v\le cx^{i}-u(Ax^{i}-b),\ \ i=1,\dots,t\\
+	\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ v\textnormal{ qualsiasi} \\
+	\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ u\ge 0
 	\end{cases}
 \end{equation*}
+
+\clearpage
 Il duale di questo problema è il seguente
 \begin{equation*}
 	DD_{L}
 	\begin{cases}
 		z(D_{L})=Min\ \sum_{i=1}^{t}\lambda_{i}(cx^{i})\\
-		\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ s.t.\  \sum_{i=1}^{t}\lambda_{i}=1 \\
-		\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \sum_{i=1}^{t}\lambda_{i}(Ax^{i}-b)\ge 0 \\
-		\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \lambda_{i}\ge 0,\ i=1,\dots,t
+		\ \ \ \ \ \ \ \ \ \ \ \ \ \ s.t.\  \sum_{i=1}^{t}\lambda_{i}=1 \\
+		\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \sum_{i=1}^{t}\lambda_{i}(Ax^{i}-b)\ge 0 \\
+		\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \lambda_{i}\ge 0,\ i=1,\dots,t
 	\end{cases}
 \end{equation*}
 Si noti che $\sum_{i=1}^{t}\lambda_{i}(cx^{i})=c(\sum_{i=1}^{t}\lambda_{i}x^{i})$ ed inoltre che $\sum_{i=1}^{t}=\lambda_{i}(Ax^{i}-b)=A(\sum_{i=1}^{t}\lambda_{i}x^{i})-b(\sum_{i=1}^{t}\lambda_{i})$.\\
-Quindi $DD_{L}$ può essere riscritto come
+Quindi $DD_{L}$ può essere riscritto come:
 \begin{numcases}{DD_{L}}
 	z(D_{L})=Min\ c(\sum_{i=1}^{t}\lambda_{i}x^{i}) \\
-	\ \ \ \ \ \ \ \ \ \ \ \ \ \ s.t.\ \sum_{i=1}^{t}\lambda_{i}=1 \label{eq:3.8}\\
-	\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ A(\sum_{i=1}^{t}\lambda_{i}x^{i})\ge b(\sum_{i=1}^{t}\lambda_{i}) \label{eq:3.22}\\
+	\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ s.t.\ \sum_{i=1}^{t}\lambda_{i}=1 \label{eq:3.8}\\
+	\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ A(\sum_{i=1}^{t}\lambda_{i}x^{i})\ge b(\sum_{i=1}^{t}\lambda_{i}) \label{eq:3.22}\\
 	\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \lambda_{i}\ge 0,\ i=1,\dots,t \label{eq:3.10}
 \end{numcases}
 Si osservi che, per ogni t-pla $\lambda_{i},\dots,\lambda_{t}$ che soddisfa i vincoli \ref{eq:3.8} e \ref{eq:3.10}, il punto $x=\sum_{i=1}^{t}\lambda_{i}x^{i}$ appartiene a $conv(X)$. Quindi il problema $DD_{L}$ può essere riscritto come
@@ -320,14 +327,14 @@ Si osservi che, per ogni t-pla $\lambda_{i},\dots,\lambda_{t}$ che soddisfa i vi
 	DD_{L}
 	\begin{cases}
 		z(D_{L})=Min\ cx \\
-		\ \ \ \ \ \ \ \ \ \ \ \ \ \ s.t.\ Ax\ge b \\
+		\ \ \ \ \ \ \ \ \ \ \ \ \ s.t.\ Ax\ge b \\
 		\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\in conv(X)
 	\end{cases}
 \end{equation}
 $\square$
 
 \section{Lagrangiano Duale e Rilassamento Lineare}
-\subsection{TEOREMA}
+\subsection{Teorema}
 \begin{equation*}
 	z(D_{L})\ge z(LP)
 \end{equation*}
@@ -337,9 +344,9 @@ Il rilassamento lineare $LP$ è definito come
 	LP
 	\begin{cases}
 		z(LP)=Min\ cx \\
-		\ \ \ \ \ \ \ \ \ \ \ \ \ \ s.t.\ Ax\ge b \\
-		\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Bx\ge d \\
-		\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0\le x\le 1
+		\ \ \ \ \ \ \ \ \ \ \ \ \ s.t.\ Ax\ge b \\
+		\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Bx\ge d \\
+		\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0\le x\le 1
 	\end{cases}
 \end{equation*}
 Definiamo $\bar{X}=\{x:Bx\ge d,\ 0\le x\le 1\}$, quindi
@@ -360,21 +367,22 @@ e poichè abbiamo dimostrato che
 	D_{L}
 	\begin{cases}
 		z(D_{L})=Min\ cx\\
-		\ \ \ \ \ \ \ \ \ \ \ \ \ \ s.t.\ Ax\ge b \\
-		\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\in conv(X)
+		\ \ \ \ \ \ \ \ \ \ \ \ \ s.t.\ Ax\ge b \\
+		\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x\in conv(X)
 	\end{cases}
 \end{equation*}
 si ha che $z(D_{L})\ge z(LP)$.\\
 $\square$
 
 \clearpage
-\subsection{TEOREMA: $\boldsymbol{L(u)}$ è concava}
+\subsection{Teorema: $\boldsymbol{L(u)}$ è concava}
 La funzione lagrangiana $L(u)$ è concava, ovvero $L(\lambda u^{1}+(1-\lambda)u^{2})\ge \lambda L(u^{1})+(1-\lambda)L(u^{2})$, $\lambda \in [0,1]$
 
 \centerline{\includegraphics[height=8cm]{images/graph28.png}}
 
 \subsubsection{Dimostrazione}
-Siano $u^{1},u^{2}\ge 0$ e $u^{0}=\lambda u^{1}+(1-\lambda)u^{2}$ con $\lambda in[0,1]$.\\
+Siano $u^{1},u^{2}\ge 0$ e $u^{0}=\lambda u^{1}+(1-\lambda)u^{2}$ con $\lambda\in\{0,1\}$.
+
 Indichiamo con $x^{0}$ la soluzione ottima di $RL_{u^{0}}$:
 \begin{equation*}
 	L(u^{0})=cx^{0}-u^{0}(Ax^{0}-b)
@@ -382,9 +390,9 @@ Indichiamo con $x^{0}$ la soluzione ottima di $RL_{u^{0}}$:
 $x^{0}$ è soluzione ammissibile di $RL_{u^{1}}$ e $RL_{u^{2}}$ quindi
 \begin{flalign}
 	L(u^{1})\le cx^{0}-u^{1}(Ax^{0}-b) \label{eq:3.12} \\
-	L(u^{2})\ge cx^{0}-u^{2}(Ax^{0}-b) \label{eq:3.13}
+	L(u^{2})\le cx^{0}-u^{2}(Ax^{0}-b) \label{eq:3.13}
 \end{flalign}
-Moltiplicando la \ref{eq:3.12} per $\lambda$, la \ref{eq:3.13} e sommando:
+Moltiplicando la \ref{eq:3.12} per $\lambda$, la \ref{eq:3.13} per ($1-\lambda$) e sommando:
 \begin{equation*}
 	\lambda L(u^{1})+(1-\lambda)L(u^{2})\le cx^{0}-\underbrace{(\lambda u^{1}+(1-\lambda)u^{2})}_{u^{0}}(Ax^{0}-b)=L(u^{0})
 \end{equation*}
@@ -395,7 +403,7 @@ Un vettore è detto subgradiente di $L(u)$ in $\bar{u}$ se soddisfa
 	L(u)\ge L(\bar{u})+y(u-\bar{u})
 \end{equation*}
 
-\centerline{\includegraphics[height=7cm]{images/graph29.png}}
+\centerline{\includegraphics[height=6cm]{images/graph29.png}}
 
 \textbf{Come calcolare $\boldsymbol{y}$?}\\
 Sia $\bar{x}$ tale che
@@ -419,10 +427,7 @@ ne segue che $y=-(A\bar{x}-b)$ è un subgradiente di $L(u)$ in $\bar{u}$
 \subsection{Metodo del subgradiente}
 Metodo iterativo per risolvere il lagrangiano duale
 \begin{equation*}
-	D_{L}
-	\begin{cases}
-		z(D_{L})=\underset{u\ge 0}{Max}[L(u)]
-	\end{cases}
+	D_{L}\ \ \ \ \ \ \ \ z(D_{L})=\underset{u\ge 0}{Max}[L(u)]
 \end{equation*}
 Il metodo genera una sequenza finita di punti $(u^{1},u^{2},\dots,u^{k})$ e, quindi, calcola
 \begin{equation*}
@@ -438,11 +443,13 @@ se vogliamo che $L(u^{r})$ possa essere maggiore di $L(u^{r-1})$ è necessario c
 \begin{equation}
 	-(Ax^{r-1}-b)(u^{r}-u^{r-1})>0 \label{eq:3.16}
 \end{equation}
-Si noti che una scelta di $u^{r}$ che verifichi la suddetta condizione non è sufficiente per garantire che $L(u^{r})>L(u^{r-1})$.\\
-Come definire $u^{r}$ affinchè \ref{eq:3.16} sia verificata?\\
-Supponiamo che $A$ abbia $m$ righe e quindi $u=(u_{1},\dots,u_{m})$ indicando con $a^{i}\ge b_{i}$ la i-esima disequazione di $Ax\ge b$; la condizione \ref{eq:3.16} può essere scritta come
+Si noti che una scelta di $u^{r}$ che verifichi la suddetta condizione non è sufficiente per garantire che $L(u^{r})>L(u^{r-1})$.
+
+Come definire $u^{r}$ affinchè \ref{eq:3.16} sia verificata?
+
+Supponiamo che $A$ abbia $m$ righe e quindi $u=(u_{1},\dots,u_{m})$ indicando con $a^{i}x\ge b_{i}$ la i-esima disequazione di $Ax\ge b$; la condizione \ref{eq:3.16} può essere scritta come
 \begin{equation}
-	-\sum_{i=1}^{m}(a_{i}^{r-1}-b_{i})(u_{i}^{r}-u_{i}^{r-1})>0 \label{eq:3.16bis}
+	-\sum_{i=1}^{m}(a_{i}x^{r-1}-b_{i})(u_{i}^{r}-u_{i}^{r-1})>0 \label{eq:3.16bis}
 \end{equation}
 Per soddisfare \ref{eq:3.16bis} è sufficiente determinare ogni $u_{i}^{r}$ in modo che
 \begin{equation*}
@@ -458,7 +465,7 @@ Da cui seguono i seguenti casi:
 	\item $a^{i}x^{r-1}=b_{i}$: $x^{r-1}$ satura il vincolo i-esimo \\
 	$u_{i}^{r}$ qualsiasi (è buona norma $u_{i}^{r}=u_{i}^{r-1}$)
 \end{itemize}
-
+\subsubsection{Metodo del subgradiente}
 \begin{enumerate}
 	\item Inizializza $u^{1}=0$ e poni $r=1$ e $LB=-\infty$
 	\item Risolvi:
@@ -466,8 +473,8 @@ Da cui seguono i seguenti casi:
 		L(u^{r})
 		\begin{cases}
 			Min\ cx-u^{r}(Ax-b)\\
-			s.t.\ Bx\ge d\\
-			x\in(0,1)
+			\,s.t.\ Bx\ge d\\
+			\ \ \ \ \ \ \ \ x\in(0,1)
 		\end{cases}
 	\end{equation*}
 	Sia $x^{r}$ la soluzione ottima\\
@@ -500,8 +507,8 @@ Da cui seguono i seguenti casi:
 	L(u)
 	\begin{cases}
 		Min\ cx-u^{1}(A_{1}x-b_{1})-u^{2}(A_{2}x-b_{2})-u^{3}(A_{3}x-b_{3})\\
-		\ \ \ \ \ \ \ s.t.\ Bx\ge d\\
-		\ \ \ \ \ \ \ \ \ \ \ \ x\in\{0,1\}^{m}
+		\;s.t.\ Bx\ge d\\
+		\ \ \ \ \ \ \ \ x\in\{0,1\}^{m}
 	\end{cases}
 \end{equation*}
 ma anche:
@@ -509,8 +516,8 @@ ma anche:
 	L(u)
 	\begin{cases}
 		Min\ (c-u^{1}A_{1}-u^{2}A_{2}-u^{3}A_{3})x+u^{1}b_{1}+u^{2}b_{2}+u^{3}b_{3}\\
-		\ \ \ \ \ \ \ s.t.\ Bx\ge d \\
-		\ \ \ \ \ \ \ \ \ \ \ \ x\in\{0,1\}
+		\;s.t.\ Bx\ge d \\
+		\ \ \ \ \ \ \ \ x\in\{0,1\}
 	\end{cases}
 \end{equation*}
 
@@ -519,7 +526,7 @@ Ad una generica iterazione, sia $\bar{x}$ la soluzione ottima di $L(u)$.
 
 Calcola $y^{1}=A_{1}\bar{x}-b_{1}$, $y^{2}=A_{2}\bar{x}-b_{2}$, $y^{3}=A_{3}\bar{x}-b_{3}$.
 
-Poni $y=(y^{1},y^{2},y^{3})$ e $t=\alpha\frac{z_{UB}-L(u)}{\displaystyle\sum_{i=1}^{m}y_{1}^{2}}$
+Poni $y=(y^{1},y^{2},y^{3})$ e $t=\alpha\frac{z_{UB}-L(u)}{\sum_{i=1}^{m}y_{1}^{2}}$
 \begin{flalign*}
 	& u_{i}^{1}\gets max[0,\ u_{i}^{1}-ty_{i}^{1}],\ i=1,\dots,m_{1}\\
 	& u_{i}^{2}\gets u_{i}^{2}-ty_{i}^{2},\ i=1,\dots,m_{2}\\
@@ -536,7 +543,6 @@ $N=\{1,\dots,n\}$ insieme dei vertici.
 
 $A=\{1,\dots,m\}$ insieme degli archi.
 
-\textbf{Costi simmetrici:} $c_{ij}=c_{ji}$ $\forall\ ij$
 Indichiamo con $c_{l}$ il costo dell'arco $l\in A$.\\
 Per ogni arco $l\in A$ siano $(\alpha_{l},\beta_{l})$ i due vertici terminali.\\
 Inoltre sia $B_{i}\subset A$ l'insieme degli archi incidenti nel vertice $i\in N$.
@@ -562,11 +568,11 @@ Min\ z=\sum_{l=1}^{m}c_{l}x_{l}\\
 \end{numcases}
 
 \subsubsection{$\boldsymbol{1^{o}}$ Rilassamento Lagrangiano (SST)}
-I vincoli \ref{eq:3.19} vengono portati nella funzione obiettivo e sostituiti nella formulazione con il "surrogato": $\sum_{i=1}^{n}=(\sum_{l\in B_{i}}x_{l})=2n$.
+I vincoli \ref{eq:3.19} vengono portati nella funzione obiettivo e sostituiti nella formulazione con il "surrogato": $\sum_{i=1}^{n}(\sum_{l\in B_{i}}x_{l})=2n$.
 \begin{flalign*}
 & L(\lambda)=min\ \sum_{l=1}^{m}c_{l}x_{l}-\sum_{i=1}^{n}\lambda_{i}(\sum_{l\in B_{i}}x_{l}-2)\\
 & \sum_{l=1}^{m}x_{l}=n \\
-& \sum_{l\in K_{t}}x_{l}\ge 1;\ \ \forall K_{t}=(S_{t},\ N\setminus S_{t})\ \ \ \ S_{t}\subset N,\ S_{t}\neq\emptyset \\
+& \sum_{l\in K_{t}}x_{l}\ge 1;\ \ \ \forall K_{t}=(S_{t},\ N\setminus S_{t})\ \ \ S_{t}\subset N,\ S_{t}\neq\emptyset \\
 & x_{l}\in\{0,1\}\ \ l=1,\dots,m
 \end{flalign*}
 \begin{flalign*}
@@ -575,17 +581,18 @@ I vincoli \ref{eq:3.19} vengono portati nella funzione obiettivo e sostituiti ne
 \end{flalign*}
 Si noti che l'arco $l$ ha come vertici terminali $\alpha_{l}$, $\beta_{l}$ e quindi compare per $i=\alpha_{l}$ ed $i=\beta_{l}$.
 \begin{flalign*}
-& \sum_{i=1}^{n}\sum_{l\in B_{i}}\lambda_{i}x_{l}=\sum_{l=1}^{m}(\lambda+\lambda)x_{l} \\
+& \sum_{i=1}^{n}\sum_{l\in B_{i}}\lambda_{i}x_{l}=\sum_{l=1}^{m}(\lambda_{\alpha_{l}}+\lambda_{\beta_{l}})x_{l} \\
 & L(\lambda)=min\ \sum_{l=1}^{m}(\underbrace{c_{l}-\lambda_{\alpha_{l}}-\lambda_{\beta_{l}}}_{c'_{l}})x_{l}+2\sum_{i=1}^{n}\lambda_{i} \\
 & \sum_{l=1}^{m}x_{l}=n \\
 & \sum_{l\in K_{t}}x_{l}\ge 1;\ \ \ \forall K_{t}\equiv(S_{t},\ N\setminus S_{t})\ \ \ \ \ S_{t}\subset N,\ S_{t}\neq\emptyset \\
 & x_{l}\in\{0,1\}
 \end{flalign*}
-La soluzione ottima si ottiene calcolando l'albero di costo minimo, usando i costi $(c_{l}-\lambda_{\alpha_{l}}-\lambda_{\beta_{l}})$, detto $v(SST)$ tale costo si ha che
+La soluzione ottima si ottiene calcolando l'albero di costo minimo, usando i costi $(c_{l}-\lambda_{\alpha_{l}}-\lambda_{\beta_{l}})$, detto $v(SST)$ tale costo, si ha che
 \begin{equation*}
 	L(\lambda)=v(SST)+c'_{l_{min}}+2\sum_{i=1}^{n}\lambda_{i}
 \end{equation*}
 dove $c_{l_{min}}'=min\{(c_{l}-\lambda_{\alpha_{l}}-\lambda_{\beta_{l}}):\ l\notin SST\}$
+\clearpage
 
 \subsection{Calcolo di $\boldsymbol{L(\lambda^{0})}$ per $\boldsymbol{\lambda^{0}=0}$}
 \centerline{\includegraphics[height=7cm]{images/graph31.png}}

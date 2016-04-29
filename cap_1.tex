@@ -6,7 +6,7 @@ Siano date $n$ città e i costi $c_{ij}$ per andare dalla città $i$ alla città
 Si vuole determinare un cammino che parte da una città (diciamo $i_{1}$), visitare una ed una sola volta tutte le rimanenti città e terminare nella città di partenza $i_{1}$.
 Inoltre si vuole che il costo di tale cammino sia minimo.\newline
 Ha molteplici applicazioni pratiche e teoriche perche è la struttura di molti problemi pratici.\newline
-Si è soliti modella il TSP come segue:
+Si è soliti modellare il TSP come segue:
 \begin{itemize}
 	\item è dato un grafo orientato (o non orientato) $G = (N,A)$
 	dove $N$ è un insieme di $n$ vertici e $A$ è un insieme di $m$ archi.
@@ -79,7 +79,7 @@ Sia $u_{i}$ una variabile intera il cui valore sappresenta la posizione che il v
 	Es. tour (1,4,5,3,2,1) per TSP con n=5 vertici, si ha $u_{1}=1,\;u_{2}=5,\;u_{3}=4,\;u_{4}=2,\;u_{5}=3$	
 \end{center}
 
-Miller, Tucker e Zemlin propongono in alternativa a:
+\textbf{Miller}, \textbf{Tucker} e \textbf{Zemlin} propongono in alternativa a:
 \begin{equation}
 	\sum_{i\in S}^{}\sum_{j\in N\setminus S}^{} x_{ij} \ge 1,\;\;\forall S\subset N
 \end{equation}
@@ -124,12 +124,12 @@ I tempi di arrivo sono calcolati come:
 \end{equation}
 
 \subsubsection{Formulazione del TSPTW}
-Sia $x_{ij}$ una variabile binaria intera che assume il valore $1$ se il vertice $i$ è visitato immediatamente prima di $i$ e $x_{ij}=0$ altrimenti.
+Sia $x_{ij}$ una variabile binaria intera che assume il valore $1$ se il vertice $i$ è visitato immediatamente prima di $j$ e $x_{ij}=0$ altrimenti.
 \begin{flalign}
-	& Min\;\;\sum_{(i,j)\in A}^{}c_{ik}x_{ij} \\
+	& Min\;\;\sum_{(i,j)\in A}^{}c_{ij}x_{ij} \\
 	& s.t.\;\;\;\;\sum_{i\in A_{j}^{-}}^{}x_{ij}=1,\;\;\forall j\in V \\		
 	& \;\;\;\;\;\;\;\;\sum_{j\in A_{i}^{+}}^{}x_{ij}=1,\;\;\forall i\in V \\
-	& \;\;\;\;\;\;\;\;t_{i}+\theta_{ij}-t_{j}\le M(1-x_{ij},\;\;\forall (i,j)\in A,\; j\ne 0) \\
+	& \;\;\;\;\;\;\;\;t_{i}+\theta_{ij}-t_{j}\le M(1-x_{ij}),\;\;\forall (i,j)\in A,\; j\ne 0 \\
 	& \;\;\;\;\;\;\;\;t_{i}\le d_{i},\;\;\forall i\in V \\
 	& \;\;\;\;\;\;\;\;t_{i}\ge r_{i},\;\;\forall i\in V \\
 	& \;\;\;\;\;\;\;\;x_{ij}\in \{0,1\},\;\;\forall \in A \\
@@ -138,7 +138,7 @@ Sia $x_{ij}$ una variabile binaria intera che assume il valore $1$ se il vertice
 dove 
 \begin{flalign*}
 	& A_{i}^{+}=\{j\in V:(i,j)\in A\} \\
-	& A_{i}^{-}=\{j\in V:(i,j)\in A\} \\
+	& A_{i}^{-}=\{j\in V:(j,i)\in A\} \\
 	& M\;è\;un\;intero\;grande\;a\;piacere \\
 	& r_{0}=d_{0}=0
 \end{flalign*}
@@ -226,7 +226,7 @@ Sia dato un insieme $N$ di veicoli che devono scaricare presso un deposito che h
 Per ogni veicolo $i\in N$ sono noti:
 \begin{itemize}
 	\item il sottoinsieme di linee $L_{i}\subseteq L$ compatibili con le operazioni di scarico richieste dal veicolo;
-	\item iltempo di arrivo $a_{i}$ del veicolo al deposito;
+	\item il tempo di arrivo $a_{i}$ del veicolo al deposito;
 	\item la durata dello scarico $d_{ij}$ sulla linea $j\in L_{i}$.
 \end{itemize}
 Si assume che lo scarico di un veicolo non possa essere interrotto, ovvero, se lo scarico del veicolo $i$ sulla linea $j\in L_{i}$ inizia al tempo $t$, allora la linea $j$ deve essere disponibile per tutti gli istanti di tempo $\tau=t,\dots,t+d_{ij}-1$ (ovvero $\tau \in T_{j}$ per ogni $\tau=t,\dots,t+d_{ij}-1$).\\
@@ -234,11 +234,11 @@ Indichiamo con $I_{ij}$ l'insieme degli istanti di tempo in cui può iniziare lo
 Sia $c_{ijt}$ il costo per iniziare lo scarico del veicolo $i\in N$ sulla linea $j\in L_{i}$ al tempo $t\in I_{ij}$.\newline
 Il problema richiede che ogni veicolo sia assegnato ad una linea di scarico compatibile in modo che ogni scarico sia fatto senza interruzioni e sia minimo il costo dell'assegnamento.
 
+\clearpage
 \subsection{Formulazione matematica}
 Per ogni $i\in N$, $j\in L_{i}$ e $t\in I_{ij}$ poniamo $\delta_{ijt\tau}=1$ per $\tau=t,\dots,t+d_{ij}-1$ e $\delta_{ijt\tau}=0$ per ogni $\tau\in T_{j}$ tale che $\tau < t$ oppure $\tau >t+d_{ij}-1$.\\
 Indichiamo con $N_{j}\subseteq N$ il sottoinsieme di veicoli che possono essere scaricati sulla linea $j$, ovvero $N_{j}=\{i\in N:\;j\in L_{i}\}$.
 
-\clearpage
 \subsubsection{Variabili}
 $x_{ijt}$ è una variabile (0-1) che vale 1 se e solo se il veicolo $i\in N$ inizia lo scarico sulla linea $j\in L_{i}$ al tempo $t\in I_{ij}$.\\
 $s_{j\tau}$ è una variabile (0-1) che vale 1 se e solo se la linea $j$ non viene utilizzata nell'istante di tempo $\tau$.\newline
