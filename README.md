@@ -2,7 +2,7 @@
 
 TeX rewriting of "Metodi ed algoritmi di ottimizzazione per il problem solving"'s slides course
 
-######[PDF](Metodi.pdf)
+[PDF Download](MetodiEdAlgoritmiDiOttimizzazionePerIlProblemSolving.pdf)
 
 ## 1. Modelli e formulazioni matematiche
    * The Traveling Salesman Problem
@@ -28,9 +28,9 @@ TeX rewriting of "Metodi ed algoritmi di ottimizzazione per il problem solving"'
   * Il taglio 2-D a ghigliottina
   * Ricorsioni per il TSP
   * Rilassamento dello spazio degli stati
-  * Un nuovo metodo di rilassamento: <i>ng-path relaxation</i>
+  * Un nuovo metodo di rilassamento: _ng-path relaxation_
 
 ## 5. Metodi di decomposizione
-  * Il metodo Dantiz-Wolfe
+  * Il metodo Dantzig-Wolfe
   * Decomposizione Lagrangiana
   * Esempi applicativi
